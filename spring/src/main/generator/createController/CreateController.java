@@ -45,10 +45,10 @@ public class CreateController implements BaseConstants {
                     "import javax.inject.Inject;\n" +
                     "\n" +
                     "@RestController\n" +
-                    "@RequestMapping(\"/u/new"+entity.toLowerCase()+"s\")\n" +
-                    "public class New"+entity+"Controller extends BaseController<"+entity+"Entity, Long, "+entity+"View>{\n" +
+                    "@RequestMapping(\"/u/"+entity.toLowerCase()+"s\")\n" +
+                    "public class "+entity+"Controller extends BaseController<"+entity+"Entity, Long, "+entity+"View>{\n" +
                     "    @Autowired\n" +
-                    "    public New"+entity+"Controller("+entity+"Repository repo) {\n" +
+                    "    public "+entity+"Controller("+entity+"Repository repo) {\n" +
                     "        super(repo);\n" +
                     "    }\n" +
                     "\n" +

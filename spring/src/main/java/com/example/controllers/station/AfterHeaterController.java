@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newafterheaters")
-public class NewAfterHeaterController extends BaseController<AfterHeaterEntity, Long, AfterHeaterView>{
+@RequestMapping("/u/afterheaters")
+public class AfterHeaterController extends BaseController<AfterHeaterEntity, Long, AfterHeaterView>{
     @Autowired
-    public NewAfterHeaterController(AfterHeaterRepository repo) {
+    public AfterHeaterController(AfterHeaterRepository repo) {
         super(repo);
     }
 

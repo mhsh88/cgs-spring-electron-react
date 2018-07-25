@@ -1,3 +1,4 @@
+import com.google.common.base.CaseFormat;
 import createConstants.CreateConstants;
 import createController.CreateController;
 import createDao.CreateDao;
@@ -17,8 +18,8 @@ public class MainGenerator {
         final File folder = new File(path);
         File baseFolder = new File(new java.io.File( "." ).getCanonicalPath() + "/spring/src/main/java/com/example");
         ReadEntityFiles readEntityFiles = new ReadEntityFiles();
-//        File foldertemp = new File(new java.io.File( "." ).getCanonicalPath() + "/spring/src/main/java/com/example/models/users");
-//        readEntityFiles.listFilesForFolder(foldertemp);
+
+
         List<String> fileList = readEntityFiles.listFilesForFolder(folder);
 
 
@@ -29,22 +30,23 @@ public class MainGenerator {
         new CreateController().createController(fileList, baseFolder, destFolder);
         new CreateConstants().createConstant(fileList, baseFolder, destFolder);
 //        new CreateDaoBean().createDaoBean(fileList, baseFolder, destFolder);
+        File foldertemp = new File(new java.io.File( "." ).getCanonicalPath() + "/spring/src/main/java/com/example/models/users");
+        readEntityFiles.listFilesForFolder(foldertemp);
+        for( String file : fileList){
 
-//        for( String file : fileList){
-//
-//            String[] tok = file.split("Entity", 2);
-//            String entity = tok[0];
-//            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_READ" + " = \"" +
-//                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".read\";");
-//            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_UPDATE" + " = \"" +
-//                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".update\";");
-//            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_CREATE" + " = \"" +
-//                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".create\";");
-//            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_DELETE" + " = \"" +
-//                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".delete\";\n");
-//
-//
-//        }
+            String[] tok = file.split("Entity", 2);
+            String entity = tok[0];
+            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_READ" + " = \"" +
+                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".read\";");
+            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_UPDATE" + " = \"" +
+                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".update\";");
+            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_CREATE" + " = \"" +
+                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".create\";");
+            System.out.println("String " + CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, entity)+"_DELETE" + " = \"" +
+                    CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, entity) + ".delete\";\n");
+
+
+        }
 
     }
 }

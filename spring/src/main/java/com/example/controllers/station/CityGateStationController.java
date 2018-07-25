@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newcitygatestations")
-public class NewCityGateStationController extends BaseController<CityGateStationEntity, Long, CityGateStationView>{
+@RequestMapping("/u/citygatestations")
+public class CityGateStationController extends BaseController<CityGateStationEntity, Long, CityGateStationView>{
     @Autowired
-    public NewCityGateStationController(CityGateStationRepository repo) {
+    public CityGateStationController(CityGateStationRepository repo) {
         super(repo);
     }
 

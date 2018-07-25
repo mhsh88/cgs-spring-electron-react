@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newcollectors")
-public class NewCollectorController extends BaseController<CollectorEntity, Long, CollectorView>{
+@RequestMapping("/u/collectors")
+public class CollectorController extends BaseController<CollectorEntity, Long, CollectorView>{
     @Autowired
-    public NewCollectorController(CollectorRepository repo) {
+    public CollectorController(CollectorRepository repo) {
         super(repo);
     }
 

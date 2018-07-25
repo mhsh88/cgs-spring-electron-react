@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newburnershasstates")
-public class NewBurnersHasStateController extends BaseController<BurnersHasStateEntity, Long, BurnersHasStateView>{
+@RequestMapping("/u/burnershasstates")
+public class BurnersHasStateController extends BaseController<BurnersHasStateEntity, Long, BurnersHasStateView>{
     @Autowired
-    public NewBurnersHasStateController(BurnersHasStateRepository repo) {
+    public BurnersHasStateController(BurnersHasStateRepository repo) {
         super(repo);
     }
 

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newpipesizes")
-public class NewPipeSizeController extends BaseController<PipeSizeEntity, Long, PipeSizeView>{
+@RequestMapping("/u/pipesizes")
+public class PipeSizeController extends BaseController<PipeSizeEntity, Long, PipeSizeView>{
     @Autowired
-    public NewPipeSizeController(PipeSizeRepository repo) {
+    public PipeSizeController(PipeSizeRepository repo) {
         super(repo);
     }
 

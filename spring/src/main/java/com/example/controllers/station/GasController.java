@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newgass")
-public class NewGasController extends BaseController<GasEntity, Long, GasView>{
+@RequestMapping("/u/gass")
+public class GasController extends BaseController<GasEntity, Long, GasView>{
     @Autowired
-    public NewGasController(GasRepository repo) {
+    public GasController(GasRepository repo) {
         super(repo);
     }
 

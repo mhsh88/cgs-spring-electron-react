@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/newrunshasstates")
-public class NewRunsHasStateController extends BaseController<RunsHasStateEntity, Long, RunsHasStateView>{
+@RequestMapping("/u/runshasstates")
+public class RunsHasStateController extends BaseController<RunsHasStateEntity, Long, RunsHasStateView>{
     @Autowired
-    public NewRunsHasStateController(RunsHasStateRepository repo) {
+    public RunsHasStateController(RunsHasStateRepository repo) {
         super(repo);
     }
 
