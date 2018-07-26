@@ -11,3 +11,11 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
+.gitignore
+README.md
+package-lock.json
+package.json
+public/
+src/
+test-admin.iml
+yarn.lock

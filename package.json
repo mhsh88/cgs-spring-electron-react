@@ -24,6 +24,7 @@
     ]
   },
   "devDependencies": {
+    "admin-on-rest": "^1.4.1",
     "electron": "^2.0.2",
     "electron-builder": "^20.15.1",
     "npm-run-all": "^4.1.3",
