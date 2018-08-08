@@ -19,7 +19,7 @@ shell.echo('#     Building spring    #')
 shell.echo('##########################')
 
 shell.cd('spring')
-const mvnw = process.platform === 'win32' ? 'mvnw' : './mvnw'
+const mvnw = process.platform === 'win32' ? 'mvnw' : 'mvn'
 if (shell.exec(mvnw + ' clean package').code !== 0) {
   shell.echo('Error: spring build failed')
   shell.exit(1)

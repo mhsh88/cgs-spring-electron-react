@@ -1,7 +1,7 @@
 package com.example.controllers.station;
 
-import com.hosSein.core.ebean.BaseController;
-import com.hosSein.core.ebean.BaseDao;
+import core.hosSein.core.ebean.BaseController;
+import core.hosSein.core.ebean.BaseDao;
 import com.example.daos.station.BurnersDao;
 import com.example.repositories.station.BurnersRepository;
 import com.example.dtos.station.BurnersView;

@@ -1,7 +1,7 @@
 package com.example.repositories.users;
 
 import com.example.models.users.PermissionEntity;
-import com.hosSein.core.ebean.BaseRepository;
+import core.hosSein.core.ebean.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

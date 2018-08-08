@@ -6,7 +6,7 @@ package com.example.daos.users;
 import com.example.models.users.TokenActionEntity;
 import com.example.models.users.UserEntity;
 import com.example.repositories.users.TokenActionRepository;
-import com.hosSein.core.ebean.BaseDao;
+import core.hosSein.core.ebean.BaseDao;
 import enumerations.security.ActionTokenType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

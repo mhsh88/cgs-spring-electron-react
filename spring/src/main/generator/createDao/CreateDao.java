@@ -33,7 +33,7 @@ public class CreateDao implements BaseConstants {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             osw.write("package com.example.daos."+folderName+";\n" +
                     "\n" +
-                    "import com.hosSein.core.ebean.BaseDao;\n" +
+                    "import BaseDao;\n" +
                     "import com.example.models."+folderName+"."+entity+"Entity;\n" +
                     "import javax.inject.Singleton;\n" +
                     "import org.springframework.stereotype.Component;\n" +

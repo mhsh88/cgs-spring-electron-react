@@ -34,7 +34,7 @@ public class CreateConstants implements BaseConstants {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             osw.write("package com.example.constants."+folderName+";\n" +
                     "\n" +
-                    "import com.hosSein.core.constant.BaseConstants;\n" +
+                    "import BaseConstants;\n" +
                     "\n" +
                     "public interface "+entity+"Constants extends BaseConstants {\n" +
                     "\n" +

@@ -3,7 +3,7 @@ package com.example.daos.users;
 //import com.feth.play.module.pa.user.AuthUser;
 
 import com.example.models.users.LinkedAccountEntity;
-import com.hosSein.core.ebean.BaseDao;
+import core.hosSein.core.ebean.BaseDao;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Singleton;

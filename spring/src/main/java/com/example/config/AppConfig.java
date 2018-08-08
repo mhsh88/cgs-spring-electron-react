@@ -2,7 +2,7 @@ package com.example.config;
 
 import com.example.service.users.UserService;
 import com.example.service.users.UserServiceImpl;
-import com.hosSein.core.util.excel.ExcelPOIHelper;
+import core.hosSein.core.util.excel.ExcelPOIHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.cdi.Eager;

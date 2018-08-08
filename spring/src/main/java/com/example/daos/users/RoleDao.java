@@ -1,7 +1,7 @@
 package com.example.daos.users;
 
 import com.example.models.users.RoleEntity;
-import com.hosSein.core.ebean.BaseDao;
+import core.hosSein.core.ebean.BaseDao;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Singleton;

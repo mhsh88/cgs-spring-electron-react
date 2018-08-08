@@ -2,11 +2,10 @@ package com.example.models.station;
 
 import com.example.models.users.UserEntity;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.hosSein.core.model.BaseEntity;
+import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
 @Table(name = "city_gate_station", schema = "cgs", catalog = "")

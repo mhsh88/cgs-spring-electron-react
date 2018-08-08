@@ -33,7 +33,7 @@ public class CreateDto implements BaseConstants {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             osw.write("package com.example.dtos."+folderName+";\n" +
                     "\n" +
-                    "import com.hosSein.core.view.BaseView;\n" +
+                    "import BaseView;\n" +
                     "\n" +
                     "public class "+entity+"View extends BaseView {\n" +
                     "}\n");

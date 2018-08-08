@@ -6,7 +6,7 @@ import com.example.constants.users.RoleConstants;
 import com.example.dtos.users.PermissionView;
 import com.example.dtos.users.RoleView;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.hosSein.core.model.BaseEntity;
+import core.hosSein.core.model.BaseEntity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

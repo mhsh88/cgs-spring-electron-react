@@ -1,6 +1,6 @@
 package com.example.constants.station;
 
-import com.hosSein.core.constant.BaseConstants;
+import core.hosSein.core.constant.BaseConstants;
 
 public interface BurnersConstants extends BaseConstants {
 

@@ -4,7 +4,7 @@ import com.example.constants.users.TokenActionConstants;
 import com.example.dtos.users.TokenActionView;
 import com.example.dtos.users.UserView;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.hosSein.core.model.BaseEntity;
+import core.hosSein.core.model.BaseEntity;
 import enumerations.security.ActionTokenType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

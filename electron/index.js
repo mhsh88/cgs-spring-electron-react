@@ -76,14 +76,14 @@ function loadHomePage(baseUrl) {
   checkCount = 0;
   const axios = require('axios');
   setTimeout(function cycle() {
-    axios.get(`${baseUrl}/health`)
+    axios.get(`${baseUrl}`)
       .then(response => {
-        mainWindow.loadURL(`${baseUrl}?_=${Date.now()}`);
+        mainWindow.loadURL(`${baseUrl}`);
       })
       .catch(e => {
         if (checkCount < MAX_CHECK_COUNT) {
           checkCount++;
-          setTimeout(cycle, 1000);
+          setTimeout(cycle, 10000);
         } else {
           dialog.showErrorBox('Server timeout',
             `UI does not receive server response for ${MAX_CHECK_COUNT} seconds.`);
@@ -105,7 +105,7 @@ app.on('ready', function () {
     loadHomePage('http://localhost:9000');
   } else {
     // Start server at an available port (prefer 8080)
-    getPort({ port: 8080 }).then(port => {
+    getPort({ port: 9000 }).then(port => {
       startServer(port);
       loadHomePage(`http://localhost:${port}`)
     })

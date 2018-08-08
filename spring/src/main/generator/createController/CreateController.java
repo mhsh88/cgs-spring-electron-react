@@ -33,8 +33,8 @@ public class CreateController implements BaseConstants {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             osw.write("package com.example.controllers."+folderName+";\n" +
                     "\n" +
-                    "import com.hosSein.core.ebean.BaseController;\n" +
-                    "import com.hosSein.core.ebean.BaseDao;\n" +
+                    "import BaseController;\n" +
+                    "import BaseDao;\n" +
                     "import com.example.daos."+folderName+"."+entity+"Dao;\n" +
                     "import com.example.repositories."+folderName+"."+entity+"Repository;\n" +
                     "import com.example.dtos."+folderName+"."+entity+"View;\n" +

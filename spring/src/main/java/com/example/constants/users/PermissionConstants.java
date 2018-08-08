@@ -1,6 +1,6 @@
 package com.example.constants.users;
 
-import com.hosSein.core.constant.BaseConstants;
+import core.hosSein.core.constant.BaseConstants;
 
 /**
  * Developer: Payam Mostafaei

@@ -33,7 +33,7 @@ public class CreateRepository implements BaseConstants {
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             osw.write("package com.example.repositories."+folderName+";\n" +
                     "\n" +
-                    "import com.hosSein.core.ebean.BaseRepository;\n" +
+                    "import BaseRepository;\n" +
                     "import com.example.models."+folderName+"."+entity+"Entity;\n" +
                     "import org.springframework.stereotype.Repository;\n" +
                     "\n" +
