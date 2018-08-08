@@ -1,0 +1,90 @@
+export default {
+    hcore: {
+        action: {
+            delete: 'حذف',
+            show: 'جزئیات',
+            list: 'فهرست',
+            save: 'ذخیره',
+            create: 'ایجاد',
+            edit: 'ویرایش',
+            retrieve: 'بازنشانی',
+            cancel: 'لغو',
+            refresh: 'بارگزاری',
+            add_filter: 'افزودن فیلتر',
+            remove_filter: 'حذف فیلتر',
+        },
+        boolean: {
+            true: 'بله',
+            false: 'خیر',
+        },
+        page: {
+            list: 'فهرست %{name}',
+            edit: '%{name} #%{id}',
+            show: '%{name} #%{id}',
+            create: 'ایجاد %{name}',
+            delete: 'حذف %{name} #%{id}',
+            retrieve: 'بازنشانی %{name} #%{id}',
+            dashboard: 'داشبورد',
+        },
+        input: {
+            file: {
+                upload_several: 'فایلهایی را برای بارگذاری قرار دهید یا کلیک کنید تا فایلها انتخاب شود.',
+                upload_single: 'فایلی را برای بارگذاری قرار دهید یا کلیک کنید تا فایل انتخاب شود.',
+            },
+            image: {
+                upload_several: 'تصاویر را برای بارگزاری قرار دهید یا کلیک کنید تا تصاویر مورد نظر انتخاب شود.',
+                upload_single: 'تصویر را برای بارگذاری قرار دهید، کلیک کنید تا تصویر مورد نظر انتخاب شود.',
+            },
+        },
+        message: {
+            yes: 'Yes بله',
+            no: 'No خیر' ,
+            are_you_sure_delete: 'آیا برای حذف این مورد اطمینان دارید؟',
+            are_you_sure_retrieve: 'آیا برای بازنشانی این مورد اطمینان دارید؟',
+            about: 'درباره',
+        },
+        navigation: {
+            no_results: 'نتایجی یافت نشد',
+            page_out_of_boundaries: ' شماره صفحه %{page} خارج از محدوده است',
+            page_out_from_end: ' نمی توان از آخرین صفحه فراتر رفت',
+            page_out_from_begin: 'نمی توان از اولین صفحه اول فروتر رفت',
+            page_range_info: '%{offsetBegin}-%{offsetEnd} از %{total}',
+            next: 'بعدی',
+            prev: 'قبلی',
+        },
+        auth: {
+            username: ' نام کاربری',
+            password: ' رمز عبور',
+            sign_in: 'ورود',
+            sign_in_error: 'احراز هویت ناموفق بود، خواهشمند است دوباره امتحان کنید.',
+            logout: 'خروج',
+        },
+        permission: {
+            read: 'مشاهده %{resource}',
+            update: 'اضافه / ویرایش %{resource}',
+            delete: 'حذف %{resource}',
+        },
+        notification: {
+            updated: 'مورد به روزرسانی شد',
+            created: 'مورد ایجاد شد',
+            deleted: 'مورد پاک شد',
+            retrieved: 'مورد بازنشانی شد',
+            item_doesnt_exist: 'مورد وجود ندارد',
+            http_error: 'خطا ارتباطی سرور',
+        },
+        validation: {
+            required: 'الزامی',
+            minLength: 'حداقل %{min} کاراکتر یا بیشتر',
+            maxLength: 'حداکثر  %{max} کاراکتر یا کمتر',
+            minValue: 'حداقل باید %{min} باشد',
+            maxValue: 'باید  %{max} یا کمتر باشد',
+            number: 'باید عدد باشد',
+            email: 'باید ایمیل معتبر باشد',
+        },
+        error: {
+            load: {
+                models: 'خطا در بارگزاری مدل‌ها',
+            },
+        },
+    },
+};

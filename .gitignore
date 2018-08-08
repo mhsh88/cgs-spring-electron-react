@@ -12,10 +12,12 @@ yarn-error.log
 *.njsproj
 *.sln
 .gitignore
-README.md
-package-lock.json
-package.json
 public/
-src/
 test-admin.iml
 yarn.lock
+.babelrc
+.eslintrc
+global-groovy.log
+panel.iml
+soapui-errors.log
+soapui.log

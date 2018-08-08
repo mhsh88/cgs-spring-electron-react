@@ -1,0 +1,4 @@
+export const FETCH_START = 'HCORE/FETCH_START';
+export const FETCH_END = 'HCORE/FETCH_END';
+export const FETCH_ERROR = 'HCORE/FETCH_ERROR';
+export const FETCH_CANCEL = 'HCORE/FETCH_CANCEL';
