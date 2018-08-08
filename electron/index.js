@@ -59,7 +59,7 @@ function createWindow() {
   }));
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -87,7 +87,7 @@ function loadHomePage(baseUrl) {
         } else {
           dialog.showErrorBox('Server timeout',
             `UI does not receive server response for ${MAX_CHECK_COUNT} seconds.`);
-          app.quit()        
+          // app.quit()
         }
       });
   }, 200);

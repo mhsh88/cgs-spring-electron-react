@@ -74,17 +74,3 @@ INSERT INTO oauth_client_details(CLIENT_ID, RESOURCE_IDS, CLIENT_SECRET, SCOPE, 
  VALUES ('spring-security-oauth2-read-write-client', 'resource-server-rest-api',
  /*spring-security-oauth2-read-write-client-password1234*/'$2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W',
  'read,write', 'password,authorization_code,refresh_token,implicit', 'USER', 10800, 2592000);
-
--- set foreign_key_checks = 0;
--- DROP TABLE IF EXISTS `base_answers`;
--- CREATE TABLE `base_answers` (
---   `id` bigint(20) NOT NULL AUTO_INCREMENT,
---   `deleted` bit(1) DEFAULT NULL,
---   `value` varchar(64) COLLATE utf8_persian_ci DEFAULT NULL,
---   PRIMARY KEY (`id`)
--- ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
---
--- LOCK TABLES `base_answers` WRITE;
--- INSERT INTO `base_answers` VALUES (1,'\0','unAnswered'),(2,'\0','no'),(3,'\0','yes'),(4,'\0','alternativeResponse'),(5,'\0','notApplicable');
--- UNLOCK TABLES;
--- set foreign_key_checks = 1;
