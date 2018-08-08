@@ -1,4 +1,4 @@
-# Electron-Vue-Spring
+# Electron-React-Spring
 
 > An opionated desktop application with web front-end and Java backend.
 
@@ -6,7 +6,7 @@ In some cases, you may like to use Java backend for an Electron desktop app. The
 
 This project has two sub projects. Although they are just folders in this project, but they could be in their own Git repository and merged to this project using [Git subtree](https://help.github.com/articles/about-git-subtree-merges/).
 
-1. `vue`: a Vue.js application as the front-end, based on Vue's [webpack-simple template](https://github.com/vuejs-templates/webpack-simple).
+1. `react`: a React.js application as the front-end, based on Vue's [webpack-simple template](https://github.com/reactjs-templates/webpack-simple).
 2. `spring`: a Spring Boot application as the backend, based on a Maven project created by [Spring Initializer](https://start.spring.io/) with Web dependency.
 
 Both Windows and Mac OS are supported.
@@ -21,8 +21,8 @@ Build the final installer, which can be found in folder `dist`. It is an `exe` f
 # install dependencies
 npm install
 
-# install dependencies for vue project
-cd vue
+# install dependencies for react project
+cd panel
 npm install
 cd ..
 
@@ -35,7 +35,7 @@ npm run build
 During development, you may simple work on front-end and backend with independent tools. Note that the front-end `vue` project has its own `package.json` so it can be built independently.
 
 * To run backend, import the Maven project into your favorite Java IDE and launch from there. The embedded Tomcat server will be running on port `8080`.
-* To run front-end, simple run `npm run dev` in `vue` folder. The webpack dev server will be running on port `9000` with hot reload. It is configured to proxy `health` and `api` URL to port `8080`.
+* To run front-end, simple run `npm run dev` in `panel` folder. The webpack dev server will be running on port `9000` with hot reload. It is configured to proxy `health` and `api` URL to port `8080`.
 * To run the Electron part, run `npm run start` in root folder. The Electron app loads the home page at `http://localhost:9000`, therefore you should run both backend and front-end first.
 
 ## How it works
@@ -52,7 +52,7 @@ When building the final desktop app installer:
 2. Backend is built second. It creates a web app with the front-end artifacts created above and an executable jar.
 3. Electron installer is built last. It includes the web app created above in the bundle and creates an executable installer.
 
-However, both `vue` sub project and `spring` sub project are free of Electron and can be built independently without building the Electron part. This allows them to be deployed online, instead of packaged into Electron app.
+However, both `react` sub project and `spring` sub project are free of Electron and can be built independently without building the Electron part. This allows them to be deployed online, instead of packaged into Electron app.
 
 ### Launch process
 
