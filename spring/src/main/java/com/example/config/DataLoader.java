@@ -57,27 +57,35 @@ public class DataLoader implements ApplicationRunner {
             userEntity = userRepository.save(userEntity1);
         }
         RoleEntity roleEntity = roleRepository.findByName(Role.ROLE_USER);
+        if (roleEntity == null) {
+            roleEntity = new RoleEntity();
+            roleEntity.name = Role.ROLE_USER;
+            roleEntity.title = Role.ROLE_USER;
+            roleEntity = roleRepository.save(roleEntity);
+        }
         RoleEntity roleEntity1 = roleRepository.findByName(Role.ROLE_ADMIN);
+        if (roleEntity1 == null) {
+            roleEntity1 = new RoleEntity();
+            roleEntity1.name = Role.ROLE_ADMIN;
+            roleEntity1.title = Role.ROLE_ADMIN;
+            roleEntity1 = roleRepository.save(roleEntity1);
+        }
         RoleEntity roleEntity2 = roleRepository.findByName(Role.ROLE_SEC);
 
+        if (roleEntity2 == null) {
+            roleEntity2 = new RoleEntity();
+            roleEntity2.name = Role.ROLE_SEC;
+            roleEntity2.title = Role.ROLE_SEC;
+            roleEntity2 = roleRepository.save(roleEntity2);
+        }
 
-        if(roleEntity == null){
-            RoleEntity roleEntity0 = new RoleEntity();
-            roleEntity0.name = Role.ROLE_USER;
-            roleEntity0.title = Role.ROLE_USER;
-            roleRepository.save(roleEntity0);
-        }
-        if(roleEntity1 == null){
-            RoleEntity roleEntity0 = new RoleEntity();
-            roleEntity0.name = Role.ROLE_ADMIN;
-            roleEntity0.title = Role.ROLE_ADMIN;
-            roleRepository.save(roleEntity0);
-        }
-        if(roleEntity2 == null){
-            RoleEntity roleEntity0 = new RoleEntity();
-            roleEntity0.name = Role.ROLE_SEC;
-            roleEntity0.title = Role.ROLE_SEC;
-            roleRepository.save(roleEntity0);
+        RoleEntity roleEntity3 = roleRepository.findByName(Role.ROLE_GASCONSUMPTION);
+
+        if (roleEntity3 == null) {
+            roleEntity3 = new RoleEntity();
+            roleEntity3.name = Role.ROLE_GASCONSUMPTION;
+            roleEntity3.title = Role.ROLE_GASCONSUMPTION;
+            roleEntity3 = roleRepository.save(roleEntity3);
         }
 
 
@@ -106,9 +114,11 @@ public class DataLoader implements ApplicationRunner {
 
         roleEntity1.permissions = permissionEntityList;
         roleRepository.save(roleEntity1);
+        RoleEntity finalRoleEntity = roleEntity;
+        RoleEntity finalRoleEntity1 = roleEntity1;
         userEntity.roles = new ArrayList<RoleEntity>() {{
-            add(roleEntity);
-            add(roleEntity1);
+            add(finalRoleEntity);
+            add(finalRoleEntity1);
         }};
 
 //        roleRepository.save(roleEntity);
