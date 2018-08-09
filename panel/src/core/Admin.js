@@ -34,7 +34,7 @@ const Admin = ({
     resourceGroupIcons,
     restClient,
     theme,
-    title = 'ICS Panel',
+    title = 'CGS Panel',
     loginPage,
     // logoutButton,
     initialState,

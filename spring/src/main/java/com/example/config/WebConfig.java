@@ -1,6 +1,8 @@
-package config;
+package com.example.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -11,5 +13,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:index.html");
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+                .addMapping("/**")
+                .allowedOrigins(CrossOrigin.DEFAULT_ORIGINS)
+                .allowedHeaders(CrossOrigin.DEFAULT_ALLOWED_HEADERS)
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .maxAge(3600L);
     }
 }

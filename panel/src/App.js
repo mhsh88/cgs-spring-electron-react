@@ -122,7 +122,7 @@ class App extends Component {
     render() {
         return (
             <Admin
-                title="ICS Panel"
+                title="CGS Panel"
                 restClient={restClient}
                 authClient={authClient}
                 // dashboard={Dashboard}
