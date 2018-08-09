@@ -13,7 +13,7 @@ let mainWindow;
 
 // The server process
 const JAR = 'spring-1.0.0.jar'; // how to avoid manual update of this?
-const MAX_CHECK_COUNT = 10;
+const MAX_CHECK_COUNT = 1000;
 let serverProcess;
 
 function startServer(port) {
