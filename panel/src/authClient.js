@@ -7,12 +7,14 @@ export default (type, params) => {
         const body = { username: username, password: password, grant_type: 'password' };
         const request = new Request(`${restDomain}/oauth/token`, {
             method: 'POST',
-            body: JSON.stringify(body),
+            // body: JSON.stringify(body),
+            body: 'grant_type=password&password='+password+'&username=' + username,
             withCredentials : true,
             headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==',
+                'authorization': 'Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==',
             })
         });
+        console.log(JSON.stringify(body));
         return fetch(request)
             .then((response) => {
                 if (response.status < 200 || response.status >= 300) {
@@ -22,7 +24,7 @@ export default (type, params) => {
             })
             .then((response) => {
                 console.log(response);
-                const token = response.DefaultOAuth2AccessToken.access_token;
+                const token = response.access_token;
                 localStorage.setItem('token', token);
             });
     }
@@ -31,6 +33,11 @@ export default (type, params) => {
         return Promise.resolve();
     }
     if (type === AUTH_ERROR) {
+        const status  = params.message.status;
+        if (status === 401 || status === 403) {
+            localStorage.removeItem('token');
+            return Promise.reject();
+        }
         return Promise.resolve();
     }
     if (type === AUTH_CHECK) {

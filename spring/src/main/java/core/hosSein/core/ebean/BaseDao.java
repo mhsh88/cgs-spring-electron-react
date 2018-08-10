@@ -71,8 +71,9 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
             }
             sort = new Sort(page.getSort().getOrder().toLowerCase().equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, page.getSort().getField());}
         Pageable pageSpecification = null;
-            if(page.isEnablePaging())
+            if(page.isEnablePaging()){
                 pageSpecification = new PageRequest(page.getPagination().getPageNumber() - 1, page.getPagination().getPageSize(), sort);
+            }
 
         PathBuilder<T> pathBuilder = new PathBuilder<>(getEntityClass(), CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, getEntityClass().getSimpleName()));
         Querydsl querydsl = new Querydsl(entityManager,pathBuilder);

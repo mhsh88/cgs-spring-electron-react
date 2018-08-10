@@ -26,10 +26,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 //                http.authorizeRequests()
 //                .antMatchers("/**").permitAll();
                         http.authorizeRequests()
-                                .antMatchers("/").permitAll()
+                                .antMatchers("/", "/fonts.css","/static/**", "/**","/service-worker.js").permitAll()
                                 .antMatchers("/index.html").permitAll()
                                 .and().authorizeRequests()
                                 .antMatchers("/**").authenticated();
+                                /*.anyRequest().authenticated()*/;
+//                                .antMatchers("/**").authenticated();
 //        http.requestMatchers()
 //                .antMatchers(SECURED_PATTERN)
 //                .and().authorizeRequests();

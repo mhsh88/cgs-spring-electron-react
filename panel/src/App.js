@@ -114,6 +114,17 @@ import {
     RoleIcon,
 } from './users';
 
+import {
+    CityGateStationCreate,
+    CityGateStationDelete,
+    CityGateStationDetails,
+    CityGateStationEdit,
+    CityGateStationList,
+    CityGateStationRetrieve,
+    CityGateStationIcon
+} from './station';
+
+
 import restClient from './restClient';
 
 class App extends Component {
@@ -131,6 +142,7 @@ class App extends Component {
                 messages={translations}
                 resourceGroupIcons={ResourceGroupIcons}
             >
+                <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
                 <Resource name="organizationassessments" group="assessments" list={OrganizationAssessmentList} create={OrganizationAssessmentCreate} icon={OrganizationAssessmentIcon} remove={OrganizationAssessmentDelete}/>
                 <Resource name="assessmentsals" group="assessments" list={AssessmentSalList} create={AssessmentSalCreate} edit={AssessmentSalEdit} show={AssessmentSalDetails} remove={AssessmentSalDelete} retrieve={AssessmentSalRetrieve} icon={AssessmentSalIcon} />
                 <Resource name="databasequestions" group="assessments" list={DatabaseQuestionList} create={DatabaseQuestionCreate} edit={DatabaseQuestionEdit} show={DatabaseQuestionDetails} remove={DatabaseQuestionDelete} retrieve={DatabaseQuestionRetrieve} icon={DatabaseQuestionIcon} />

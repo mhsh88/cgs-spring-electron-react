@@ -28,6 +28,19 @@ export default {
         groups: {
             users: 'کاربران',
             assessments: 'ارزیابی‌ها',
+            stations: 'ایستگاه‌های تقلیل فشار گاز'
+        },
+        citygatestations:{
+            name: 'اطلاعات ایستگاه',
+            fields: {
+                id: 'ایستگاه',
+                province:'',
+                city:'',
+                state:'',
+                region:'',
+                address:'',
+                nominalCapacity:''
+            }
         },
         organizationassessments: {
             name: 'ارزیابی سازمان |||| ارزیابی‌های سازمان',

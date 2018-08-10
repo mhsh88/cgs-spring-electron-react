@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/citygatestations")
+@RequestMapping("/citygatestations")
 public class CityGateStationController extends BaseController<CityGateStationEntity, Long, CityGateStationView>{
     @Autowired
     public CityGateStationController(CityGateStationRepository repo) {

@@ -28,6 +28,19 @@ export default {
         groups: {
             users: 'Users',
             assessments: 'Assessments',
+            stations: 'City Gate Stations'
+        },
+        citygatestations: {
+            name: 'Station Informations',
+            fields: {
+                id: 'Station',
+                province: 'Province',
+                city: 'City',
+                state: 'State',
+                region: 'Region',
+                address: 'Address',
+                nominalCapacity: 'Nominal Capacity'
+            }
         },
         organizationassessments: {
             name: 'Assessment |||| Assessments',

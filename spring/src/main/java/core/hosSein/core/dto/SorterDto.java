@@ -8,6 +8,19 @@ public class SorterDto {
     private String field;
     private String order;
 
+    public SorterDto() {
+
+    }
+
+    public SorterDto(String field, String order) {
+        this.field = field;
+        this.order = order;
+
+    }
+
+    public SorterDto(String string){
+
+    }
     public String getField() {
         return field;
     }

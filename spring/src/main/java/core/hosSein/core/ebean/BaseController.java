@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -58,13 +59,32 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         PageResult<T> modelsPageResult = new PageResult<>();
             try {
                 modelsPageResult = getStringResponseEntity(pageDto, (PageResult<T>) modelsPageResult);
-                ResponseEntity<String> respo = ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+                int pagenumber = 1;
+                int size = 20;
+                int total = modelsPageResult.getTotal();
+                if(pageDto.isEnablePaging()) {
+                 pagenumber = pageDto.getPagination().getPageNumber();
+                 size = pageDto.getPagination().getPageSize();
+                }
+                int from = (pagenumber - 1) * size;
+                int to = pagenumber * size -1;
+                to = to >= total ? total : to;
+                String string = "" + String.valueOf(from) + "-"+String.valueOf(to)+"/"+ total;
+                ResponseEntity<String> respo = ResponseEntity.ok().header("Content-Range", string).body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
+
+//                HttpHeaders headers = respo.getHeaders();
+//                headers.add("Content-Range", "0-24/319"/*String.valueOf(modelsPageResult.getData().size() - 1)+"/"+String.valueOf(modelsPageResult.getTotal())*/);
+
+
                 return respo;
             }
               catch (Exception e) {
             e.printStackTrace();
+            modelsPageResult.unsuccessfulOperation(e.getMessage());
 
-            return ResponseEntity.badRequest().body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
+            return ResponseEntity.badRequest().header("Content-Range", "0-0/0").body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
         }
 
 
