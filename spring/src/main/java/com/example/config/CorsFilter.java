@@ -28,6 +28,7 @@ public class CorsFilter implements Filter {
         response.addHeader("Access-Control-Expose-Headers","x-auth-token");
         response.addHeader("Access-Control-Expose-Headers","xsrf-token");
         response.addHeader("Access-Control-Expose-Headers","Content-Range");
+        response.addHeader("Access-Control-Expose-Headers","X-Total-Count");
 
         if ("OPTIONS".equalsIgnoreCase(((HttpServletRequest) req).getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);

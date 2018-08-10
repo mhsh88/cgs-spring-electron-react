@@ -1,15 +1,20 @@
 import React from 'react';
 import {
-    Show,
+    maxLength, NumberField,
+    Show, SimpleForm,
     SimpleShowLayout,
-    TextField,
+    TextField, TextInput,
 } from '../../core';
 import CityGateStationTitle from './CityGateStationTitle';
 
 const CityGateStationDetails = props => (
     <Show title={<CityGateStationTitle />} {...props}>
         <SimpleShowLayout>
-            <TextField source="value" />
+            <TextInput source="province"  />
+            <TextInput source="city" />
+            <TextInput source="region"  />
+            <TextInput source="address"  />
+            <NumberField source="nominalCapacity"  />
         </SimpleShowLayout>
     </Show>
 );

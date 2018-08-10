@@ -47,7 +47,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
     }
     protected void afterLoad(T model) { }
 
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})//(/*value = "/{queryString}",*/ /*method=RequestMethod.GET*/)
+    @RequestMapping(method = {RequestMethod.GET})//(/*value = "/{queryString}",*/ /*method=RequestMethod.GET*/)
     public @ResponseBody
     ResponseEntity<String> listAll(@RequestParam Map<String,String> params, @RequestBody(required = false) PageDto pageDto, HttpServletRequest request,
                                    ModelMap model, Principal principal
@@ -72,7 +72,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
                 int to = pagenumber * size -1;
                 to = to >= total ? total : to;
                 String string = "" + String.valueOf(from) + "-"+String.valueOf(to)+"/"+ total;
-                ResponseEntity<String> respo = ResponseEntity.ok().header("Content-Range", string).body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
+                ResponseEntity<String> respo = ResponseEntity.ok().header("Content-Range", string).header("X-Total-Count",String.valueOf(total)).body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
 
 //                HttpHeaders headers = respo.getHeaders();
 //                headers.add("Content-Range", "0-24/319"/*String.valueOf(modelsPageResult.getData().size() - 1)+"/"+String.valueOf(modelsPageResult.getTotal())*/);
@@ -135,7 +135,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
 
 
-    @RequestMapping(method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     ResponseEntity<String> create(/*HttpServletRequest request*/@RequestBody(required = false) T json) throws IOException {
 //        ServletInputStream test = request.getInputStream();
@@ -179,7 +179,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 //        return  ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.POST/*, consumes={MediaType.APPLICATION_JSON_VALUE}*/)
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT/*, consumes={MediaType.APPLICATION_JSON_VALUE}*/)
     public @ResponseBody
     ResponseEntity<String> update(@PathVariable ID id, @RequestBody T json) throws JsonProcessingException {
         logger.debug("update() of id#{} with body {}", id, json);
