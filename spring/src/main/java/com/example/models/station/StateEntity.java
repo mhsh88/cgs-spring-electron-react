@@ -1,8 +1,10 @@
 package com.example.models.station;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +17,12 @@ public class StateEntity extends BaseEntity {
     private Double stationInputPressure;
     private Double stationOutputTemprature;
     private Double stationOutputPressure;
+
+    @JsonView
+    @OneToMany(mappedBy = "state")
+    public List<CalculationEntity> calculationEntities;
+
+
 
 
     @Basic

@@ -8,6 +8,7 @@ import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "city_gate_station")
@@ -34,4 +35,13 @@ public class CityGateStationEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     public UserEntity user;
+
+    @JsonView
+    @OneToMany(mappedBy = "cityGateStation")
+    public List<GasEntity> gasEntities;
+
+    @JsonView
+    @OneToMany(mappedBy = "cityGateStation")
+    public List<CalculationEntity> calculationEntities;
+
 }

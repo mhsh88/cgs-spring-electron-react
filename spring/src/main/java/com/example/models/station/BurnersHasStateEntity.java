@@ -1,5 +1,6 @@
 package com.example.models.station;
 
+import com.example.constants.station.BurnersHasStateConstants;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "burners_has_state", schema = "cgs", catalog = "")
-public class BurnersHasStateEntity extends BaseEntity {
+public class BurnersHasStateEntity extends BaseEntity implements BurnersHasStateConstants {
     private Double oxygenPercent;
     private Double flueGasTemprature;
 

@@ -1,8 +1,14 @@
 package com.example.models.station;
 
+import com.example.dtos.station.CityGateStationView;
+import com.example.dtos.station.GasView;
+import com.example.dtos.users.UserView;
+import com.example.models.users.UserEntity;
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,8 +35,27 @@ public class GasEntity extends BaseEntity {
     private Double hydrogenSulfide;
     private Double helium;
     private Double argon;
-    private String moleWightPersent;
+    private Boolean moleWightPersent;
+    private String name;
 
+    @JsonView
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    public CityGateStationEntity cityGateStation;
+
+    @JsonView
+    @OneToMany(mappedBy = "gas")
+    public List<CalculationEntity> calculationEntities;
+
+    @Basic
+    @Column(name = "carbon_dioxide")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Basic
     @Column(name = "nitrogen")
@@ -244,11 +269,11 @@ public class GasEntity extends BaseEntity {
 
     @Basic
     @Column(name = "mole_wight_persent")
-    public String getMoleWightPersent() {
+    public Boolean isMoleWightPersent() {
         return moleWightPersent;
     }
 
-    public void setMoleWightPersent(String moleWightPersent) {
+    public void setMoleWightPersent(Boolean moleWightPersent) {
         this.moleWightPersent = moleWightPersent;
     }
 
