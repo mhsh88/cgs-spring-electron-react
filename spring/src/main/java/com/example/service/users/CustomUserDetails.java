@@ -1,4 +1,4 @@
-package service.users;
+package com.example.service.users;
 
 import com.example.models.users.RoleEntity;
 import com.example.models.users.UserEntity;
@@ -12,6 +12,7 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
+    private UserEntity user;
     private String username;
     private String password;
     private Long organizationId;
@@ -34,12 +35,13 @@ public class CustomUserDetails implements UserDetails {
 
     }
 
-    public CustomUserDetails(String username, String password, Boolean active, Collection<? extends GrantedAuthority> authorities, Long organizationId) {
+    public CustomUserDetails(String username, String password, Boolean active, Collection<? extends GrantedAuthority> authorities, Long organizationId, UserEntity user) {
         this.username = username;
         this.password = password;
         this.active = active;
         this.authorities = authorities;
         this.organizationId = organizationId;
+        this.user = user;
 
     }
 
@@ -87,4 +89,11 @@ public class CustomUserDetails implements UserDetails {
         this.organizationId = organizationId;
     }
 
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }

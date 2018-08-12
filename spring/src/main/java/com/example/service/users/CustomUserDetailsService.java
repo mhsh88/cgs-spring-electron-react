@@ -1,4 +1,4 @@
-package service.users;
+package com.example.service.users;
 
 
 import com.example.models.users.PermissionEntity;
@@ -55,7 +55,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //                user.email, user.password, user.active, true, true,
 //                true, getAuthorities(user.roles));
 
-        return new service.users.CustomUserDetails(user.username, user.password, user.active, getAuthorities(user.roles),user.organization.id);
+        return new CustomUserDetails(user.username, user.password, user.active, getAuthorities(user.roles),user.organization.id, user);
 //        return new CustomUserDetails(user);
     }
 

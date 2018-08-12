@@ -44,7 +44,6 @@ public class OrganizationController extends
     @PostAuthorize("#id == authentication.principal.organizationId or hasAuthority('"+Role.ROLE_ADMIN +"')")
     public @ResponseBody
     ResponseEntity<String> get(@PathVariable Long id) throws JsonProcessingException {
-
         return super.get(id);
     }
 

@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import service.users.CustomUserDetailsService;
+import com.example.service.users.CustomUserDetailsService;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;

@@ -31,10 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-//import org.apache.commons.beanutils.BeanUtils;
-//import org.apache.commons.beanutils.BeanUtilsBean;
-
-
 public abstract class BaseController<T extends BaseEntity, ID extends Serializable, V extends BaseView> {
 
     private Logger logger = LoggerFactory.getLogger(RestController.class);
@@ -47,7 +43,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
     }
     protected void afterLoad(T model) { }
 
-    @RequestMapping(method = {RequestMethod.GET})//(/*value = "/{queryString}",*/ /*method=RequestMethod.GET*/)
+    @RequestMapping(method = {RequestMethod.GET})
     public @ResponseBody
     ResponseEntity<String> listAll(@RequestParam Map<String,String> params, @RequestBody(required = false) PageDto pageDto, HttpServletRequest request,
                                    ModelMap model, Principal principal
@@ -77,11 +73,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
                         .header("X-Total-Count",String.valueOf(total))
                         .header("Content-type", "application/json; charset=utf-8")
                         .body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
-
-//                HttpHeaders headers = respo.getHeaders();
-//                headers.add("Content-Range", "0-24/319"/*String.valueOf(modelsPageResult.getData().size() - 1)+"/"+String.valueOf(modelsPageResult.getTotal())*/);
-
-
                 return respo;
             }
               catch (Exception e) {
@@ -104,8 +95,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
             }
 
             return modelsPageResult;
-//            return ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(modelsPageResult));
-//            return ResponseEntity.ok().body(modelsPageResult);
 
 
     }
@@ -128,25 +117,13 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
         }
 
-//        ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(jsonString, PageDto.class);
 
     }
 
-
-
-
-
-
-
-    @RequestMapping(method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method={RequestMethod.PUT, RequestMethod.POST}, consumes={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
-    ResponseEntity<String> create(/*HttpServletRequest request*/@RequestBody(required = false) T json) throws IOException {
-//        ServletInputStream test = request.getInputStream();
-//        T json = getParamsFromPost(request);
-        
-//        T json = mapper.readValue(request.getInputStream(),getModelClass());
-//        T json = null;
+    ResponseEntity<String> create(@RequestBody(required = false) T json) throws IOException {
         logger.debug("create() with body {} of type {}", json, json.getClass());
         PageResult<T> pageResult = new PageResult<>();
 
@@ -164,23 +141,15 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
             T model = getDao().findOne(id);
             pageResult.addData(model);
             pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODEL);
-            return ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
+            return ResponseEntity.ok()
+                    .header("Content-type", "application/json; charset=utf-8")
+                    .header("X-Total-Count",String.valueOf(pageResult.getTotal()))
+                    .body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
         }
         catch (Exception e) {
             pageResult.unsuccessfulOperation(e.getMessage());
             return ResponseEntity.badRequest().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
         }
-
-
-
-
-//        T model = this.repo.findOne(id);
-
-
-//        pageResult.addData((T) model);
-//        pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODEL);
-//
-//        return  ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.POST/*, consumes={MediaType.APPLICATION_JSON_VALUE}*/)
@@ -197,7 +166,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
 
         try {
-//            BeanUtils.copyProperties(entity, json);
             copyNonNullProperties(json, entity);
         }
         catch (Exception e) {
@@ -222,14 +190,12 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         T updated;
         ResponseEntity<String> response = null;
 
-//        BeanUtilsBean.getInstance().getConvertUtils().register(false, false, 0);
         for(T t : json) {
             try {
 
                 T entity = findOne((ID) t.id);
 
                 try {
-//            BeanUtils.copyProperties(entity, json);
                     copyNonNullProperties(t, entity);
                 } catch (Exception e) {
                     logger.warn("while copying properties", e);
@@ -245,13 +211,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
                 response = ResponseEntity.badRequest().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
             }
         }
-
-//        BeanUtils.copyProperty(entity, json, "aProperty");
-//        BeanUtils beanUtils = new BeanUtils();
-//        beanUtils.setExcludeNulls(true);
-
-
-        
         return response;
 
     }
@@ -261,7 +220,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
             T updated = this.repo.save(entity);
             pageResult.addData(updated);
             pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODEL);
-            return ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
+            return ResponseEntity.ok().header("Content-type", "application/json; charset=utf-8").body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
         }
         catch (Exception e) {
             pageResult.unsuccessfulOperation(e.getMessage());
@@ -280,17 +239,12 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         try{
             T model = this.repo.findOne(id);
             model.setDeleted(true);
-//            this.repo.save(model);
             return getStringResponseEntity(pageResult, model);
         }
         catch (Exception e){
             pageResult.unsuccessfulOperation(e.getMessage());
             return ResponseEntity.badRequest().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
         }
-
-//        Map<String, Object> m = Maps.newHashMap();
-//        m.put("success", true);
-//        return m;
     }
 
 
@@ -302,23 +256,15 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
             try{
                 delete(id);
-//                T model = this.repo.findOne(id);
-//                model.deleted = true;
-//                this.repo.save(model);
             }
             catch (Exception e){
                 pageResult.unsuccessfulOperation(e.getMessage());
-                return ResponseEntity.badRequest().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
+                return ResponseEntity.badRequest().header("Content-type", "application/json; charset=utf-8").body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
             }
 
         }
         pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODEL);
         return ResponseEntity.ok().body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
-
-
-//        Map<String, Object> m = Maps.newHashMap();
-//        m.put("success", true);
-//        return m;
     }
 
 
@@ -360,18 +306,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
 
-//    public static String[] getNullPropertyNames (Object source) {
-//        final BeanWrapper src = new BeanWrapperImpl(source);
-//        java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
-//
-//        Set<String> emptyNames = new HashSet<String>();
-//        for(java.beans.PropertyDescriptor pd : pds) {
-//            Object srcValue = src.getPropertyValue(pd.getName());
-//            if (srcValue == null) emptyNames.add(pd.getName());
-//        }
-//        String[] result = new String[emptyNames.size()];
-//        return emptyNames.toArray(result);
-//    }
     public static String[] getNullPropertyNames(Object source) {
         final BeanWrapper wrappedSource = new BeanWrapperImpl(source);
         return Stream.of(wrappedSource.getPropertyDescriptors())
@@ -391,9 +325,6 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         reader.close();
         String params = sb.toString();
         String[] _params = params.split("&");
-//        for (String param : _params) {
-//            System.out.println("params(POST)-->" + param);
-//        }
         Class<T> clazz = getModelClass();
         return mapper.readValue(params, clazz);
     }

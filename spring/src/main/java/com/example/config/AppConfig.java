@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import service.users.CustomUserDetailsService;
+import com.example.service.users.CustomUserDetailsService;
 
 //@Lazy
 @Eager
