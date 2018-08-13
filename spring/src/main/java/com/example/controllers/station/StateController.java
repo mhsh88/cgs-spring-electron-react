@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/states")
+@RequestMapping("/conditions")
 public class StateController extends BaseController<StateEntity, Long, StateView>{
     @Autowired
     public StateController(StateRepository repo) {

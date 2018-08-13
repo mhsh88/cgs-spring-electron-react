@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "calculation")
@@ -18,15 +19,18 @@ public class CalculationEntity extends BaseEntity implements CalculationConstant
     @JsonView({CalculationView.class, CityGateStationView.class})
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
+    @NotNull
     public CityGateStationEntity cityGateStation;
 
     @JsonView({CalculationView.class, StateView.class})
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
-    public StateEntity state;
+    @NotNull
+    public StateEntity condition;
 
     @JsonView({CalculationView.class, GasView.class})
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
+    @NotNull
     public GasEntity gas;
 }

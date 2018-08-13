@@ -19,7 +19,7 @@ public class StateEntity extends BaseEntity {
     private Double stationOutputPressure;
 
     @JsonView
-    @OneToMany(mappedBy = "state")
+    @OneToMany(mappedBy = "condition")
     public List<CalculationEntity> calculationEntities;
 
 
