@@ -2,5 +2,5 @@ package com.example.dtos.station;
 
 import core.hosSein.core.view.BaseView;
 
-public class StateView extends BaseView {
+public class RunsHasConditionView extends BaseView {
 }

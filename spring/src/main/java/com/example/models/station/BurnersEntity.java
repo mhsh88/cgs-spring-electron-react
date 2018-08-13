@@ -1,26 +1,45 @@
 package com.example.models.station;
 
+import com.example.dtos.station.BurnersView;
+import com.example.dtos.station.HeatersView;
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "burners", schema = "cgs", catalog = "")
 public class BurnersEntity extends BaseEntity {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BurnersEntity that = (BurnersEntity) o;
-        return id == that.id;
+    private Double oxygenPercent;
+    private Double flueGasTemprature;
+
+
+    @JsonView(BurnersView.class)
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    public HeatersEntity heater;
+
+    @JsonView({BurnersView.class, HeatersView.class})
+    @Basic
+    @Column(name = "oxygen_percent")
+    public Double getOxygenPercent() {
+        return oxygenPercent;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id);
+    public void setOxygenPercent(Double oxygenPercent) {
+        this.oxygenPercent = oxygenPercent;
     }
+    @JsonView({BurnersView.class, HeatersView.class})
+    @Basic
+    @Column(name = "flue_gas_temprature")
+    public Double getFlueGasTemprature() {
+        return flueGasTemprature;
+    }
+
+    public void setFlueGasTemprature(Double flueGasTemprature) {
+        this.flueGasTemprature = flueGasTemprature;
+    }
+
 }

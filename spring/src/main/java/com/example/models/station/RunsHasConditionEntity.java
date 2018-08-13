@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "runs_has_state", schema = "cgs", catalog = "")
-public class RunsHasStateEntity extends BaseEntity {
+@Table(name = "runs_has_condition", schema = "cgs", catalog = "")
+public class RunsHasConditionEntity extends BaseEntity {
     private Double debi;
 
 
@@ -25,7 +25,7 @@ public class RunsHasStateEntity extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RunsHasStateEntity that = (RunsHasStateEntity) o;
+        RunsHasConditionEntity that = (RunsHasConditionEntity) o;
         return id == that.id &&
                 Objects.equals(debi, that.debi);
     }

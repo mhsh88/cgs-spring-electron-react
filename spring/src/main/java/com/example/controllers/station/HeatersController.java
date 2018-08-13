@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/heaterss")
+@RequestMapping("/heaters")
 public class HeatersController extends BaseController<HeatersEntity, Long, HeatersView>{
     @Autowired
     public HeatersController(HeatersRepository repo) {

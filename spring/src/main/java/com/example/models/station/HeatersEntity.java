@@ -1,8 +1,11 @@
 package com.example.models.station;
 
+import com.example.dtos.station.HeatersView;
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +13,12 @@ import java.util.Objects;
 public class HeatersEntity extends BaseEntity {
     private Double efficiency;
 
+    @JsonView(HeatersView.class)
+    @OneToMany(mappedBy = "heater")
+    public List<BurnersEntity> burners;
 
+
+    @JsonView(HeatersView.class)
     @Basic
     @Column(name = "Efficiency")
     public Double getEfficiency() {

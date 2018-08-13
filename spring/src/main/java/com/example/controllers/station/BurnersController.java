@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/burnerss")
+@RequestMapping("/burners")
 public class BurnersController extends BaseController<BurnersEntity, Long, BurnersView>{
     @Autowired
     public BurnersController(BurnersRepository repo) {

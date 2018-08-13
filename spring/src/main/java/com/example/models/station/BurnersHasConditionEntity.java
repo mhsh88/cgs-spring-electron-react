@@ -1,14 +1,14 @@
 package com.example.models.station;
 
-import com.example.constants.station.BurnersHasStateConstants;
+import com.example.constants.station.BurnersHasConditionConstants;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "burners_has_state", schema = "cgs", catalog = "")
-public class BurnersHasStateEntity extends BaseEntity implements BurnersHasStateConstants {
+@Table(name = "burners_has_condition", schema = "cgs", catalog = "")
+public class BurnersHasConditionEntity extends BaseEntity implements BurnersHasConditionConstants {
     private Double oxygenPercent;
     private Double flueGasTemprature;
 
@@ -37,7 +37,7 @@ public class BurnersHasStateEntity extends BaseEntity implements BurnersHasState
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BurnersHasStateEntity that = (BurnersHasStateEntity) o;
+        BurnersHasConditionEntity that = (BurnersHasConditionEntity) o;
         return id == that.id &&
                 Objects.equals(oxygenPercent, that.oxygenPercent) &&
                 Objects.equals(flueGasTemprature, that.flueGasTemprature);

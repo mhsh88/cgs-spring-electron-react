@@ -19,9 +19,12 @@ public class CityGateStationEntity extends BaseEntity {
     @JsonView(CityGateStationView.class)
     @Size(max = 255)
     public String city;
+
     @JsonView(CityGateStationView.class)
     @Size(max = 255)
-    public String state;
+    @Column(name = "conditions")
+    public String condition;
+
     @JsonView(CityGateStationView.class)
     @Size(max = 255)
     public String region;

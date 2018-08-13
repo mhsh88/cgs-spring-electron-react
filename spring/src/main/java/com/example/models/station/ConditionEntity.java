@@ -1,5 +1,6 @@
 package com.example.models.station;
 
+import com.example.constants.station.ConditionConstants;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
@@ -8,8 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "state", schema = "cgs", catalog = "")
-public class StateEntity extends BaseEntity {
+@Table(name = "conditions", schema = "cgs", catalog = "")
+public class ConditionEntity extends BaseEntity implements ConditionConstants {
     private Double envTempreture;
     private Double windSpeed;
     private Double stationDebi;
@@ -21,9 +22,6 @@ public class StateEntity extends BaseEntity {
     @JsonView
     @OneToMany(mappedBy = "condition")
     public List<CalculationEntity> calculationEntities;
-
-
-
 
     @Basic
     @Column(name = "env_tempreture")
@@ -99,7 +97,7 @@ public class StateEntity extends BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StateEntity that = (StateEntity) o;
+        ConditionEntity that = (ConditionEntity) o;
         return id == that.id &&
                 Objects.equals(envTempreture, that.envTempreture) &&
                 Objects.equals(windSpeed, that.windSpeed) &&

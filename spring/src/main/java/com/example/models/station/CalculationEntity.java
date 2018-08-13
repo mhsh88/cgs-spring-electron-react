@@ -5,7 +5,7 @@ import com.example.constants.station.CalculationConstants;
 import com.example.dtos.station.CalculationView;
 import com.example.dtos.station.CityGateStationView;
 import com.example.dtos.station.GasView;
-import com.example.dtos.station.StateView;
+import com.example.dtos.station.ConditionView;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
@@ -22,11 +22,11 @@ public class CalculationEntity extends BaseEntity implements CalculationConstant
     @NotNull
     public CityGateStationEntity cityGateStation;
 
-    @JsonView({CalculationView.class, StateView.class})
+    @JsonView({CalculationView.class, ConditionView.class})
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     @NotNull
-    public StateEntity condition;
+    public ConditionEntity condition;
 
     @JsonView({CalculationView.class, GasView.class})
     @ManyToOne

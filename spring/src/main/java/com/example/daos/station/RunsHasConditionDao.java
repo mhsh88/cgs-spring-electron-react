@@ -1,11 +1,11 @@
 package com.example.daos.station;
 
 import core.hosSein.core.ebean.BaseDao;
-import com.example.models.station.BurnersHasStateEntity;
+import com.example.models.station.RunsHasConditionEntity;
 import javax.inject.Singleton;
 import org.springframework.stereotype.Component;
 
 @Singleton
 @Component
-public class BurnersHasStateDao extends BaseDao<BurnersHasStateEntity, Long> {
+public class RunsHasConditionDao extends BaseDao<RunsHasConditionEntity, Long> {
 }

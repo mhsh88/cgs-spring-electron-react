@@ -2,9 +2,9 @@ package com.example.constants.station;
 
 import core.hosSein.core.constant.BaseConstants;
 
-public interface StateConstants extends BaseConstants {
+public interface ConditionConstants extends BaseConstants {
 
-    String ENTITY = "state";
+    String ENTITY = "condition";
 
 
 }
