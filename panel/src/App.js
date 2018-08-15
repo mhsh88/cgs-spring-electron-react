@@ -127,7 +127,7 @@ import {
     GasEdit,
     CalculationList, CalculationCreate, CalculationEdit,
     ConditionList, ConditionCreate,
-    HeaterList, HeaterCreate,
+    HeaterList, HeaterCreate, HeaterEdit,
     BurnerList, BurnerCreate
 } from './station';
 
@@ -153,7 +153,7 @@ class App extends Component {
                 <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} />
                 <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} />
                 <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} />
-                <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} />
+                <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} edit={HeaterEdit}/>
                 <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} />
                 <Resource name="organizationassessments" group="assessments" list={OrganizationAssessmentList} create={OrganizationAssessmentCreate} icon={OrganizationAssessmentIcon} remove={OrganizationAssessmentDelete}/>
                 <Resource name="assessmentsals" group="assessments" list={AssessmentSalList} create={AssessmentSalCreate} edit={AssessmentSalEdit} show={AssessmentSalDetails} remove={AssessmentSalDelete} retrieve={AssessmentSalRetrieve} icon={AssessmentSalIcon} />

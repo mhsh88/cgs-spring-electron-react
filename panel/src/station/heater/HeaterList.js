@@ -16,9 +16,10 @@ export const HeaterList = props => (
             <TextField source="efficiency"/>
             <ReferenceManyField reference="burners" target="heaters.id" >
                 <SingleFieldList>
-                    <ChipField source="oxygenPercent" />
+                    <ChipField label="Burner" source="oxygenPercent" />
                 </SingleFieldList>
             </ReferenceManyField>
+            <EditButton/>
         </Datagrid>
     </List>
 );
