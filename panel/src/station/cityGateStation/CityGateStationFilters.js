@@ -1,17 +1,16 @@
 import React from 'react';
 import {
-    Filter, maxLength, SimpleForm,
-    TextInput,
-} from '../../core';
+    Filter, SimpleForm,
+    TextInput, NumberInput
+} from  '../../core';
 
 const CityGateStationFilters = props => (
     <Filter {...props}>
-        {/*<TextInput label="pos.search" source="query" alwaysOn />*/}
-        {/*<TextInput label="id" />*/}
-        {/*<TextInput source="city" />*/}
-        {/*<TextInput source="region" />*/}
-        {/*<TextInput source="address" />*/}
-        {/*<NumberInput source="nominalCapacity" />*/}
+        <TextInput source="id" />
+        <TextInput source="city" />
+        <TextInput source="region" />
+        <TextInput source="address" />
+        <NumberInput source="nominalCapacity" />
     </Filter>
 );
 

@@ -14,7 +14,7 @@ public class HeatersEntity extends BaseEntity {
     private Double efficiency;
 
     @JsonView(HeatersView.class)
-    @OneToMany(mappedBy = "heater")
+    @OneToMany(mappedBy = "heaters")
     public List<BurnersEntity> burners;
 
 

@@ -4,7 +4,7 @@ import {
     Show, SimpleForm,
     SimpleShowLayout,
     TextField, TextInput,
-} from '../../core';
+} from  '../../core';
 import CityGateStationTitle from './CityGateStationTitle';
 
 const CityGateStationDetails = props => (

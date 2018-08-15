@@ -25,6 +25,7 @@ export default {
         },
     },
     resources: {
+
         groups: {
             users: 'Users',
             assessments: 'Assessments',
@@ -41,6 +42,22 @@ export default {
                 address: 'Address',
                 nominalCapacity: 'Nominal Capacity'
             }
+        },
+        gass:{
+            name: 'Gas Properties'
+
+        },
+        calculations:{
+            name: 'Calculations'
+        },
+        conditions:{
+            name: 'Conditions'
+        },
+        heaters:{
+            name: "Heaters"
+        },
+        burners:{
+            name:"Burners"
         },
         organizationassessments: {
             name: 'Assessment |||| Assessments',

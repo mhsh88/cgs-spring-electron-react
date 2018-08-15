@@ -115,13 +115,20 @@ import {
 } from './users';
 
 import {
-    CityGateStationCreate,
-    CityGateStationDelete,
-    CityGateStationDetails,
-    CityGateStationEdit,
     CityGateStationList,
+    CityGateStationCreate,
+    CityGateStationEdit,
+    CityGateStationDetails,
+    CityGateStationDelete,
     CityGateStationRetrieve,
-    CityGateStationIcon
+    CityGateStationIcon,
+    GasList,
+    GasCreate,
+    GasEdit,
+    CalculationList, CalculationCreate, CalculationEdit,
+    ConditionList, ConditionCreate,
+    HeaterList, HeaterCreate,
+    BurnerList, BurnerCreate
 } from './station';
 
 
@@ -143,6 +150,11 @@ class App extends Component {
                 resourceGroupIcons={ResourceGroupIcons}
             >
                 <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
+                <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} />
+                <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} />
+                <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} />
+                <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} />
+                <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} />
                 <Resource name="organizationassessments" group="assessments" list={OrganizationAssessmentList} create={OrganizationAssessmentCreate} icon={OrganizationAssessmentIcon} remove={OrganizationAssessmentDelete}/>
                 <Resource name="assessmentsals" group="assessments" list={AssessmentSalList} create={AssessmentSalCreate} edit={AssessmentSalEdit} show={AssessmentSalDetails} remove={AssessmentSalDelete} retrieve={AssessmentSalRetrieve} icon={AssessmentSalIcon} />
                 <Resource name="databasequestions" group="assessments" list={DatabaseQuestionList} create={DatabaseQuestionCreate} edit={DatabaseQuestionEdit} show={DatabaseQuestionDetails} remove={DatabaseQuestionDelete} retrieve={DatabaseQuestionRetrieve} icon={DatabaseQuestionIcon} />

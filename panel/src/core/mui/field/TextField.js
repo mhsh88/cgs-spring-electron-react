@@ -9,7 +9,7 @@ import { DEFAULT_LANGUAGE, INITIAL_LANGUAGE } from '../../i18n';
 const TextField = ({ source, record = {}, elStyle, language }) => {
     // keys.reduce((result, key) => { if (langs[key] !== undefined) result.push(key); return result; }, [])
     let fieldValue = get(record, source);
-    if (typeof fieldValue === 'object') {
+    if (typeof fieldValue === 'object' && fieldValue) {
         const hasResourceAnyLocale = Object.keys(fieldValue).reduce((result, key) => {
             if (key !== INITIAL_LANGUAGE) result.push(key); return result;
         }, []).length > 0;

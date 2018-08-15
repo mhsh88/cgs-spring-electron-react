@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '../../core';
+import { TextField } from  '../../core';
 
 const CityGateStationTitle = ({ record }) => <TextField source="city" record={record} />;
 

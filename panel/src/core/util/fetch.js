@@ -1,17 +1,21 @@
 import HttpError from './HttpError';
 
 export const fetchJson = (url, options = {}) => {
-    const requestHeaders = options.headers || new Headers({
-        Accept: 'application/json',
-    });
-    if (!(options && options.body && options.body instanceof FormData)) {
-        // requestHeaders.set('Content-Type', 'application/json');
+    const requestHeaders =
+        options.headers ||
+        new Headers({
+            Accept: 'application/json',
+        });
+    if (
+        !requestHeaders.has('Content-Type') &&
+        !(options && options.body && options.body instanceof FormData)
+    ) {
         requestHeaders.set('Content-Type', 'application/json');
     }
-    if (localStorage.getItem('token')) {
-        // TODO: uncomment the next line code after starting up an authentication AOP
-        // requestHeaders.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    if (options.user && options.user.authenticated && options.user.token) {
+        requestHeaders.set('Authorization', options.user.token);
     }
+
 
     return fetch(url, { ...options, headers: requestHeaders, mode: 'cors' })
         .then(response => response.text().then(text => ({

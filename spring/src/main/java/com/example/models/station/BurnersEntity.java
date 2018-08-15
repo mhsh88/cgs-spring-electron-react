@@ -19,7 +19,7 @@ public class BurnersEntity extends BaseEntity {
     @JsonView(BurnersView.class)
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
-    public HeatersEntity heater;
+    public HeatersEntity heaters;
 
     @JsonView({BurnersView.class, HeatersView.class})
     @Basic

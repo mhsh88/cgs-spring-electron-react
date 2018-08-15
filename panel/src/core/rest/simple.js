@@ -51,20 +51,20 @@ export default (apiUrl, httpClient = fetchJson) => {
                 query.pagination = { pageNumber: page, pageSize: perPage };
             }
             // url = `${apiUrl}/${resource}?${JSON.stringify(query)}`;
-            url = `${apiUrl}/u/${resource}?${encodeURIComponent(JSON.stringify(query))}`;
+            url = `${apiUrl}/${resource}?${encodeURIComponent(JSON.stringify(query))}`;
             // url = `${apiUrl}/${resource}?${queryParameters(query)}`;
             options.method = 'GET';
             break;
         }
         case GET_ONE:
-            url = `${apiUrl}/u/${resource}/${params.id}`;
+            url = `${apiUrl}/${resource}/${params.id}`;
             options.method = 'GET';
             break;
         case GET_MANY: {
             const query = {
                 filter: JSON.stringify({ id: params.ids }),
             };
-            url = `${apiUrl}/u/${resource}?${queryParameters(query)}`;
+            url = `${apiUrl}/${resource}?${queryParameters(query)}`;
             options.method = 'GET';
             break;
         }
@@ -78,7 +78,7 @@ export default (apiUrl, httpClient = fetchJson) => {
                 // range: JSON.stringify([(page - 1) * perPage, (page * perPage) - 1]),
                 filters: Object.keys(filters).map(key => ({
                     field: key.split('_')[0],
-                    operator: (key.split('_').length > 1 ? key.split('_')[1] : 'like'),
+                    operator: (key.split('_').length > 1 ? key.split('_')[1] : 'in'),
                     value: filters[key],
                 })),
                 // filter: JSON.stringify({ ...params.filter, [params.target]: params.id }),
@@ -86,24 +86,24 @@ export default (apiUrl, httpClient = fetchJson) => {
             if (page !== undefined) {
                 query.pagination = { pageNumber: page, pageSize: perPage };
             }
-            url = `${apiUrl}/u/${resource}?${encodeURIComponent(JSON.stringify(query))}`;
+            url = `${apiUrl}/${resource}?${encodeURIComponent(JSON.stringify(query))}`;
             // url = `${apiUrl}/${resource}?${queryParameters(query)}`;
             options.method = 'GET';
             break;
         }
         case CREATE:
-            url = `${apiUrl}/u/${resource}`;
+            url = `${apiUrl}/${resource}`;
             options.method = 'PUT';
             options.body = JSON.stringify(params.data);
             break;
         case UPDATE:
-            // url = `${apiUrl}/u/${resource}/${params.id}`;
-            url = `${apiUrl}/u/${resource}`;
+            // url = `${apiUrl}/${resource}/${params.id}`;
+            url = `${apiUrl}/${resource}`;
             options.method = 'POST';
             options.body = JSON.stringify(params.data);
             break;
         case DELETE:
-            url = `${apiUrl}/u/${resource}/${params.id}`;
+            url = `${apiUrl}/${resource}/${params.id}`;
             options.method = 'DELETE';
             break;
         default:

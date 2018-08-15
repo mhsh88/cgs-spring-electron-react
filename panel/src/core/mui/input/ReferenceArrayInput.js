@@ -228,7 +228,7 @@ function mapStateToProps(state, props) {
     };
 }
 
-const ConnectedReferenceInput = connect(mapStateToProps, {
+const   ConnectedReferenceInput = connect(mapStateToProps, {
     crudGetMany: crudGetManyAction,
     crudGetMatching: crudGetMatchingAction,
 })(ReferenceArrayInput);

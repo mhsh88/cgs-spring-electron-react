@@ -111,10 +111,10 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
             String pathString = filter.getField().substring(0, filter.getField().lastIndexOf('.'));
             property = filter.getField().substring(filter.getField().lastIndexOf('.') + 1);
             PathBuilder<T> subPath = new PathBuilder<T>(
-                    (Class<? extends T>) Class.forName("models.assessments." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity"),
+                    (Class<? extends T>) Class.forName("com.example.models.station." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity"),
                     pathString+"Entity");
 
-            field = Class.forName("models.assessments." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity").getConstructor().newInstance().getClass().getField(property).getType();
+            field = Class.forName("com.example.models.station." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity").getConstructor().newInstance().getClass().getField(property).getType();
 
 //            genericPath = subPath;
 
