@@ -127,6 +127,8 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         logger.debug("create() with body {} of type {}", json, json.getClass());
         PageResult<T> pageResult = new PageResult<>();
 
+        T json2 = getDao().save(json);
+
         ResponseEntity<String> response = getStringResponseEntity(pageResult, (T) json);
         return response;
     }
@@ -237,9 +239,11 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
     ResponseEntity<String> delete(@PathVariable ID id) throws JsonProcessingException {
         PageResult<T> pageResult = new PageResult<>();
         try{
-            T model = this.repo.findOne(id);
-            model.setDeleted(true);
-            return getStringResponseEntity(pageResult, model);
+            repo.delete(id);
+//            T model = this.repo.findOne(id);
+//            model.setDeleted(true);
+//            return getStringResponseEntity(pageResult, null);
+           return    ResponseEntity.ok().header("Content-type", "application/json; charset=utf-8").body(mapper.writerWithView(getViewClass()).writeValueAsString(pageResult));
         }
         catch (Exception e){
             pageResult.unsuccessfulOperation(e.getMessage());

@@ -7,16 +7,16 @@ import {
 } from  '../../core';
 export const CityGateStationList = props => (
     <List {...props} >
+
         <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }} >
 
             <TextField source="id"/>
             <TextField source="province" />
             <TextField source="city" />
-            <TextField source="state" />
             <TextField source="region" />
             <TextField source="address" />
             <TextField source="nominalCapacity" />
-            <EditButton />
+            <ColumnActions smallScreen />
         </Datagrid>
     </List>
 );

@@ -25,6 +25,7 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 import org.springframework.data.jpa.repository.support.QueryDslJpaRepository;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +37,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
 
     @PersistenceContext
@@ -46,9 +48,14 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
     JpaEntityInformation<T, ?> entityInformation;
 
 
-
-
-
+    @Transactional
+    public T save(T entity){
+        entityInformation = JpaEntityInformationSupport.getEntityInformation(getEntityClass(), entityManager);
+        repository = new QueryDslJpaRepository<T, ID>((JpaEntityInformation<T, ID>) entityInformation, entityManager);
+        entity = repository.save(entity);
+//        entityManager.persist(entity);
+        return entity;
+        }
     public T findOne(ID id) {
         PageResult<T> pageResult = new PageResult<>();
         entityInformation = JpaEntityInformationSupport.getEntityInformation(getEntityClass(), entityManager);

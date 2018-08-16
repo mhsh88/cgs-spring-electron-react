@@ -1,22 +1,20 @@
 import React from 'react';
-import { NumberInput, Create, Edit, SimpleForm, DisabledInput, TextInput, DateInput, LongTextInput, ReferenceManyField, Datagrid, TextField, DateField, EditButton } from  '../../core';
+import { NumberInput, Create, Edit, SimpleForm, DisabledInput,
+    TextInput, DateInput, LongTextInput, ReferenceManyField,
+    Datagrid, TextField, DateField, EditButton,
+    ReferenceArrayInput,SelectArrayInput} from  '../../core';
 
 
 export const HeaterEdit = (props) => (
     <Edit  {...props} >
-        <SimpleForm>
+        <SimpleForm >
 
             <DisabledInput source="id"/>
             <NumberInput source="efficiency"/>
 
-            <ReferenceManyField label="Burners" reference="burners" target="heaters.id">
-                <Datagrid>
-                    <TextField source="id" />
-                    <TextField source="oxygenPercent" />
-                    <TextField source="flueGasTemprature" />
-                    <EditButton />
-                </Datagrid>
-            </ReferenceManyField>
+            <ReferenceArrayInput source="burners" reference="burners">
+                <SelectArrayInput optionText="text" />
+            </ReferenceArrayInput>
         </SimpleForm>
     </Edit>
 );

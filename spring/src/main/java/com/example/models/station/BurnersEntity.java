@@ -1,45 +1,40 @@
 package com.example.models.station;
 
+import com.example.constants.station.BurnersConstants;
 import com.example.dtos.station.BurnersView;
 import com.example.dtos.station.HeatersView;
+import com.example.dtos.station.StandardView;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "burners", schema = "cgs", catalog = "")
-public class BurnersEntity extends BaseEntity {
+@Table(name = "burner",uniqueConstraints={@UniqueConstraint(columnNames ={"text"})})
+@EntityListeners({AuditingEntityListener.class})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class BurnersEntity extends BaseEntity implements BurnersConstants {
 
-    private Double oxygenPercent;
-    private Double flueGasTemprature;
 
+    @JsonView({BurnersView.class,HeatersView.class})
+    @Lob
+    public String text;
 
-    @JsonView(BurnersView.class)
+    @JsonView({BurnersView.class, HeatersView.class})
+    @Column(name = "oxygen_percent")
+    public Double oxygenPercent;
+    @JsonView({BurnersView.class, HeatersView.class})
+    @Column(name = "flue_gas_temprature")
+    public Double flueGasTemprature;
+
+    @JsonView
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name="heaters_id", referencedColumnName = "id")
     public HeatersEntity heaters;
 
-    @JsonView({BurnersView.class, HeatersView.class})
-    @Basic
-    @Column(name = "oxygen_percent")
-    public Double getOxygenPercent() {
-        return oxygenPercent;
-    }
 
-    public void setOxygenPercent(Double oxygenPercent) {
-        this.oxygenPercent = oxygenPercent;
-    }
-    @JsonView({BurnersView.class, HeatersView.class})
-    @Basic
-    @Column(name = "flue_gas_temprature")
-    public Double getFlueGasTemprature() {
-        return flueGasTemprature;
-    }
-
-    public void setFlueGasTemprature(Double flueGasTemprature) {
-        this.flueGasTemprature = flueGasTemprature;
-    }
 
 }

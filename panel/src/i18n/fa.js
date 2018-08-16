@@ -34,12 +34,12 @@ export default {
             name: 'اطلاعات ایستگاه',
             fields: {
                 id: 'ایستگاه',
-                province:'',
-                city:'',
-                state:'',
-                region:'',
-                address:'',
-                nominalCapacity:''
+                province:'استان',
+                city:'شهر',
+                condition:'وضعیت',
+                region:'منطقه',
+                address:'آدرس',
+                nominalCapacity:'ظرفیت اسمی'
             }
         },
         organizationassessments: {
