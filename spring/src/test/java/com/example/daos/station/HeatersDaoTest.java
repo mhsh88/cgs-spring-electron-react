@@ -1,8 +1,8 @@
 package com.example.daos.station;
 
 import com.example.CGSApplication;
+import com.example.config.H2JpaConfig;
 import com.example.models.station.HeatersEntity;
-import javafx.application.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +12,24 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestData
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestDatabase.*;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 //@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = CGSApplication.class)
+
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CGSApplication.class)
+@ContextConfiguration(
+        classes = { H2JpaConfig.class },
+        loader = AnnotationConfigContextLoader.class)
 @DataJpaTest
-//@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Transactional
 public class HeatersDaoTest {
 
     @Autowired
