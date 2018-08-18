@@ -4,12 +4,14 @@ import com.example.constants.station.BurnersConstants;
 import com.example.dtos.station.BurnersView;
 import com.example.dtos.station.HeatersView;
 import com.example.dtos.station.StandardView;
+import com.example.models.users.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,10 +32,15 @@ public class BurnersEntity extends BaseEntity implements BurnersConstants {
     @Column(name = "flue_gas_temprature")
     public Double flueGasTemprature;
 
+//    @JsonView
+//    @ManyToOne
+//    @JoinColumn(name="heaters_id", referencedColumnName = "id")
+//    public HeatersEntity heaters;
+
     @JsonView
-    @ManyToOne
-    @JoinColumn(name="heaters_id", referencedColumnName = "id")
-    public HeatersEntity heaters;
+    @ManyToMany(mappedBy = "burners")
+    public List<HeatersEntity> heaters;
+
 
 
 

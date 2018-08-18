@@ -19,7 +19,7 @@ export const HeaterList = props => (
                     <ChipField label="Burner" source="oxygenPercent" />
                 </SingleFieldList>
             </ReferenceManyField>
-            <EditButton/>
+            <ColumnActions smallScreen />
         </Datagrid>
     </List>
 );

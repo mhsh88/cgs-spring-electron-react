@@ -13,8 +13,21 @@ import java.util.Objects;
 public class HeatersEntity extends BaseEntity {
     private Double efficiency;
 
-    @JsonView(HeatersView.class)
-    @OneToMany(mappedBy = "heaters", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+//    @JsonView(HeatersView.class)
+//    @OneToMany(mappedBy = "heaters", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+//    public List<BurnersEntity> burners;
+
+
+    @JsonView
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name="heater_burner"
+            , joinColumns={
+            @JoinColumn(name="heater_id", nullable=false)
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="burner_id", nullable=false)
+    })
     public List<BurnersEntity> burners;
 
 
