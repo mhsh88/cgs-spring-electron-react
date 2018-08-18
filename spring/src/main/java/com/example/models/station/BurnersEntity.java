@@ -3,8 +3,6 @@ package com.example.models.station;
 import com.example.constants.station.BurnersConstants;
 import com.example.dtos.station.BurnersView;
 import com.example.dtos.station.HeatersView;
-import com.example.dtos.station.StandardView;
-import com.example.models.users.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
