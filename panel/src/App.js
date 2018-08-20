@@ -130,7 +130,9 @@ import {
     HeaterList, HeaterCreate, HeaterEdit,
     BurnerList, BurnerCreate,
     PipeSizeList, PipeSizeCreate,
-    PipeSpecificationCreate, PipeSpecificationEdit, PipeSpecificationList
+    PipeSpecificationCreate, PipeSpecificationEdit, PipeSpecificationList,
+    RunsHasConditionList, RunsHasConditionCreate,
+    RunsCreate,RunsEdit,RunsList
 } from './station';
 
 
@@ -160,6 +162,10 @@ class App extends Component {
                 <Resource name="afterheaters" group="stations" />
                 <Resource name="pipespecificationss" group="stations" list={PipeSpecificationList} create={PipeSpecificationCreate} edit={PipeSpecificationEdit}/>
                 <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate}/>
+                <Resource name="runshasconditions" group="stations" list={RunsHasConditionList} create={RunsHasConditionCreate}/>
+                <Resource name="runss" group="stations" list={RunsList} create={RunsCreate} edit={RunsEdit}/>
+
+
                 <Resource name="organizationassessments" group="assessments" list={OrganizationAssessmentList} create={OrganizationAssessmentCreate} icon={OrganizationAssessmentIcon} remove={OrganizationAssessmentDelete}/>
                 <Resource name="assessmentsals" group="assessments" list={AssessmentSalList} create={AssessmentSalCreate} edit={AssessmentSalEdit} show={AssessmentSalDetails} remove={AssessmentSalDelete} retrieve={AssessmentSalRetrieve} icon={AssessmentSalIcon} />
                 <Resource name="databasequestions" group="assessments" list={DatabaseQuestionList} create={DatabaseQuestionCreate} edit={DatabaseQuestionEdit} show={DatabaseQuestionDetails} remove={DatabaseQuestionDelete} retrieve={DatabaseQuestionRetrieve} icon={DatabaseQuestionIcon} />

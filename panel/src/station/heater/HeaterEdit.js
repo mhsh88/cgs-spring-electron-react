@@ -10,6 +10,7 @@ export const HeaterEdit = (props) => (
         <SimpleForm >
 
             <DisabledInput source="id"/>
+            <TextInput source="text"/>
             <NumberInput source="efficiency"/>
 
             <ReferenceArrayInput source="burners" reference="burners">

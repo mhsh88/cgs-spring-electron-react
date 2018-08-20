@@ -17,7 +17,7 @@ public class PipeSpecificationsEntity extends BaseEntity {
     private Double insulationFactor;
     private Double insulationThickness;
 
-    @JsonView({PipeSpecificationsView.class,CityGateStationView.class})
+    @JsonView({PipeSpecificationsView.class})
     @ManyToOne
     @JoinColumn(name="pipe_size_id")
     public PipeSizeEntity pipeSize;

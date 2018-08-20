@@ -4,6 +4,7 @@ import {
     List,
     Datagrid,
     TextField, EditButton, ReferenceField, ReferenceInput, required, SelectInput, SimpleForm,
+    ReferenceManyField,SingleFieldList,ChipField
 } from '../../core';
 export const CityGateStationList = props => (
     <List {...props} >
@@ -25,6 +26,11 @@ export const CityGateStationList = props => (
             <ReferenceField source="collector.id" reference="pipespecificationss" validate={required} >
                 <TextField source="length"/>
             </ReferenceField>
+            <ReferenceManyField reference="heaters" target="cityGateStation.id" >
+                <SingleFieldList>
+                    <ChipField source="efficiency" />
+                </SingleFieldList>
+            </ReferenceManyField>
             <ColumnActions smallScreen />
         </Datagrid>
     </List>

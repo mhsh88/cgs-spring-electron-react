@@ -13,7 +13,7 @@ import {
     TextField,
     DateField,
     EditButton,
-    ReferenceInput, SelectInput, required
+    ReferenceInput, SelectInput, required, ReferenceArrayInput, SelectArrayInput
 } from '../../core';
 
 import CityGateStationTitle from './CityGateStationTitle';
@@ -35,6 +35,10 @@ export const CityGateStationEdit = (props) => (
             <ReferenceInput label="Collector" source="collector.id" reference="pipespecificationss" allowEmpty>
                 <SelectInput optionText="length" validate={required}/>
             </ReferenceInput>
+
+            <ReferenceArrayInput source="heaters" reference="heaters" validate={required} >
+                <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
+            </ReferenceArrayInput>
         </SimpleForm>
     </Edit>
 );

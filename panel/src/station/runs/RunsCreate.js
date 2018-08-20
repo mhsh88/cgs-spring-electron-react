@@ -28,15 +28,15 @@ import {
 
 
 
-export const HeaterCreate = (props) => (
+export const RunsCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
                 <DisabledInput source="id"/>
-                <TextInput source="text" validate={required} />
-                <NumberInput source="efficiency" validate={[required, maxValue(100),minValue(0)]} />
-
-
-                <ReferenceArrayInput source="burners" reference="burners" validate={required} >
+                <NumberInput source="length" validate={[required, maxValue(100),minValue(0)]} />
+                <ReferenceInput source="pipeSize.id" reference="pipesizes" validate={required} allowEmpty>
+                    <SelectInput source="name" options={{ fullWidth: true }}/>
+                </ReferenceInput>
+                <ReferenceArrayInput source="runshasconditions" reference="runshasconditions" validate={required} >
                     <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
                 </ReferenceArrayInput>
 
@@ -45,4 +45,4 @@ export const HeaterCreate = (props) => (
     </Create>
 );
 
-export default HeaterCreate;
+export default RunsCreate;

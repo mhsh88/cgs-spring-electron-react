@@ -23,6 +23,10 @@ public class PipeSizeEntity extends BaseEntity {
     @OneToMany(mappedBy="pipeSize")
     public List<PipeSpecificationsEntity> pipeSpecifications;
 
+    @JsonView
+    @OneToMany(mappedBy = "pipeSize")
+    public List<RunsEntity> runs;
+
     @Basic
     @Column(name = "name")
     public String getName() {

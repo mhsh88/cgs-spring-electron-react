@@ -107,7 +107,7 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
     private JPAQueryBase filterResults(PathBuilder<T> pathBuilder, List<String> fetchFields, List<FilterDto> filters) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException {
 
         JPAQueryBase jpaQueryBase = new JPAQuery(entityManager).from(pathBuilder);
-
+        Class<?> field;
 
         if (filters.size() > 0) {
             for (FilterDto filter : filters) {
@@ -120,15 +120,12 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
                             (Class<? extends T>) Class.forName("com.example.models.station." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity"),
                             pathString + "Entity");
 
-
-                    jpaQueryBase.join(pathBuilder.get(pathString), subPath);/*.where(subPath.get(property).in(val));*/
-//                    addWhereClouse(jpaQueryBase, subPath, property, filter.getOperator(), filter.getValue());
+                    jpaQueryBase.join(pathBuilder.get(pathString), subPath);
                     filter.setField(property);
                     jpaQueryBase = applyWhereExpression(jpaQueryBase, subPath, filter);
                 } else {
                     property = filter.getField();
-                    Class<?> field = getEntityClass().getField(property).getType();
-//            genericPath = entityPath;
+                    field = getEntityClass().getField(property).getType();
                     jpaQueryBase = applyWhereExpression(jpaQueryBase, pathBuilder, filter);
                 }
 
@@ -191,12 +188,7 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
         }
         genericPath = entityPath;
 
-
-//        com.querydsl.core.types.Path<T> path;
-//        return addEpressionToPath(builder, genericPath,filter.getOperator(), field,
-//                property, filter);
-        return addEpressionToPath(builder, genericPath,filter, field
-               );
+        return addEpressionToPath(builder, genericPath,filter, field);
     }
 
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/runshasconditions")
+@RequestMapping("/runshasconditions")
 public class RunsHasConditionController extends BaseController<RunsHasConditionEntity, Long, RunsHasConditionView>{
     @Autowired
     public RunsHasConditionController(RunsHasConditionRepository repo) {

@@ -13,6 +13,7 @@ export const HeaterList = props => (
     <List {...props}>
         <Datagrid>
             <TextField source="id"/>
+            <TextField source="text"/>
             <TextField source="efficiency"/>
             <ReferenceManyField reference="burners" target="heaters.id" >
                 <SingleFieldList>

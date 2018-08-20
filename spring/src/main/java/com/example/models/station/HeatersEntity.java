@@ -1,5 +1,6 @@
 package com.example.models.station;
 
+import com.example.dtos.station.CityGateStationView;
 import com.example.dtos.station.HeatersView;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
@@ -11,12 +12,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "heaters")
 public class HeatersEntity extends BaseEntity {
+    private String text;
     private Double efficiency;
 
-//    @JsonView(HeatersView.class)
-//    @OneToMany(mappedBy = "heaters", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-//    public List<BurnersEntity> burners;
 
+    @JsonView({HeatersView.class, CityGateStationView.class})
+    @Basic
+    @Column(name = "text")
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     @JsonView
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
@@ -29,6 +38,12 @@ public class HeatersEntity extends BaseEntity {
             @JoinColumn(name="burner_id", nullable=false)
     })
     public List<BurnersEntity> burners;
+
+
+
+    @JsonView
+    @ManyToMany(mappedBy = "heaters")
+    public List<CityGateStationEntity> cityGateStation;
 
 
     @JsonView(HeatersView.class)

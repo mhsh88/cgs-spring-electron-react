@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/u/runss")
+@RequestMapping("/runss")
 public class RunsController extends BaseController<RunsEntity, Long, RunsView>{
     @Autowired
     public RunsController(RunsRepository repo) {

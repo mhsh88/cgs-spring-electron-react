@@ -1,14 +1,36 @@
 package com.example.models.station;
 
+import com.example.dtos.station.CityGateStationView;
+import com.example.dtos.station.PipeSpecificationsView;
+import com.example.dtos.station.RunsView;
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "runs")
 public class RunsEntity extends BaseEntity {
     private Double length;
+
+    @JsonView
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name="runs_condition"
+            , joinColumns={
+            @JoinColumn(name="runs_id", nullable=false)
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="condition_id", nullable=false)
+    })
+    public List<RunsHasConditionEntity> runsHasCondition;
+
+    @JsonView(RunsView.class)
+    @ManyToOne
+    @JoinColumn(name="pipe_size_id")
+    public PipeSizeEntity pipeSize;
 
 
     @Basic

@@ -2,6 +2,7 @@ package com.example.models.station;
 
 import com.example.dtos.station.CalculationView;
 import com.example.dtos.station.CityGateStationView;
+import com.example.dtos.station.PipeSpecificationsView;
 import com.example.dtos.users.UserView;
 import com.example.models.users.UserEntity;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -35,20 +36,38 @@ public class CityGateStationEntity extends BaseEntity {
     @Lob
     public String address;
 
-    @JsonView({CityGateStationView.class, CalculationView.class})
+    @JsonView({CityGateStationView.class, CalculationView.class, PipeSpecificationsView.class})
     @ManyToOne
     @JoinColumn(name = "after_heater")
     public PipeSpecificationsEntity afterHeater;
 
-    @JsonView({CityGateStationView.class, CalculationView.class})
+    @JsonView({CityGateStationView.class, CalculationView.class, PipeSpecificationsView.class})
     @ManyToOne
     @JoinColumn(name = "before_heater")
     public PipeSpecificationsEntity beforeHeater;
 
-    @JsonView({CityGateStationView.class, CalculationView.class})
+    @JsonView({CityGateStationView.class, CalculationView.class, PipeSpecificationsView.class})
     @ManyToOne
     @JoinColumn(name = "collector")
     public PipeSpecificationsEntity collector;
+
+
+    @JsonView(CityGateStationView.class)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name="station_heater"
+            , joinColumns={
+            @JoinColumn(name="station_id", nullable=false)
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="heater_id", nullable=false)
+    })
+    public List<HeatersEntity> heaters;
+
+    @JsonView({CityGateStationView.class, CalculationView.class})
+    @ManyToOne
+    @JoinColumn(name = "runs")
+    public RunsEntity runs;
 
     
 

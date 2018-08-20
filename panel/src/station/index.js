@@ -34,4 +34,11 @@ export { default as PipeSpecificationList } from './pipeSpecification/PipeSpecif
 export { default as PipeSpecificationCreate } from './pipeSpecification/PipeSpecificationCreate';
 export { default as PipeSpecificationEdit } from './pipeSpecification/PipeSpecificationEdit';
 
+export { default as RunsHasConditionList } from './runsHasCondition/RunsHasConditionList';
+export { default as RunsHasConditionCreate } from './runsHasCondition/RunsHasConditionCreate';
+
+export { default as RunsList } from './runs/RunsList';
+export { default as RunsCreate } from './runs/RunsCreate';
+export { default as RunsEdit } from './runs/RunsEdit';
+
 
