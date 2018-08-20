@@ -1,7 +1,7 @@
 package com.example.daos.station;
 
 import com.example.config.H2JpaConfig;
-import com.example.models.station.HeatersEntity;
+import com.example.models.station.BurnersEntity;
 import core.hosSein.core.criteria.Operator;
 import core.hosSein.core.dto.FilterDto;
 import core.hosSein.core.dto.PageDto;
@@ -32,31 +32,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EnableJpaRepositories(basePackages="com.example.repositories.*")
 @EntityScan(basePackages ={"com.*","controllers.*","models.*","repositories.*","service.*","core.hosSein.core.model.*","daos.*","config"},basePackageClasses = BaseEntity.class)
 @Transactional
-public class HeatersDaoTest {
+public class BurnersDaoTest {
 
     @Autowired
-    HeatersDao heatersDao;
+    BurnersDao burnersDao;
 
     @Test
     public void getDataWithFilter() throws Exception {
-        HeatersEntity heatersEntity = getHeaterEntity();
-        HeatersEntity savedToDb = heatersDao.save(heatersEntity);
-        HeatersEntity getFromDb = heatersDao.findOne(savedToDb.getId());
+        BurnersEntity burnersEntity= getBurnersEntity();
+        BurnersEntity savedToDb = burnersDao.save(burnersEntity);
+        BurnersEntity getFromDb = burnersDao.findOne(savedToDb.getId());
         FilterDto filterDto = new FilterDto();
         filterDto.setField("heaters.id");
         filterDto.setOperator(Operator.IN);
         filterDto.setValue("1,2,3");
         PageDto pageDto = new PageDto();
         pageDto.getFilters().add(filterDto);
-        PageResult<HeatersEntity> result = heatersDao.findData(pageDto);
+        PageResult<BurnersEntity> result = burnersDao.findData(pageDto);
 
         assertThat(getFromDb).isEqualTo(savedToDb);
 
     }
 
-    private HeatersEntity getHeaterEntity() {
-        HeatersEntity heatersEntity = new HeatersEntity();
-        heatersEntity.setEfficiency(80.0);
-        return heatersEntity;
+    private BurnersEntity getBurnersEntity() {
+        BurnersEntity burnersEntity = new BurnersEntity();
+        burnersEntity.flueGasTemprature = 200.0;
+        burnersEntity.oxygenPercent = 20.0;
+        return burnersEntity;
     }
 }

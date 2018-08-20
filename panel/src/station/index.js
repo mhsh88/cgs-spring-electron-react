@@ -27,4 +27,11 @@ export { default as HeaterEdit } from './heater/HeaterEdit';
 export { default as BurnerList } from './burner/BurnerList';
 export { default as BurnerCreate } from './burner/BurnerCreate';
 
+export { default as PipeSizeList } from './pipeSize/PipeSizeList';
+export { default as PipeSizeCreate } from './pipeSize/PipeSizeCreate';
+
+export { default as PipeSpecificationList } from './pipeSpecification/PipeSpecificationList';
+export { default as PipeSpecificationCreate } from './pipeSpecification/PipeSpecificationCreate';
+export { default as PipeSpecificationEdit } from './pipeSpecification/PipeSpecificationEdit';
+
 

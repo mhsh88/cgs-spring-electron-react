@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "heaters", schema = "cgs", catalog = "")
+@Table(name = "heaters")
 public class HeatersEntity extends BaseEntity {
     private Double efficiency;
 

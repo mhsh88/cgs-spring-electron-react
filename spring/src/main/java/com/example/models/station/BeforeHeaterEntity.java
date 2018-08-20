@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "before_heater", schema = "cgs", catalog = "")
+@Table(name = "before_heater")
 public class BeforeHeaterEntity extends BaseEntity {
 
 }

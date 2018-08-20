@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "conditions", schema = "cgs", catalog = "")
+@Table(name = "conditions")
 public class ConditionEntity extends BaseEntity implements ConditionConstants {
     private Double envTempreture;
     private Double windSpeed;

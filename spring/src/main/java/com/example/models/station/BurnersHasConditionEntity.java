@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "burners_has_condition", schema = "cgs", catalog = "")
+@Table(name = "burners_has_condition")
 public class BurnersHasConditionEntity extends BaseEntity implements BurnersHasConditionConstants {
     private Double oxygenPercent;
     private Double flueGasTemprature;

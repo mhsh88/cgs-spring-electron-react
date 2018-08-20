@@ -1,5 +1,6 @@
 package com.example.models.station;
 
+import com.example.dtos.station.CalculationView;
 import com.example.dtos.station.CityGateStationView;
 import com.example.dtos.users.UserView;
 import com.example.models.users.UserEntity;
@@ -33,6 +34,23 @@ public class CityGateStationEntity extends BaseEntity {
     @JsonView(CityGateStationView.class)
     @Lob
     public String address;
+
+    @JsonView({CityGateStationView.class, CalculationView.class})
+    @ManyToOne
+    @JoinColumn(name = "after_heater")
+    public PipeSpecificationsEntity afterHeater;
+
+    @JsonView({CityGateStationView.class, CalculationView.class})
+    @ManyToOne
+    @JoinColumn(name = "before_heater")
+    public PipeSpecificationsEntity beforeHeater;
+
+    @JsonView({CityGateStationView.class, CalculationView.class})
+    @ManyToOne
+    @JoinColumn(name = "collector")
+    public PipeSpecificationsEntity collector;
+
+    
 
     @JsonView({CityGateStationView.class, UserView.class})
     @ManyToOne

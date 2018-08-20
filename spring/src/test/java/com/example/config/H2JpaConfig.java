@@ -1,6 +1,8 @@
 package com.example.config;
 
 
+import com.example.daos.station.BurnersDao;
+import com.example.daos.station.HeatersDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,5 +33,14 @@ public class H2JpaConfig {
         dataSource.setPassword(env.getProperty("jdbc.pass"));
 
         return dataSource;
+    }
+
+    @Bean
+    public HeatersDao heatersDao(){
+        return new HeatersDao();
+    }
+    @Bean
+    public BurnersDao burnersDao(){
+        return new BurnersDao();
     }
 }

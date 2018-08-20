@@ -104,6 +104,40 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
         pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODELS);
         return pageResult;
     }
+    private JPAQueryBase filterResults(PathBuilder<T> pathBuilder, List<String> fetchFields, List<FilterDto> filters) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException {
+
+        JPAQueryBase jpaQueryBase = new JPAQuery(entityManager).from(pathBuilder);
+
+
+        if (filters.size() > 0) {
+            for (FilterDto filter : filters) {
+                String property;
+                if (filter.getField().contains(StringUtil.DOT)) {
+                    String pathString = filter.getField().substring(0, filter.getField().lastIndexOf('.'));
+                    property = filter.getField().substring(filter.getField().lastIndexOf('.') + 1);
+
+                    PathBuilder<T> subPath = new PathBuilder<T>(
+                            (Class<? extends T>) Class.forName("com.example.models.station." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity"),
+                            pathString + "Entity");
+
+
+                    jpaQueryBase.join(pathBuilder.get(pathString), subPath);/*.where(subPath.get(property).in(val));*/
+//                    addWhereClouse(jpaQueryBase, subPath, property, filter.getOperator(), filter.getValue());
+                    filter.setField(property);
+                    jpaQueryBase = applyWhereExpression(jpaQueryBase, subPath, filter);
+                } else {
+                    property = filter.getField();
+                    Class<?> field = getEntityClass().getField(property).getType();
+//            genericPath = entityPath;
+                    jpaQueryBase = applyWhereExpression(jpaQueryBase, pathBuilder, filter);
+                }
+
+
+            }
+        }
+
+        return jpaQueryBase;
+    }
 
 
     public com.querydsl.core.types.Predicate getPredicate(PathBuilder<T> entityPath, FilterDto filter) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException {
@@ -115,6 +149,12 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
         String property;
 
         if (filter.getField().contains(StringUtil.DOT)) {
+            String[] pathSplit = filter.getField().split(StringUtil.DOT);
+            if(pathSplit.length>2){
+
+                String st = "";
+
+            }
             String pathString = filter.getField().substring(0, filter.getField().lastIndexOf('.'));
             property = filter.getField().substring(filter.getField().lastIndexOf('.') + 1);
             PathBuilder<T> subPath = new PathBuilder<T>(
@@ -122,6 +162,23 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
                     pathString+"Entity");
 
             field = Class.forName("com.example.models.station." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, pathString) + "Entity").getConstructor().newInstance().getClass().getField(property).getType();
+//            try{
+//                Field field2 = Class.forName("com.example.models.station.BurnersEntity").getConstructor().newInstance().getClass().getField(pathString);
+//                PathBuilder<T> pathBuilder = new PathBuilder<>(getEntityClass(), CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, getEntityClass().getSimpleName()));
+//                JPAQueryBase jpaQueryBase = new JPAQuery(entityManager).from(pathBuilder);
+//                Constant<?> val;
+//                List<Long> list2 = Arrays.asList("1,2,3".split(",")).stream().map(s -> Long.parseLong(s.trim())).collect(Collectors.toList());
+//                val = (Constant<?>) Expressions.constant(list2);
+//                jpaQueryBase.join(pathBuilder.get(pathString), subPath).where(subPath.get(property).in(val));
+//                List list = jpaQueryBase.fetch();
+//
+//
+//
+//                System.out.println(field2);
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//            }
 
 //            genericPath = subPath;
 
@@ -230,6 +287,7 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
     }
 
     private JPAQueryBase applyWhereExpression(JPAQueryBase query, PathBuilder pathBuilder , FilterDto filterDto) throws NoSuchMethodException, IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, ClassNotFoundException {
+
         com.querydsl.core.types.Predicate expression = getPredicate(pathBuilder, filterDto);
 
         if (expression != null) {
@@ -239,44 +297,7 @@ public abstract class BaseDao<T extends BaseEntity, ID extends Serializable> {
     }
 
 
-    private JPAQueryBase filterResults(PathBuilder<T> pathBuilder, List<String> fetchFields, List<FilterDto> filters) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException {
 
-        JPAQueryBase jpaQueryBase = new JPAQuery(entityManager).from(pathBuilder);
-
-//        for (String fetchField : fetchFields)
-//            if (!fetchField.contains("$")) {
-//                if (fetchField.contains(StringUtil.DOT)) {
-//                    String path = fetchField.substring(0, fetchField.lastIndexOf('.'));
-//                    String property = fetchField.substring(fetchField.lastIndexOf('.') + 1);
-//                    PathBuilder<T> joining = new PathBuilder<T>(
-//                            (Class<? extends T>) Class.forName("models.assessments." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, path) + "Entity"),
-//                            path+"Entity");
-//
-//                    Class<?> f = Class.forName("models.assessments." + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, path) + "Entity").getConstructor().newInstance().getClass().getField(property).getType();
-//
-////                    joining.get(property); on(joining.get(property, f.getClass()).eq(pathBuilder.get(path)))
-//                    jpaQueryBase.join(pathBuilder.get(path, f.getClass()), joining)/*.select(joining.get(path, f.getClass()))*/;
-//
-//
-//                }
-//                else {
-//                    Class<?> f = getEntityClass().getField(fetchField).getType();
-//                    pathBuilder.get(fetchField, f);
-//
-//                    jpaQueryBase.select(pathBuilder);
-//                }
-//            }
-
-        if (filters.size() > 0) {
-            for (FilterDto filter : filters) {
-
-
-                jpaQueryBase = applyWhereExpression(jpaQueryBase, pathBuilder, filter);
-            }
-        }
-
-        return jpaQueryBase;
-    }
 
 
 

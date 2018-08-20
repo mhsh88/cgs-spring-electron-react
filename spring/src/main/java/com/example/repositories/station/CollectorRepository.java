@@ -1,7 +1,7 @@
 package com.example.repositories.station;
 
-import core.hosSein.core.ebean.BaseRepository;
 import com.example.models.station.CollectorEntity;
+import core.hosSein.core.ebean.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 

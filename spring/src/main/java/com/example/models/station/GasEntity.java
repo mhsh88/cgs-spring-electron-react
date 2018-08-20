@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "gas", schema = "cgs", catalog = "")
+@Table(name = "gas")
 public class GasEntity extends BaseEntity {
     private Double nitrogen;
     private Double carbonDioxide;

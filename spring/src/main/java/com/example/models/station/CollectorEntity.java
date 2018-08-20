@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "collector", schema = "cgs", catalog = "")
+@Table(name = "collector")
 public class CollectorEntity extends BaseEntity {
 
 }

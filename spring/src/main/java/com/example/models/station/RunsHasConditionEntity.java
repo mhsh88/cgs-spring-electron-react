@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "runs_has_condition", schema = "cgs", catalog = "")
+@Table(name = "runs_has_condition")
 public class RunsHasConditionEntity extends BaseEntity {
     private Double debi;
 

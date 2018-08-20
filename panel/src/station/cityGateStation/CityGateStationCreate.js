@@ -11,6 +11,15 @@ export const CityGateStationCreate = (props) => (
             <TextInput source="region" validate={maxLength(255)} options={{ fullWidth: true }} />
             <TextInput source="address" validate={maxLength(1000)} options={{ fullWidth: true }} />
             <NumberInput source="nominalCapacity" validate={maxLength(1000)} options={{ fullWidth: true }} />
+            <ReferenceInput label="After Heater" source="afterHeater.id" reference="pipespecificationss" allowEmpty>
+                <SelectInput optionText="length" validate={required}/>
+            </ReferenceInput>
+            <ReferenceInput label="Before Heater" source="beforeHeater.id" reference="pipespecificationss" allowEmpty>
+                <SelectInput optionText="length" validate={required}/>
+            </ReferenceInput>
+            <ReferenceInput label="Collector" source="collector.id" reference="pipespecificationss" allowEmpty>
+                <SelectInput optionText="length" validate={required}/>
+            </ReferenceInput>
         </SimpleForm>
     </Create>
 );

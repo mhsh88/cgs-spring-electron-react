@@ -20,7 +20,7 @@ export const CalculationList = props => (
             <ReferenceField label="Natural Gas" source="gas.id" reference="gass">
                 <TextField source="name" />
             </ReferenceField>
-            <EditButton />
+            <ColumnActions />
         </Datagrid>
     </List>
 );

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "runs", schema = "cgs", catalog = "")
+@Table(name = "runs")
 public class RunsEntity extends BaseEntity {
     private Double length;
 

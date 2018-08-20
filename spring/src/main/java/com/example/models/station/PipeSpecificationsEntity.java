@@ -1,17 +1,26 @@
 package com.example.models.station;
 
+import com.example.dtos.station.CityGateStationView;
+import com.example.dtos.station.PipeSpecificationsView;
+import com.example.models.users.UserEntity;
+import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "pipe_specifications", schema = "cgs", catalog = "")
+@Table(name = "pipe_specifications")
 public class PipeSpecificationsEntity extends BaseEntity {
     private Double length;
     private Double insulationFactor;
     private Double insulationThickness;
 
+    @JsonView({PipeSpecificationsView.class,CityGateStationView.class})
+    @ManyToOne
+    @JoinColumn(name="pipe_size_id")
+    public PipeSizeEntity pipeSize;
 
     @Basic
     @Column(name = "length")
