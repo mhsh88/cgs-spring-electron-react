@@ -16,7 +16,7 @@ export const RunsEdit = (props) => (
             <ReferenceInput source="pipeSize.id" reference="pipesizes" validate={required} >
                 <SelectInput source="name"/>
             </ReferenceInput>
-            <ReferenceArrayInput source="runshasconditions" reference="runshasconditions" validate={required} >
+            <ReferenceArrayInput source="runsHasCondition" reference="runshasconditions" validate={required} >
                 <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
             </ReferenceArrayInput>
         </SimpleForm>

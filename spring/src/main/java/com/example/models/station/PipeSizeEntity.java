@@ -1,8 +1,6 @@
 package com.example.models.station;
 
-import com.example.dtos.station.CityGateStationView;
 import com.example.dtos.station.PipeSizeView;
-import com.example.dtos.station.PipeSpecificationsView;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
@@ -19,7 +17,7 @@ public class PipeSizeEntity extends BaseEntity {
     private Double wallThickness;
 
 
-    @JsonView({PipeSizeView.class,PipeSpecificationsView.class, CityGateStationView.class})
+    @JsonView({PipeSizeView.class})
     @OneToMany(mappedBy="pipeSize")
     public List<PipeSpecificationsEntity> pipeSpecifications;
 

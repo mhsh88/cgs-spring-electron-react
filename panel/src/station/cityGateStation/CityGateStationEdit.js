@@ -39,6 +39,10 @@ export const CityGateStationEdit = (props) => (
             <ReferenceArrayInput source="heaters" reference="heaters" validate={required} >
                 <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
             </ReferenceArrayInput>
+
+            <ReferenceInput label="Runs" source="runs.id" reference="runss" allowEmpty>
+                <SelectInput optionText="length" validate={required}/>
+            </ReferenceInput>
         </SimpleForm>
     </Edit>
 );

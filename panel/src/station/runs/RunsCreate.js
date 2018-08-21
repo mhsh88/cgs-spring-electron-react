@@ -36,7 +36,7 @@ export const RunsCreate = (props) => (
                 <ReferenceInput source="pipeSize.id" reference="pipesizes" validate={required} allowEmpty>
                     <SelectInput source="name" options={{ fullWidth: true }}/>
                 </ReferenceInput>
-                <ReferenceArrayInput source="runshasconditions" reference="runshasconditions" validate={required} >
+                <ReferenceArrayInput source="runsHasCondition" reference="runshasconditions" validate={required} >
                     <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
                 </ReferenceArrayInput>
 

@@ -31,6 +31,9 @@ export const CityGateStationList = props => (
                     <ChipField source="efficiency" />
                 </SingleFieldList>
             </ReferenceManyField>
+            <ReferenceField source="runs.id" reference="runss" validate={required} >
+                <TextField source="length"/>
+            </ReferenceField>
             <ColumnActions smallScreen />
         </Datagrid>
     </List>
