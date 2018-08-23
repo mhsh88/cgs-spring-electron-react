@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -267,8 +268,9 @@ public class GasEntity extends BaseEntity {
         this.argon = argon;
     }
 
-    @Basic
+
     @Column(name = "mole_wight_persent")
+    @NotNull
     public Boolean isMoleWightPersent() {
         return moleWightPersent;
     }

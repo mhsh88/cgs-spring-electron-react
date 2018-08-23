@@ -2,7 +2,30 @@
     display:flex;
     flex-direction:row;
     vertical-align: text-top;
+    alignItems: right;
 }
 .rowC:hover{
     background-color: red;
+}
+#main{
+  position:absolute;
+  width:450px;px;
+  height:240px;
+  border:1px solid black;
+  padding:10px;
+}
+#main > div{
+  float:right;
+  margin:10px;
+}
+#d1{
+  width:200px;
+  height:200px;
+  border:1px solid red;
+}
+
+#d2{
+  width:200px;
+  height:200px;
+  border:1px solid blue;
 }
