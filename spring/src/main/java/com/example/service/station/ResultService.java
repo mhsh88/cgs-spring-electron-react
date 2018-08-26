@@ -12,6 +12,9 @@ public class ResultService {
         CityGateStationEntity cityGateStation = calculationEntity.cityGateStation;
         ConditionEntity conditionEntity = calculationEntity.condition;
         GasEntity gasEntity = calculationEntity.gas;
+        GasService gasService = new GasService();
+        gasService.setGas(gasEntity,cityGateStation,conditionEntity);
+
 
     }
 }

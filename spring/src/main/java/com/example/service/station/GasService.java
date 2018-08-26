@@ -1,11 +1,11 @@
 package com.example.service.station;
 
-import com.example.models.station.CityGateStationEntity;
-import com.example.models.station.ConditionEntity;
-import com.example.models.station.GasEntity;
+import com.example.models.station.*;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import sample.model.Station;
 import sample.model.base.BaseModel;
+import sample.model.pipeLine.PipeLine;
+import sample.model.pipeLine.PipeSize;
 import sample.model.stationProperties.StationPropertice;
 
 import java.util.Map;
@@ -97,6 +97,18 @@ public void setGas(GasEntity gasEntity, CityGateStationEntity cityGateStationEnt
     Map<String, BaseModel> tempMap = station.getList();
     tempMap.put("stationPropertice",stationPropertice);
 
+
+
+}
+
+public void setBeforeHeater(PipeSpecificationsEntity pipeSpecificationsEntity){
+PipeSize pipeSize = new PipeSize(pipeSpecificationsEntity.pipeSize.getWallThickness(),pipeSpecificationsEntity.pipeSize.getOuterDiameter());
+    PipeLine pipeLine = new PipeLine(pipeSize, pipeSpecificationsEntity.getLength());
+    pipeLine.setInsulationFactor(pipeSpecificationsEntity.getInsulationFactor());
+    pipeLine.setInsulationThickness(pipeSpecificationsEntity.getInsulationThickness());
+
+    Map<String, BaseModel> map = Station.getInstance().getList();
+    map.put("beforeHeaterPipeLine", pipeLine);
 
 
 }
