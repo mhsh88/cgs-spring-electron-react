@@ -1,10 +1,10 @@
 package com.example.models.station;
 
-import com.example.dtos.station.CityGateStationView;
-import com.example.dtos.station.PipeSpecificationsView;
 import com.example.dtos.station.RunsView;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +25,7 @@ public class RunsEntity extends BaseEntity {
             , inverseJoinColumns={
             @JoinColumn(name="condition_id", nullable=false)
     })
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<RunsHasConditionEntity> runsHasCondition;
 
     @JsonView(RunsView.class)

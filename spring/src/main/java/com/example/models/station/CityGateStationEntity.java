@@ -7,6 +7,8 @@ import com.example.dtos.users.UserView;
 import com.example.models.users.UserEntity;
 import com.fasterxml.jackson.annotation.JsonView;
 import core.hosSein.core.model.BaseEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -62,11 +64,13 @@ public class CityGateStationEntity extends BaseEntity {
             , inverseJoinColumns={
             @JoinColumn(name="heater_id", nullable=false)
     })
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<HeatersEntity> heaters;
 
     @JsonView({CityGateStationView.class, CalculationView.class})
     @ManyToOne
     @JoinColumn(name = "runs")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public RunsEntity runs;
 
     
@@ -84,4 +88,116 @@ public class CityGateStationEntity extends BaseEntity {
     @OneToMany(mappedBy = "cityGateStation")
     public List<CalculationEntity> calculationEntities;
 
+    @JsonView
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+    @JsonView
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    @JsonView
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+    @JsonView
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+    @JsonView
+    public Double getNominalCapacity() {
+        return nominalCapacity;
+    }
+
+    public void setNominalCapacity(Double nominalCapacity) {
+        this.nominalCapacity = nominalCapacity;
+    }
+    @JsonView
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    @JsonView
+    public PipeSpecificationsEntity getAfterHeater() {
+        return afterHeater;
+    }
+
+    public void setAfterHeater(PipeSpecificationsEntity afterHeater) {
+        this.afterHeater = afterHeater;
+    }
+    @JsonView
+    public PipeSpecificationsEntity getBeforeHeater() {
+        return beforeHeater;
+    }
+
+    public void setBeforeHeater(PipeSpecificationsEntity beforeHeater) {
+        this.beforeHeater = beforeHeater;
+    }
+    @JsonView
+    public PipeSpecificationsEntity getCollector() {
+        return collector;
+    }
+
+    public void setCollector(PipeSpecificationsEntity collector) {
+        this.collector = collector;
+    }
+    @JsonView
+    public List<HeatersEntity> getHeaters() {
+        return heaters;
+    }
+
+    public void setHeaters(List<HeatersEntity> heaters) {
+        this.heaters = heaters;
+    }
+    @JsonView
+    public RunsEntity getRuns() {
+        return runs;
+    }
+
+    public void setRuns(RunsEntity runs) {
+        this.runs = runs;
+    }
+    @JsonView
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+    @JsonView
+    public List<GasEntity> getGasEntities() {
+        return gasEntities;
+    }
+
+    public void setGasEntities(List<GasEntity> gasEntities) {
+        this.gasEntities = gasEntities;
+    }
+    @JsonView
+    public List<CalculationEntity> getCalculationEntities() {
+        return calculationEntities;
+    }
+
+    public void setCalculationEntities(List<CalculationEntity> calculationEntities) {
+        this.calculationEntities = calculationEntities;
+    }
 }
