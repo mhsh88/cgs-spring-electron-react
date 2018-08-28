@@ -88,7 +88,7 @@ public class CityGateStationEntity extends BaseEntity {
     @OneToMany(mappedBy = "cityGateStation")
     public List<CalculationEntity> calculationEntities;
 
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public String getProvince() {
         return province;
     }
@@ -96,7 +96,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setProvince(String province) {
         this.province = province;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public String getCity() {
         return city;
     }
@@ -104,7 +104,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setCity(String city) {
         this.city = city;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public String getCondition() {
         return condition;
     }
@@ -112,7 +112,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public String getRegion() {
         return region;
     }
@@ -120,7 +120,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setRegion(String region) {
         this.region = region;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public Double getNominalCapacity() {
         return nominalCapacity;
     }
@@ -128,7 +128,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setNominalCapacity(Double nominalCapacity) {
         this.nominalCapacity = nominalCapacity;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public String getAddress() {
         return address;
     }
@@ -136,7 +136,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setAddress(String address) {
         this.address = address;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public PipeSpecificationsEntity getAfterHeater() {
         return afterHeater;
     }
@@ -144,7 +144,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setAfterHeater(PipeSpecificationsEntity afterHeater) {
         this.afterHeater = afterHeater;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public PipeSpecificationsEntity getBeforeHeater() {
         return beforeHeater;
     }
@@ -152,7 +152,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setBeforeHeater(PipeSpecificationsEntity beforeHeater) {
         this.beforeHeater = beforeHeater;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public PipeSpecificationsEntity getCollector() {
         return collector;
     }
@@ -160,7 +160,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setCollector(PipeSpecificationsEntity collector) {
         this.collector = collector;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public List<HeatersEntity> getHeaters() {
         return heaters;
     }
@@ -168,7 +168,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setHeaters(List<HeatersEntity> heaters) {
         this.heaters = heaters;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public RunsEntity getRuns() {
         return runs;
     }
@@ -184,7 +184,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-    @JsonView
+    @JsonView(CityGateStationView.class)
     public List<GasEntity> getGasEntities() {
         return gasEntities;
     }

@@ -1,5 +1,8 @@
 package sample.controller.calculate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import ir.behinehsazan.gasStation.model.burner.Burner;
 import ir.behinehsazan.gasStation.model.gas.Gas;
 import ir.behinehsazan.gasStation.model.heater.Heater;
@@ -18,6 +21,7 @@ import sample.model.run.Runs;
 import sample.model.showResultEntity.Table;
 import sample.model.stationProperties.StationPropertice;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CalculateController extends BaseController{
@@ -31,12 +35,17 @@ public class CalculateController extends BaseController{
     public final static String FARENHEIT = "°F";
     public final static String MINUS = "-";
     public final static String SPACE = " ";
+    ObjectMapper mapper = new ObjectMapper();
+
+    ArrayNode arrayNode = mapper.createArrayNode();
+    ObjectNode stationItems = mapper.createObjectNode();
+
 
 
     public final static String cubicMeter = " متر مکعب بر ساعت ";
     public final static String windSpeed = " m/s ";
     double Th;
-    public boolean calculate() {
+    public ObjectNode calculate() throws IOException {
         boolean state;
 
         Station station = Station.getInstance();
@@ -77,7 +86,10 @@ public class CalculateController extends BaseController{
             stationLogic.setTout(stationPropertice.getOutputTemp());
             stationLogic.setPout(stationPropertice.getOutputPressure());
 
+
             station.getList().put("beforeHeaterPipeLine", stationLogic.setBeforeHeater(beforeHeaterPipeLine));
+
+
 
             stationLogic.setRegulator();
 
@@ -95,14 +107,217 @@ public class CalculateController extends BaseController{
             stationLogic.setHeaters(heatersModel);
 //
             station.setStationLogic(stationLogic);
+
             state = true;
+
+
+
+            stationItems.put("province",stationPropertice.getProvince());
+            stationItems.put("city",stationPropertice.getCity());
+            stationItems.put("region", stationPropertice.getArea());
+            stationItems.put("address", stationPropertice.getAddress());
+            stationItems.put("nominalCapacity", stationPropertice.getNominalCapacity());
+            if(stationPropertice.getEnvironmentTemp()!=null) {
+                stationItems.put("envTemperature", String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+            }
+            stationItems.put("windSpeed", stationPropertice.getWindVelocity());
+            stationItems.put("stationInputTemperature", stationPropertice.getInputTemp() - 273.15);
+            stationItems.put("stationInputPressure", stationPropertice.getInputPressure());
+            stationItems.put("stationOutputTemperature", stationPropertice.getOutputTemp() - 273.15);
+            stationItems.put("stationOutputPressure", stationPropertice.getOutputPressure());
+            stationItems.put("stationDebi", stationPropertice.getDebi());
+
+            ObjectNode userInput = mapper.createObjectNode();
+
+//
+            ObjectNode beforeHeater = mapper.createObjectNode();
+            PipeLine beforeheaterpipeline = (PipeLine) station.getList().get("beforeHeaterPipeLine");
+            ObjectNode beforeHeaterInput = mapper.createObjectNode();
+            beforeHeaterInput.put("T", beforeheaterpipeline.getTin());
+            beforeHeaterInput.put("P", beforeheaterpipeline.getPin());
+            gas.calculate(beforeheaterpipeline.getPin(),beforeheaterpipeline.getTin());
+            beforeHeaterInput.put("gas", removeGasProperty(gas));
+            beforeHeater.put("input",beforeHeaterInput);
+
+            ObjectNode beforeHeaterOutput = mapper.createObjectNode();
+            beforeHeaterOutput.put("T", beforeheaterpipeline.getTout());
+            beforeHeaterOutput.put("P", beforeheaterpipeline.getPout());
+            gas.calculate(beforeheaterpipeline.getPout(),beforeheaterpipeline.getTout());
+            beforeHeaterOutput.put("gas",removeGasProperty(gas));
+            beforeHeater.put("output",beforeHeaterOutput);
+            beforeHeater.put("insulationConsumption", -1 * beforeheaterpipeline.getWithInsulationConsumption());
+            beforeHeater.put("noInsulationConsumption", -1 * beforeheaterpipeline.getWithInsulationConsumption());
+
+            userInput.put("beforeHeater", beforeHeater);
+//
+//
+//
+            if (stationLogic.getHeaters() != null) {
+
+                Heaters heaters = stationLogic.getHeaters();
+                List<Heater> heater = heaters.getHeaters();
+//                data.add(new Table("اطلاعات گرم کن ", "", ""));
+                ObjectNode allHeaters = mapper.createObjectNode();
+                ArrayNode jsonHeaters = mapper.createArrayNode();
+                for (Heater h : heater) {
+                    ObjectNode jsonHeater = mapper.createObjectNode();
+                    jsonHeater.put("efficiency", h.getEfficiency() * 100);
+
+                    List<Burner> burners = h.getBurners();
+                    ArrayNode jsonBurners = mapper.createArrayNode();
+                    int temp2 = 1;
+                    for (Burner b : burners) {
+                        ObjectNode jsonBurner = mapper.createObjectNode();
+                        jsonBurner.put("flueGasTemperature", b.getTstack());
+                        jsonBurner.put("oxygenPercent", b.getOxygen());
+                        jsonBurner.put("efficiency", b.getEfficiency());
+                        jsonBurner.put("consumption", b.getConsumption());
+                        jsonBurners.add(jsonBurner);
+                    }
+
+                    jsonHeater.put("burners", jsonBurners);
+                    jsonHeaters.add(jsonHeater);
+                }
+
+                allHeaters.put("heaters", jsonHeaters);
+                allHeaters.put("consumption", heaters.getConsumption());
+
+                ObjectNode heaterInput = mapper.createObjectNode();
+                heaterInput.put("T", heaters.getTin());
+                heaterInput.put("P", heaters.getPin());
+                gas.calculate(heaters.getPin(),heaters.getTin());
+                heaterInput.put("gas",removeGasProperty(gas));
+                allHeaters.put("input",heaterInput);
+
+                ObjectNode heaterOutput = mapper.createObjectNode();
+                heaterOutput.put("T", heaters.getTout());
+                heaterOutput.put("P", heaters.getPout());
+                gas.calculate(heaters.getPout(),heaters.getTout());
+                heaterOutput.put("gas",removeGasProperty(gas));
+                allHeaters.put("output",heaterOutput);
+
+                userInput.put("heater", allHeaters);
+
+            }
+//
+//
+//            ObjectNode afterHeater = mapper.createObjectNode();
+//
+//            ObjectNode afterHeaterInput = mapper.createObjectNode();
+//            afterHeaterInput.put("T", afterHeaterPipeLine.getTin());
+//            afterHeaterInput.put("P", afterHeaterPipeLine.getPin());
+//            gas.calculate(afterHeaterPipeLine.getPin(),afterHeaterPipeLine.getTin());
+//            afterHeaterInput.put("gas",removeGasProperty(gas));
+//            afterHeater.put("input",afterHeaterInput);
+//
+//            ObjectNode afterHeaterOutput = mapper.createObjectNode();
+//            afterHeaterOutput.put("T", afterHeaterPipeLine.getTout());
+//            afterHeaterOutput.put("P", afterHeaterPipeLine.getPout());
+//            gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+//            afterHeaterOutput.put("gas",removeGasProperty(gas));
+//            afterHeater.put("output",afterHeaterOutput);
+//            afterHeater.put("insulationLoss", -1 * afterHeaterPipeLine.getWithInsulationConsumption());
+//            afterHeater.put("noInsulationLoss", -1 * afterHeaterPipeLine.getWithInsulationConsumption());
+//
+//            userInput.put("afterHeater", afterHeater);
+//
+//
+//            if (stationLogic != null) {
+//                if (stationLogic.getCollector() != null) {
+//
+//                    BasePipe collector = stationLogic.getCollector();
+//                    ObjectNode jsonCollector = mapper.createObjectNode();
+//
+//                    ObjectNode collectorInput = mapper.createObjectNode();
+//                    collectorInput.put("T", collector.getTin());
+//                    collectorInput.put("P", collector.getPin());
+//                    gas.calculate(collector.getPin(),collector.getTin());
+//                    collectorInput.put("gas",removeGasProperty(gas));
+//                    jsonCollector.put("input",collectorInput);
+//
+//                    ObjectNode collectorOutput = mapper.createObjectNode();
+//                    collectorOutput.put("T", afterHeaterPipeLine.getTout());
+//                    collectorOutput.put("P", afterHeaterPipeLine.getPout());
+//                    gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+//                    collectorOutput.put("gas",removeGasProperty(gas));
+//                    jsonCollector.put("output",collectorOutput);
+//
+//                    jsonCollector.put("loss", -1 * collector.getConsumption());
+//
+//                    userInput.put("collector", jsonCollector);
+//
+//                }
+//            }
+//            if (stationLogic != null) {
+//                if (stationLogic.getRuns() != null) {
+//
+//                    ir.behinehsazan.gasStation.model.run.Runs logicRuns = stationLogic.getRuns();
+//                    List<BaseRun> run = logicRuns.getRuns();
+//                    ArrayNode runArray = mapper.createArrayNode();
+//                    int i = 1;
+//                    for (BaseRun r : run) {
+//                        ObjectNode jsonRun = mapper.createObjectNode();
+//
+//                        ObjectNode runInput = mapper.createObjectNode();
+//                        runInput.put("T", r.getTin());
+//                        runInput.put("P", r.getPin());
+//                        gas.calculate(r.getPin(),r.getTin());
+//                        runInput.put("gas",removeGasProperty(gas));
+//                        jsonRun.put("input",runInput);
+//
+//                        ObjectNode runOutput = mapper.createObjectNode();
+//                        runOutput.put("T", afterHeaterPipeLine.getTout());
+//                        runOutput.put("P", afterHeaterPipeLine.getPout());
+//                        gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+//                        runOutput.put("gas",removeGasProperty(gas));
+//                        jsonRun.put("output",runOutput);
+//
+//                        jsonRun.put("loss", -1 * r.getConsumption());
+//                        runArray.add(jsonRun);
+//                    }
+//                    userInput.put("runs", runArray);
+//
+//                }
+//            }
+//
+//            if (stationLogic != null) {
+//                if (stationLogic.getRegulator() != null) {
+//                    Regulator regulator = stationLogic.getRegulator();
+//                    ObjectNode jsonRegulator = mapper.createObjectNode();
+//
+//                    ObjectNode regulatorInput = mapper.createObjectNode();
+//                    regulatorInput.put("T", regulator.getTin());
+//                    regulatorInput.put("P", regulator.getPin());
+//                    gas.calculate(regulator.getPin(),regulator.getTin());
+//                    regulatorInput.put("gas",removeGasProperty(gas));
+//                    jsonRegulator.put("input",regulatorInput);
+//
+//                    ObjectNode regulatorOutput = mapper.createObjectNode();
+//                    regulatorOutput.put("T", regulator.getTout());
+//                    regulatorOutput.put("P", regulator.getPout());
+//                    gas.calculate(regulator.getPout(),regulator.getTout());
+//                    regulatorOutput.put("gas",removeGasProperty(gas));
+//                    jsonRegulator.put("output",regulatorOutput);
+//                    userInput.put("regulator", jsonRegulator);
+//                 }
+//            }
+
+            stationItems.put("userInputTemperature", userInput);
+
+
+            // T_hydrate temperature
+
+
 
 
         }
 
-        saveUserTempInputResults();
-        calculateHydrateResults();
-        return state;
+
+
+
+//        saveUserTempInputResults();
+//        calculateHydrateResults();
+        return stationItems;
 
 
 
@@ -110,7 +325,7 @@ public class CalculateController extends BaseController{
 
     }
 
-    private boolean calculateHydrateResults() {
+    private void calculateHydrateResults() throws IOException {
         boolean state;
 
         Station station = Station.getInstance();
@@ -141,10 +356,12 @@ public class CalculateController extends BaseController{
             stationLogic.setTin(stationPropertice.getInputTemp());
             stationLogic.setPin(stationPropertice.getInputPressure());
             if(gas.getT_h()>50){
-                ObservableList<Table> data = ShowResultsController.getHydrateData();
-                data.clear();
-                data.add(new Table("خطا", "","دمای هیدرات برای شرایط زیر قابل محاسبه نیست"));
-                return false;
+
+                throw new IllegalArgumentException("دمای هیدرات برای شرایط زیر قابل محاسبه نیست");
+//                ObservableList<Table> data = ShowResultsController.getHydrateData();
+//                data.clear();
+//                data.add(new Table("خطا", "","دمای هیدرات برای شرایط زیر قابل محاسبه نیست"));
+//                return;
             }
             stationLogic.setTout(Th + 273.15 + 2);
             stationLogic.setPout(stationPropertice.getOutputPressure());
@@ -169,11 +386,191 @@ public class CalculateController extends BaseController{
             station.setStationLogic(stationLogic);
             state = true;
 
+            ObjectNode userInput = mapper.createObjectNode();
+
+            ObjectNode beforeHeater = mapper.createObjectNode();
+
+            ObjectNode beforeHeaterInput = mapper.createObjectNode();
+            beforeHeaterInput.put("T", beforeHeaterPipeLine.getTin());
+            beforeHeaterInput.put("P", beforeHeaterPipeLine.getPin());
+            gas.calculate(beforeHeaterPipeLine.getPin(),beforeHeaterPipeLine.getTin());
+            beforeHeaterInput.put("gas",removeGasProperty(gas));
+            beforeHeater.put("input",beforeHeaterInput);
+
+            ObjectNode beforeHeaterOutput = mapper.createObjectNode();
+            beforeHeaterOutput.put("T", beforeHeaterPipeLine.getTout());
+            beforeHeaterOutput.put("P", beforeHeaterPipeLine.getPout());
+            gas.calculate(beforeHeaterPipeLine.getPout(),beforeHeaterPipeLine.getTout());
+            beforeHeaterOutput.put("gas",removeGasProperty(gas));
+            beforeHeater.put("output",beforeHeaterOutput);
+            beforeHeater.put("insulationConsumption", -1 * beforeHeaterPipeLine.getWithInsulationConsumption());
+            beforeHeater.put("noInsulationConsumption", -1 * beforeHeaterPipeLine.getWithInsulationConsumption());
+
+            userInput.put("beforeHeater", beforeHeater);
+
+
+
+            if (stationLogic.getHeaters() != null) {
+
+                Heaters heaters = stationLogic.getHeaters();
+                List<Heater> heater = heaters.getHeaters();
+                ObjectNode allHeaters = mapper.createObjectNode();
+                ArrayNode jsonHeaters = mapper.createArrayNode();
+                for (Heater h : heater) {
+                    ObjectNode jsonHeater = mapper.createObjectNode();
+                    jsonHeater.put("efficiency", h.getEfficiency() * 100);
+
+                    List<Burner> burners = h.getBurners();
+                    ArrayNode jsonBurners = mapper.createArrayNode();
+                    int temp2 = 1;
+                    for (Burner b : burners) {
+                        ObjectNode jsonBurner = mapper.createObjectNode();
+                        jsonBurner.put("flueGasTemperature", b.getTstack());
+                        jsonBurner.put("oxygenPercent", b.getOxygen());
+                        jsonBurner.put("efficiency", b.getEfficiency());
+                        jsonBurner.put("consumption", b.getConsumption());
+                        jsonBurners.add(jsonBurner);
+                    }
+
+                    jsonHeater.put("burners", jsonBurners);
+                    jsonHeaters.add(jsonHeaters);
+                }
+
+                allHeaters.put("heaters", jsonHeaters);
+                allHeaters.put("consumption", heaters.getConsumption());
+
+                ObjectNode heaterInput = mapper.createObjectNode();
+                heaterInput.put("T", heaters.getTin());
+                heaterInput.put("P", heaters.getPin());
+                gas.calculate(heaters.getPin(),heaters.getTin());
+                heaterInput.put("gas",removeGasProperty(gas));
+                allHeaters.put("input",heaterInput);
+
+                ObjectNode heaterOutput = mapper.createObjectNode();
+                heaterOutput.put("T", heaters.getTout());
+                heaterOutput.put("P", heaters.getPout());
+                gas.calculate(heaters.getPout(),heaters.getTout());
+                heaterOutput.put("gas",removeGasProperty(gas));
+                allHeaters.put("output",heaterOutput);
+
+                userInput.put("heater", allHeaters);
+
+            }
+
+
+            ObjectNode afterHeater = mapper.createObjectNode();
+
+            ObjectNode afterHeaterInput = mapper.createObjectNode();
+            afterHeaterInput.put("T", afterHeaterPipeLine.getTin());
+            afterHeaterInput.put("P", afterHeaterPipeLine.getPin());
+            gas.calculate(afterHeaterPipeLine.getPin(),afterHeaterPipeLine.getTin());
+            afterHeaterInput.put("gas",removeGasProperty(gas));
+            afterHeater.put("input",afterHeaterInput);
+
+            ObjectNode afterHeaterOutput = mapper.createObjectNode();
+            afterHeaterOutput.put("T", afterHeaterPipeLine.getTout());
+            afterHeaterOutput.put("P", afterHeaterPipeLine.getPout());
+            gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+            afterHeaterOutput.put("gas",removeGasProperty(gas));
+            afterHeater.put("output",afterHeaterOutput);
+            afterHeater.put("insulationLoss", -1 * afterHeaterPipeLine.getWithInsulationConsumption());
+            afterHeater.put("noInsulationLoss", -1 * afterHeaterPipeLine.getWithInsulationConsumption());
+
+            userInput.put("afterHeater", afterHeater);
+
+
+            if (stationLogic != null) {
+                if (stationLogic.getCollector() != null) {
+
+                    BasePipe collector = stationLogic.getCollector();
+                    ObjectNode jsonCollector = mapper.createObjectNode();
+
+                    ObjectNode collectorInput = mapper.createObjectNode();
+                    collectorInput.put("T", collector.getTin());
+                    collectorInput.put("P", collector.getPin());
+                    gas.calculate(collector.getPin(),collector.getTin());
+                    collectorInput.put("gas",removeGasProperty(gas));
+                    jsonCollector.put("input",collectorInput);
+
+                    ObjectNode collectorOutput = mapper.createObjectNode();
+                    collectorOutput.put("T", afterHeaterPipeLine.getTout());
+                    collectorOutput.put("P", afterHeaterPipeLine.getPout());
+                    gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+                    collectorOutput.put("gas",removeGasProperty(gas));
+                    jsonCollector.put("output",collectorOutput);
+
+                    jsonCollector.put("loss", -1 * collector.getConsumption());
+
+                    userInput.put("collector", jsonCollector);
+
+                }
+            }
+            if (stationLogic != null) {
+                if (stationLogic.getRuns() != null) {
+
+                    ir.behinehsazan.gasStation.model.run.Runs logicRuns = stationLogic.getRuns();
+                    List<BaseRun> run = logicRuns.getRuns();
+                    ArrayNode runArray = mapper.createArrayNode();
+                    int i = 1;
+                    for (BaseRun r : run) {
+                        ObjectNode jsonRun = mapper.createObjectNode();
+
+                        ObjectNode runInput = mapper.createObjectNode();
+                        runInput.put("T", r.getTin());
+                        runInput.put("P", r.getPin());
+                        gas.calculate(r.getPin(),r.getTin());
+                        runInput.put("gas",removeGasProperty(gas));
+                        jsonRun.put("input",runInput);
+
+                        ObjectNode runOutput = mapper.createObjectNode();
+                        runOutput.put("T", afterHeaterPipeLine.getTout());
+                        runOutput.put("P", afterHeaterPipeLine.getPout());
+                        gas.calculate(afterHeaterPipeLine.getPout(),afterHeaterPipeLine.getTout());
+                        runOutput.put("gas",removeGasProperty(gas));
+                        jsonRun.put("output",runOutput);
+
+                        jsonRun.put("loss", -1 * r.getConsumption());
+                        runArray.add(jsonRun);
+                    }
+                    userInput.put("runs", runArray);
+
+                }
+            }
+
+            if (stationLogic != null) {
+                if (stationLogic.getRegulator() != null) {
+                    Regulator regulator = stationLogic.getRegulator();
+                    ObjectNode jsonRegulator = mapper.createObjectNode();
+
+                    ObjectNode regulatorInput = mapper.createObjectNode();
+                    regulatorInput.put("T", regulator.getTin());
+                    regulatorInput.put("P", regulator.getPin());
+                    gas.calculate(regulator.getPin(),regulator.getTin());
+                    regulatorInput.put("gas",removeGasProperty(gas));
+                    jsonRegulator.put("input",regulatorInput);
+
+                    ObjectNode regulatorOutput = mapper.createObjectNode();
+                    regulatorOutput.put("T", regulator.getTout());
+                    regulatorOutput.put("P", regulator.getPout());
+                    gas.calculate(regulator.getPout(),regulator.getTout());
+                    regulatorOutput.put("gas",removeGasProperty(gas));
+                    jsonRegulator.put("output",regulatorOutput);
+                    userInput.put("regulator", jsonRegulator);
+                }
+            }
+
+            stationItems.put("hydrateTemperature", userInput);
+
+
+            // T_hydrate temperature
+
+
+
 
         }
 
-        saveHydrateResults();
-        return state;
+//        saveHydrateResults();
+//        return state;
 
     }
 
@@ -339,6 +736,17 @@ public class CalculateController extends BaseController{
     public static void saveUserTempInputResults() {
         ObservableList<Table> data = ShowResultsController.getData();
         data.clear();
+//        ObjectNode json = mapper.createObjectNode();
+//        json.put("name", "student");
+//
+//        ArrayNode array = mapper.createArrayNode();
+//        ObjectNode item = mapper.createObjectNode();
+//        item.put("information", "test");
+//        item.put("id", 3);
+//        item.put("name", "course1");
+//        array.add(item);
+//
+//        json.put("course", array);
 
         StationLogic stationLogic = Station.getInstance().getStationLogic();
         StationPropertice stationPropertice = (StationPropertice) Station.getInstance().getList().get("stationPropertice");
@@ -348,9 +756,19 @@ public class CalculateController extends BaseController{
             data.add(new Table("منطقه", "", stationPropertice.getArea()));
             data.add(new Table("آدرس", "", stationPropertice.getAddress()));
             data.add(new Table("ظرفیت نامی" , cubicMeter, stationPropertice.getNominalCapacity()));
+
+
             if(stationPropertice.getEnvironmentTemp()!=null) {
+//                stationItems.put("envTemperature", String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
                 data.add(new Table("دمای محیط" , CELCIUS, String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15)));
             }
+//            stationItems.put("windSpeed", String.valueOf(stationPropertice.getWindVelocity()));
+//            stationItems.put("stationInputTemperature", String.valueOf(stationPropertice.getInputTemp() - 273.15));
+//            stationItems.put("stationInputPressure",String.valueOf(stationPropertice.getInputPressure()));
+//            stationItems.put("stationOutputTemperature",String.valueOf(stationPropertice.getOutputTemp() - 273.15));
+//            stationItems.put("stationOutputPressure",String.valueOf(stationPropertice.getOutputPressure()));
+//            stationItems.put("stationDebi", String.valueOf(stationPropertice.getDebi()));
+
             data.add(new Table("سرعت باد" , windSpeed, String.valueOf(stationPropertice.getWindVelocity())));
             data.add(new Table("دمای گاز ورودی به ایستگاه" , CELCIUS, String.valueOf(stationPropertice.getInputTemp() - 273.15)));
             data.add(new Table("فشار گاز ورودی به ایستگاه" , PSI, String.valueOf(stationPropertice.getInputPressure())));
@@ -526,5 +944,13 @@ public class CalculateController extends BaseController{
     @Override
     public void setOnShow() {
 
+    }
+
+    private ObjectNode removeGasProperty(Gas gas) throws IOException {
+        ObjectNode gasNode = (ObjectNode) mapper.readTree(mapper.writeValueAsString(gas));
+        gasNode.remove("component");
+        gasNode.remove("t");
+        gasNode.remove("p");
+        return  gasNode;
     }
 }

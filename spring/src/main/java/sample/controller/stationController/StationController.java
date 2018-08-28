@@ -139,7 +139,7 @@ public class StationController extends BaseController implements Initializable {
     }
 
     public void calculateButton(ActionEvent actionEvent) throws IOException {
-        if(calculateController.calculate()){
+        if(calculateController.calculate()!=null){
 
         showResultsFrame.show();
         }

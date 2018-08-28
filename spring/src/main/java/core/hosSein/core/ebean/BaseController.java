@@ -135,7 +135,7 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<String> get(@PathVariable ID id) throws JsonProcessingException {
+    ResponseEntity<String> get(@PathVariable ID id) throws IOException {
         PageResult<T> pageResult = new PageResult<>();
 
 

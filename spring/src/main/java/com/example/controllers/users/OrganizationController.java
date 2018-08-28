@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 /**
  * Developer: Payam Mostafaei
@@ -43,7 +44,7 @@ public class OrganizationController extends
     @Override
     @PostAuthorize("#id == authentication.principal.organizationId or hasAuthority('"+Role.ROLE_ADMIN +"')")
     public @ResponseBody
-    ResponseEntity<String> get(@PathVariable Long id) throws JsonProcessingException {
+    ResponseEntity<String> get(@PathVariable Long id) throws IOException {
         return super.get(id);
     }
 

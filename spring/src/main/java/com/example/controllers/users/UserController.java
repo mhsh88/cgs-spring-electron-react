@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 /**
  * Developer: Payam Mostafaei
@@ -43,7 +44,7 @@ public class UserController extends
 
     @RequestMapping("/currentuser")
     @ResponseBody
-    public ResponseEntity currentUser() throws JsonProcessingException {
+    public ResponseEntity currentUser() throws IOException {
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return super.get(userDetails.getUser().getId());
 

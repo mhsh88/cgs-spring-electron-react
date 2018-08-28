@@ -1,5 +1,6 @@
 package ir.behinehsazan.gasStation.model.gas;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
 import org.apache.commons.math3.analysis.UnivariateFunction;
@@ -36,15 +37,16 @@ public class BaseGas implements FindRoot {
     protected Double B;
     protected ArrayList<Double> C_n = new ArrayList<Double>();
     protected Double p1;
-    public static final Double R = 8.314510;
+    protected static final Double R = 8.314510;
     private double T_h;
 
+    @JsonProperty("T_hydrate")
     public double getT_h() {
         return T_h;
     }
 
 
-
+    @JsonProperty("Z")
     public Double getZ() {
         return Z;
     }
