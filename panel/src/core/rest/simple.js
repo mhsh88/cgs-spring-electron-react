@@ -61,10 +61,21 @@ export default (apiUrl, httpClient = fetchJson) => {
             options.method = 'GET';
             break;
         case GET_MANY: {
+            // const query = {
+            //     filter: JSON.stringify({ id: params.ids }),
+            // };
             const query = {
-                filter: JSON.stringify({ id: params.ids }),
+                sort: { field:"id", order: "DESC" },
+                filters: [{
+                    field: 'id',
+                    operator: 'in',
+                    value: params.ids.map(s => s).join()
+                }]
+
+                // filter: JSON.stringify({ id: params.ids }),
             };
-            url = `${apiUrl}/${resource}?${queryParameters(query)}`;
+            // url = `${apiUrl}/${resource}?${queryParameters(query)}`;
+            url = `${apiUrl}/${resource}?${encodeURIComponent(JSON.stringify(query))}`;
             options.method = 'GET';
             break;
         }

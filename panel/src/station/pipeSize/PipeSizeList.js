@@ -14,6 +14,7 @@ export const PipeSizeList = props => (
             <TextField source="name"/>
             <NumberField source="outerDiameter"/>
             <NumberField source="wallThickness"/>
+            <ColumnActions/>
         </Datagrid>
     </List>
 );
