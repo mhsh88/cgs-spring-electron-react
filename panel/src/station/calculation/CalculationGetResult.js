@@ -9,14 +9,19 @@ import restClient from '../../restClient';
 
 
 class CalculationGetResult extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            hits: [],
+        };
+    }
     handleClick = () => {
         const { push, record, showNotification } = this.props;
         // const updatedRecord = { ...record, is_approved: true };
         restClient(GET_ONE, 'results', { id: record.id })
-            .then(() => {
-                showNotification('Comment approved');
-                // push('/comments');
-            })
+            .then(response => { return response.data;})
+            .then(data => this.setState({ hits: data }))
             .catch((e) => {
                 console.error(e);
                 showNotification('Error: comment not approved', 'warning')
