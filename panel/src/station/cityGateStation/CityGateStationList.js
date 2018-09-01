@@ -20,7 +20,7 @@ export const CityGateStationList = props => (
             <ReferenceField source="beforeHeater.id" reference="pipespecificationss" validate={required} allowEmpty linkType="show" >
                 <TextField source="length" />
             </ReferenceField>
-            <ReferenceManyField label="گرم‌کن" reference="heaters" target="cityGateStation.id" allowEmpty >
+            <ReferenceManyField source="heaters" reference="heaters" target="cityGateStation.id" allowEmpty >
                 <SingleFieldList>
                     <ChipField source="efficiency" />
                 </SingleFieldList>

@@ -197,17 +197,31 @@ class ControlledExpansionPanels extends React.Component {
                                                                                     </Typography>
                                                                                 </Paper>
                                                                                 <Paper className={classes.childPaper} elevation={2}>
+
                                                                                 {
                                                                                     heater["burners"].map((burner, index )=>
+                                                                                        <div>
+                                                                                            <Typography className={classes.typography} component="h3">
+                                                                                                {'مشعل '+parseInt(index+1)}
 
-                                                                                        Object.keys(burner).map(burnerItem =>
+                                                                                            </Typography>
+                                                                                            {
 
-                                                                                                <Typography className={classes.typography} component="p">
-                                                                                                    {this.expansionPanelName(burnerItem) + ": "}
-                                                                                                    <NumberField className={classes.numberField} record={burner} source={burnerItem}/>
-                                                                                                </Typography>
 
-                                                                                        )
+                                                                                                Object.keys(burner).map(burnerItem =>
+
+                                                                                                    <Typography
+                                                                                                        className={classes.typography}
+                                                                                                        component="p">
+                                                                                                        {this.expansionPanelName(burnerItem) + ": "}
+                                                                                                        <NumberField
+                                                                                                            className={classes.numberField}
+                                                                                                            record={burner}
+                                                                                                            source={burnerItem}/>
+                                                                                                    </Typography>
+                                                                                                )
+                                                                                            }
+                                                                                        </div>
 
 
 

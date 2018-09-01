@@ -3,7 +3,7 @@ import {
     NumberInput, Create, Edit, SimpleForm, DisabledInput,
     TextInput, DateInput, LongTextInput, ReferenceManyField,
     Datagrid, TextField, DateField, EditButton,
-    ReferenceArrayInput, SelectArrayInput, required, maxValue, minValue, ReferenceInput, SelectInput
+    ReferenceArrayInput,SelectArrayInput, required, maxValue, minValue, ReferenceInput, SelectInput
 } from '../../core';
 
 
@@ -16,7 +16,7 @@ export const RunsEdit = (props) => (
             <ReferenceInput source="pipeSize.id" reference="pipesizes" validate={required} >
                 <SelectInput source="name"/>
             </ReferenceInput>
-            <ReferenceArrayInput source="runsHasCondition" reference="runshasconditions" validate={required} >
+            <ReferenceArrayInput source="runsHasCondition" reference="runshasconditions" validate={required} allowEmpty>
                 <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
             </ReferenceArrayInput>
         </SimpleForm>

@@ -69,7 +69,7 @@ export default (apiUrl, httpClient = fetchJson) => {
                 filters: [{
                     field: 'id',
                     operator: 'in',
-                    value: params.ids.map(s => s).join()
+                    value: params.ids.map(s => typeof s === 'object'? s.id : s).join()
                 }]
 
                 // filter: JSON.stringify({ id: params.ids }),

@@ -154,7 +154,8 @@ export default {
                     id:'سایز لوله'
                 },
                 length:'طول',
-                condition:'شرایط'
+                condition:'شرایط',
+                runsHasCondition: 'شرایط ران'
             }
         },
 
