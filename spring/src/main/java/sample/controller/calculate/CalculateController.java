@@ -112,20 +112,20 @@ public class CalculateController extends BaseController{
 
 
 
-            stationItems.put("province",stationPropertice.getProvince());
-            stationItems.put("city",stationPropertice.getCity());
-            stationItems.put("region", stationPropertice.getArea());
-            stationItems.put("address", stationPropertice.getAddress());
-            stationItems.put("nominalCapacity", stationPropertice.getNominalCapacity());
-            if(stationPropertice.getEnvironmentTemp()!=null) {
-                stationItems.put("envTemperature", String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
-            }
-            stationItems.put("windSpeed", stationPropertice.getWindVelocity());
-            stationItems.put("stationInputTemperature", stationPropertice.getInputTemp() - 273.15);
-            stationItems.put("stationInputPressure", stationPropertice.getInputPressure());
-            stationItems.put("stationOutputTemperature", stationPropertice.getOutputTemp() - 273.15);
-            stationItems.put("stationOutputPressure", stationPropertice.getOutputPressure());
-            stationItems.put("stationDebi", stationPropertice.getDebi());
+//            stationItems.put("province",stationPropertice.getProvince());
+//            stationItems.put("city",stationPropertice.getCity());
+//            stationItems.put("region", stationPropertice.getArea());
+//            stationItems.put("address", stationPropertice.getAddress());
+//            stationItems.put("nominalCapacity", stationPropertice.getNominalCapacity());
+//            if(stationPropertice.getEnvironmentTemp()!=null) {
+//                stationItems.put("envTemperature", String.valueOf(stationPropertice.getEnvironmentTemp() - 273.15));
+//            }
+//            stationItems.put("windSpeed", stationPropertice.getWindVelocity());
+//            stationItems.put("stationInputTemperature", stationPropertice.getInputTemp() - 273.15);
+//            stationItems.put("stationInputPressure", stationPropertice.getInputPressure());
+//            stationItems.put("stationOutputTemperature", stationPropertice.getOutputTemp() - 273.15);
+//            stationItems.put("stationOutputPressure", stationPropertice.getOutputPressure());
+//            stationItems.put("stationDebi", stationPropertice.getDebi());
 
             ObjectNode userInput = mapper.createObjectNode();
 
@@ -145,8 +145,8 @@ public class CalculateController extends BaseController{
             gas.calculate(beforeheaterpipeline.getPout(),beforeheaterpipeline.getTout());
             beforeHeaterOutput.put("gas",removeGasProperty(gas));
             beforeHeater.put("output",beforeHeaterOutput);
-            beforeHeater.put("insulationConsumption", -1 * beforeheaterpipeline.getWithInsulationConsumption());
-            beforeHeater.put("noInsulationConsumption", -1 * beforeheaterpipeline.getWithInsulationConsumption());
+            beforeHeater.put("insulationLoss", -1 * beforeheaterpipeline.getWithInsulationConsumption());
+            beforeHeater.put("noInsulationLoss", -1 * beforeheaterpipeline.getWithInsulationConsumption());
 
             userInput.put("beforeHeater", beforeHeater);
 //
