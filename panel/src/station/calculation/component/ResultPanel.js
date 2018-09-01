@@ -68,13 +68,11 @@ class ControlledExpansionPanels extends React.Component {
 
 
     expansionPanelName(name){
-
         switch(name) {
             case 'userInputTemperature':
                 return "محاسبات با اطلاعات ورودی";
             case 'hydrateTemperature':
                 return "محاسبات با دمای هیدارت";
-
             case 'beforeHeater':
                 return "خط لوله قبل از گرم‌کن";
             case 'heater':

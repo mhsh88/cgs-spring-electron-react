@@ -10,7 +10,6 @@ import {
 export const ConditionList = props => (
     <List {...props}>
         <Datagrid>
-            <TextField source="id"/>
             <TextField source="envTempreture" />
             <TextField source="windSpeed" />
             <TextField source="stationDebi" />
@@ -18,6 +17,7 @@ export const ConditionList = props => (
             <TextField source="stationInputPressure" />
             <TextField source="stationOutputTemprature" />
             <TextField source="stationOutputPressure"/>
+            <ColumnActions/>
         </Datagrid>
     </List>
 );

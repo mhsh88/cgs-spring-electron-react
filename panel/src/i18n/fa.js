@@ -39,8 +39,61 @@ export default {
                 condition:'وضعیت',
                 region:'منطقه',
                 address:'آدرس',
-                nominalCapacity:'ظرفیت اسمی'
+                nominalCapacity:'ظرفیت اسمی',
+                afterHeater: {
+                    id: 'خط لوله بعد از گرم‌کن'
+                },
+                beforeHeater: {
+                  id: 'خط لوله قبل از گرم‌کن'
+                },
+                collector: {
+                    id: 'کلکتور'
+                },
+                runs: {
+                  id: 'ران‌ها'
+                },
             }
+        },
+        calculations:{
+          name: 'محاسبات',
+            fields: {
+              id: 'اطلاعات محاسبه',
+              station:{
+
+              },
+                cityGateStation:{
+                  id: 'ایستگاه تقلیل فشار گاز'
+                },
+                condition:{
+                  id:'شرایط'
+                },
+                gas:{
+                  id:'اطلاعات گاز'
+                }
+
+            }
+        },
+        gass:{
+            name: 'اطلاعات گاز |||| اطلاعات گازها',
+            fields:{
+                id: 'گاز طبیعی',
+
+
+            },
+        },
+        conditions:{
+          name: 'شرایط',
+          fields:{
+              id: '',
+              envTempreture: 'دمای محیط',
+              windSpeed: 'سرعت باد',
+              stationDebi:'دبی عبوری',
+              stationInputTemprature:'دمای گاز ورودی',
+              stationInputPressure:'فشار گاز ورودی',
+              stationOutputTemprature:'دمای گاز خروجی',
+              stationOutputPressure:'فشار گاز خروجی',
+
+          }
         },
         organizationassessments: {
             name: 'ارزیابی سازمان |||| ارزیابی‌های سازمان',

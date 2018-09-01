@@ -164,24 +164,6 @@ class App extends Component {
                 <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate} edit={PipeSizeEdit}/>
                 <Resource name="runshasconditions" group="stations" list={RunsHasConditionList} create={RunsHasConditionCreate}/>
                 <Resource name="runss" group="stations" list={RunsList} create={RunsCreate} edit={RunsEdit}/>
-
-
-                <Resource name="organizationassessments" group="assessments" list={OrganizationAssessmentList} create={OrganizationAssessmentCreate} icon={OrganizationAssessmentIcon} remove={OrganizationAssessmentDelete}/>
-                <Resource name="assessmentsals" group="assessments" list={AssessmentSalList} create={AssessmentSalCreate} edit={AssessmentSalEdit} show={AssessmentSalDetails} remove={AssessmentSalDelete} retrieve={AssessmentSalRetrieve} icon={AssessmentSalIcon} />
-                <Resource name="databasequestions" group="assessments" list={DatabaseQuestionList} create={DatabaseQuestionCreate} edit={DatabaseQuestionEdit} show={DatabaseQuestionDetails} remove={DatabaseQuestionDelete} retrieve={DatabaseQuestionRetrieve} icon={DatabaseQuestionIcon} />
-                <Resource name="metrics" group="assessments" list={MetricList} create={MetricCreate} edit={MetricEdit} show={MetricDetails} remove={MetricDelete} retrieve={MetricRetrieve} icon={MetricIcon} />
-                <Resource name="organizationassessmenthasquestions" group="assessments" list={OrganizationAssessmentHasQuestionList} create={OrganizationAssessmentHasQuestionCreate} edit={OrganizationAssessmentHasQuestionEdit} show={OrganizationAssessmentHasQuestionDetails} remove={OrganizationAssessmentHasQuestionDelete} retrieve={OrganizationAssessmentHasQuestionRetrieve} icon={OrganizationAssessmentHasQuestionIcon} />
-                <Resource name="prequestions" group="assessments" list={PreQuestionList} create={PreQuestionCreate} edit={PreQuestionEdit} show={PreQuestionDetails} remove={PreQuestionDelete} retrieve={PreQuestionRetrieve} icon={PreQuestionIcon} />
-                <Resource name="questions" group="assessments" list={QuestionList} create={QuestionCreate} edit={QuestionEdit} show={QuestionDetails} remove={QuestionDelete} retrieve={QuestionRetrieve} icon={QuestionIcon} />
-                <Resource name="questionhassals" group="assessments" list={QuestionHasSalList} create={QuestionHasSalCreate} edit={QuestionHasSalEdit} show={QuestionHasSalDetails} remove={QuestionHasSalDelete} retrieve={QuestionHasSalRetrieve} icon={QuestionHasSalIcon} />
-                <Resource name="questionscopes" group="assessments" list={QuestionScopeList} create={QuestionScopeCreate} edit={QuestionScopeEdit} show={QuestionScopeDetails} remove={QuestionScopeDelete} retrieve={QuestionScopeRetrieve} icon={QuestionScopeIcon} />
-                <Resource name="sals" group="assessments" list={SalList} create={SalCreate} edit={SalEdit} show={SalDetails} remove={SalDelete} retrieve={SalRetrieve} icon={SalIcon} />
-                <Resource name="standards" group="assessments" list={StandardList} create={StandardCreate} edit={StandardEdit} show={StandardDetails} remove={StandardDelete} retrieve={StandardRetrieve} icon={StandardIcon} />
-                <Resource name="submetrics" group="assessments" list={SubMetricList} create={SubMetricCreate} edit={SubMetricEdit} show={SubMetricDetails} remove={SubMetricDelete} retrieve={SubMetricRetrieve} icon={SubMetricIcon} />
-
-                <Resource name="organizations" group="users" list={OrganizationsList} show={OrganizationDetails} create={OrganizationCreate} edit={OrganizationEdit} remove={OrganizationDelete} retrieve={OrganizationRetrieve} icon={OrganizationIcon} />
-                <Resource name="permissions" group="users" list={PermissionsList} show={PermissionDetails} icon={PermissionIcon} />
-                <Resource name="roles" group="users" list={RolesList} show={RoleDetails} create={RoleCreate} edit={RoleEdit} remove={RoleDelete} retrieve={RoleRetrieve} icon={RoleIcon} />
             </Admin>
         );
     }

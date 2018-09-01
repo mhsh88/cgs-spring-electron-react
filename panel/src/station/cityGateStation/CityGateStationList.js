@@ -17,20 +17,22 @@ export const CityGateStationList = props => (
             <TextField source="region" />
             <TextField source="address" />
             <TextField source="nominalCapacity" />
-            <ReferenceField source="afterHeater.id" reference="pipespecificationss" validate={required} >
-                <TextField source="length"/>
-            </ReferenceField>
             <ReferenceField source="beforeHeater.id" reference="pipespecificationss" validate={required} >
                 <TextField source="length"/>
             </ReferenceField>
-            <ReferenceField source="collector.id" reference="pipespecificationss" validate={required} >
-                <TextField source="length"/>
-            </ReferenceField>
-            <ReferenceManyField reference="heaters" target="cityGateStation.id" >
+            <ReferenceManyField label="گرم‌کن" reference="heaters" target="cityGateStation.id" >
                 <SingleFieldList>
                     <ChipField source="efficiency" />
                 </SingleFieldList>
             </ReferenceManyField>
+            <ReferenceField source="afterHeater.id" reference="pipespecificationss" validate={required} >
+                <TextField source="length"/>
+            </ReferenceField>
+
+            <ReferenceField source="collector.id" reference="pipespecificationss" validate={required} >
+                <TextField source="length"/>
+            </ReferenceField>
+
             <ReferenceField source="runs.id" reference="runss" validate={required} >
                 <TextField source="length"/>
             </ReferenceField>

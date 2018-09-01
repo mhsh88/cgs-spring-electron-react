@@ -11,13 +11,13 @@ export const CalculationList = props => (
         <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }} >
 
             <TextField source="id"/>
-            <ReferenceField label="Station" source="cityGateStation.id" reference="citygatestations">
+            <ReferenceField source="cityGateStation.id" reference="citygatestations">
                 <TextField source="city" />
             </ReferenceField>
-            <ReferenceField label="Condition" source="condition.id" reference="conditions">
+            <ReferenceField source="condition.id" reference="conditions">
                 <TextField source="id" />
             </ReferenceField>
-            <ReferenceField label="Natural Gas" source="gas.id" reference="gass">
+            <ReferenceField source="gas.id" reference="gass">
                 <TextField source="name" />
             </ReferenceField>
             <ColumnActions />
