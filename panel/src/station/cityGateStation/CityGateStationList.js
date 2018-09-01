@@ -17,23 +17,23 @@ export const CityGateStationList = props => (
             <TextField source="region" />
             <TextField source="address" />
             <TextField source="nominalCapacity" />
-            <ReferenceField source="beforeHeater.id" reference="pipespecificationss" validate={required} >
-                <TextField source="length"/>
+            <ReferenceField source="beforeHeater.id" reference="pipespecificationss" validate={required} allowEmpty linkType="show" >
+                <TextField source="length" />
             </ReferenceField>
-            <ReferenceManyField label="گرم‌کن" reference="heaters" target="cityGateStation.id" >
+            <ReferenceManyField label="گرم‌کن" reference="heaters" target="cityGateStation.id" allowEmpty >
                 <SingleFieldList>
                     <ChipField source="efficiency" />
                 </SingleFieldList>
             </ReferenceManyField>
-            <ReferenceField source="afterHeater.id" reference="pipespecificationss" validate={required} >
+            <ReferenceField source="afterHeater.id" reference="pipespecificationss" validate={required} allowEmpty>
                 <TextField source="length"/>
             </ReferenceField>
 
-            <ReferenceField source="collector.id" reference="pipespecificationss" validate={required} >
+            <ReferenceField source="collector.id" reference="pipespecificationss" validate={required} allowEmpty>
                 <TextField source="length"/>
             </ReferenceField>
 
-            <ReferenceField source="runs.id" reference="runss" validate={required} >
+            <ReferenceField source="runs.id" reference="runss" validate={required} allowEmpty>
                 <TextField source="length"/>
             </ReferenceField>
             <ColumnActions smallScreen />

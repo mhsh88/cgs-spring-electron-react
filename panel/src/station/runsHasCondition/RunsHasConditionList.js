@@ -13,6 +13,7 @@ export const RunsHasConditionList = props => (
             <TextField source="id"/>
             <TextField source="text"/>
             <NumberField source="debi"/>
+            <ColumnActions/>
         </Datagrid>
     </List>
 );

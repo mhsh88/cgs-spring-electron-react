@@ -29,12 +29,12 @@ export const RunsList = props => (
             <TextField source="id"/>
             <NumberField source="length"  />
 
-            <ReferenceField label="Pipe Size" source="pipeSize.id" reference="pipesizes" >
+            <ReferenceField source="pipeSize.id" reference="pipesizes" allowEmpty>
                 <TextField source="name" />
             </ReferenceField>
 
 
-            <ReferenceManyField reference="runshasconditions" target="runs.id" >
+            <ReferenceManyField source="condition" reference="runshasconditions" target="runs.id" >
                 <SingleFieldList>
                     <ChipField label="Debi" source="text" />
                 </SingleFieldList>

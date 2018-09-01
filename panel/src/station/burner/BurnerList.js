@@ -14,6 +14,7 @@ export const BurnerList = props => (
             <TextField source="text"/>
             <TextField source="oxygenPercent"/>
             <TextField source="flueGasTemprature"/>
+            <ColumnActions/>
         </Datagrid>
     </List>
 );

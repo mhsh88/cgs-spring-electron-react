@@ -12,13 +12,13 @@ const CalculationDetails = props => (
     <Show {...props}>
         <SimpleShowLayout>
             <TextField source="id"/>
-            <ReferenceField label="Station" source="cityGateStation.id" reference="citygatestations">
+            <ReferenceField label="Station" source="cityGateStation.id" reference="citygatestations" allowEmpty>
                 <TextField source="city" />
             </ReferenceField>
-            <ReferenceField label="Condition" source="condition.id" reference="conditions">
+            <ReferenceField label="Condition" source="condition.id" reference="conditions" allowEmpty>
                 <TextField source="id" />
             </ReferenceField>
-            <ReferenceField label="Natural Gas" source="gas.id" reference="gass">
+            <ReferenceField label="Natural Gas" source="gas.id" reference="gass" allowEmpty>
                 <TextField source="name" />
             </ReferenceField>
             <CalculationGetResult />

@@ -30,12 +30,8 @@ const GasGrid = ({ ids, data, basePath }) => (
                 <CardText>
                     <TextField record={data[id]} source="hydrogen" />
                 </CardText>
-
                 <CardActions style={{ textAlign: 'bottom' }}>
-                    <EditButton resource="gass" basePath={basePath} record={data[id]} />
-                </CardActions>
-                <CardActions style={{ textAlign: 'bottom' }}>
-                    <DeleteButton resource="gass" basePath={basePath} record={data[id]} />
+                    <ColumnActions resource="gass" basePath={basePath} record={data[id]} />
                 </CardActions>
 
 

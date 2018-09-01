@@ -30,7 +30,7 @@ export const PipeSpecificationList = props => (
             <NumberField source="length"  />
             <NumberField source="insulationFactor"  />
             <NumberField source="insulationThickness"  />
-            <ReferenceField label="Pipe Size" source="pipeSize.id" reference="pipesizes" >
+            <ReferenceField source="pipeSize.id" reference="pipesizes" allowEmpty>
                 <TextField source="name" />
             </ReferenceField>
             <ColumnActions smallScreen />

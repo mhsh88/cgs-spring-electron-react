@@ -95,6 +95,69 @@ export default {
 
           }
         },
+        heaters:{
+            name:   'گرم‌کن |||| گرم‌کن‌ها',
+            fields:{
+                id: 'گرم‌کن',
+                text:'عنوان',
+                efficiency:'راندمان حرارتی گرم‌کن',
+                burners: 'مشعل'
+
+            },
+        },
+        burners:{
+          name: 'مشعل |||| مشعل‌ها',
+            fields:{
+                id:'مشعل',
+                text:'عنوان',
+                oxygenPercent:'درصد اکسیژن',
+                flueGasTemprature:'دمای دودکش',
+            }
+        },
+        pipespecificationss:{
+          name:'مشخصات خط لوله',
+            fields:{
+              id: 'مشخصات',
+                length:'طول',
+                insulationFactor:'ضریب انتقال حرارت عایق',
+                insulationThickness:'ضخامت عایق',
+                pipeSize:{
+                  id:'سایر لوله',
+                    name:'',
+                }
+
+            }
+        },
+        pipesizes:{
+          name: 'سایز لوله |||| سایزهای لوله',
+          fields:{
+              id:'شماره',
+              name:'سایز',
+              outerDiameter:'قطر خارجی',
+              wallThickness:'ضخامت دیواره',
+          }
+        },
+        runshasconditions:{
+            name: 'شرایط ران',
+            fields:{
+                id:'شرایط',
+                text:'عنوان',
+                debi:'دبی عبوری'
+            }
+
+        },
+        runss:{
+            name:'ران',
+            fields:{
+                id:'ران',
+                pipeSize:{
+                    id:'سایز لوله'
+                },
+                length:'طول',
+                condition:'شرایط'
+            }
+        },
+
         organizationassessments: {
             name: 'ارزیابی سازمان |||| ارزیابی‌های سازمان',
             tabs: {

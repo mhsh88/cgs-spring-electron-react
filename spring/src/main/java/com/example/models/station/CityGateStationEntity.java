@@ -17,10 +17,10 @@ import java.util.List;
 @Entity
 @Table(name = "city_gate_station")
 public class CityGateStationEntity extends BaseEntity {
-    @JsonView(CityGateStationView.class)
+    @JsonView({CityGateStationView.class})
     @Size(max = 255)
     public String province;
-    @JsonView(CityGateStationView.class)
+    @JsonView({CityGateStationView.class,CalculationView.class})
     @Size(max = 255)
     public String city;
 
@@ -96,7 +96,7 @@ public class CityGateStationEntity extends BaseEntity {
     public void setProvince(String province) {
         this.province = province;
     }
-    @JsonView(CityGateStationView.class)
+    @JsonView({CityGateStationView.class,CalculationView.class})
     public String getCity() {
         return city;
     }
