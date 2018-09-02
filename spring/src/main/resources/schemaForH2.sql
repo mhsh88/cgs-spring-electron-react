@@ -40,7 +40,7 @@
         create table oauth_code (
         code VARCHAR(255), authentication LONGVARBINARY);
 
---         SET SQL_MODE='ALLOW_INVALID_DATES';
+        SET SQL_MODE='ALLOW_INVALID_DATES';
         drop table if exists oauth_approvals;
         create table oauth_approvals (
         userId VARCHAR(255),

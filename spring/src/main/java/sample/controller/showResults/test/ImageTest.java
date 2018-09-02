@@ -1,21 +1,18 @@
 package sample.controller.showResults.test;
 
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
-
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.InputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 
 
 class ImageTest {
 
-        public static void main(String[] args) {
+        public static void miam(String[] args) {
             ImageTest imageTest = new ImageTest();
             imageTest.addImage();
 

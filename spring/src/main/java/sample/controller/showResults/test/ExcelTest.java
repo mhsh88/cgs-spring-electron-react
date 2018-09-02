@@ -13,7 +13,7 @@ import java.io.*;
 
 public class ExcelTest {
 
-    public static void main(String args[]){
+    public static void miam(String args[]){
         HSSFWorkbook workbook = new HSSFWorkbook();
 
 
