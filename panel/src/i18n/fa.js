@@ -40,6 +40,7 @@ export default {
                 region:'منطقه',
                 address:'آدرس',
                 nominalCapacity:'ظرفیت اسمی',
+                heaters:"گرم‌کن‌ها",
                 afterHeater: {
                     id: 'خط لوله بعد از گرم‌کن'
                 },

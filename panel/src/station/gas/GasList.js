@@ -28,7 +28,7 @@ const GasGrid = ({ ids, data, basePath }) => (
                     subtitle={<BooleanField record={data[id]} source="moleWightPersent" />}
                 />
                 <CardText>
-                    <TextField record={data[id]} source="hydrogen" />
+                    {/*<TextField record={data[id]} source="hydrogen" />*/}
                 </CardText>
                 <CardActions style={{ textAlign: 'bottom' }}>
                     <ColumnActions resource="gass" basePath={basePath} record={data[id]} />

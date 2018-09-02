@@ -43,7 +43,7 @@ class SimpleSelect extends React.Component {
 
                     </InputLabel>
                     <Select
-                        value={this.state.property}
+                        value={Math.round(this.state.property * 1000) /1000 }
                         onChange={this.handleChange}
                         input={<Input name="property" id="age-label-placeholder" />}
                         displayEmpty
@@ -58,14 +58,14 @@ class SimpleSelect extends React.Component {
                 </FormControl>
                 <FormControl className={classes.formControl}>
                     <Select
-                        value={this.state.property}
+                        value={Math.round(this.state.property * 1000) /1000}
                         displayEmpty
                         className={classes.selectEmpty}
                     >
                         <MenuItem style={{ textAlign:'right', fontFamily: 'IRANSans'}} value="" disabled>
                             مقدار
                         </MenuItem>
-                        <MenuItem style={{alignContent: 'left'}} value={this.state.property}>{this.state.property}</MenuItem>
+                        <MenuItem style={{alignContent: 'left'}} value={Math.round(this.state.property * 1000) /1000}>{Math.round(this.state.property* 1000) /1000}</MenuItem>
 
                     </Select>
                     <FormHelperText style={{ textAlign:'right', fontFamily: 'IRANSans'}}>مقدار</FormHelperText>

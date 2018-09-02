@@ -115,7 +115,7 @@ class ControlledExpansionPanels extends React.Component {
             case 'oxygenPercent':
                 return "درصد اگسیژن";
             default:
-                return "";
+                return parseInt(name + 1) ? 'ران ' + parseInt(parseInt(name) + 1) : '';
         }
 
     }
@@ -144,8 +144,8 @@ class ControlledExpansionPanels extends React.Component {
                                             <ExpansionPanelSummary>
                                                 <Typography
                                                     className={classes.heading}>{this.expansionPanelName(calitems)}</Typography>
-                                                <Typography className={classes.secondaryHeading}>
-                                                    {calitems}
+                                                <Typography style={{color: 'white'}} className={classes.secondaryHeading}>
+                                                    نامرئی
                                                 </Typography>
                                             </ExpansionPanelSummary>
                                             <ExpansionPanelDetails>
@@ -155,7 +155,7 @@ class ControlledExpansionPanels extends React.Component {
                                             </ExpansionPanelDetails>
 
                                             {
-                                                Object.keys(data[0][items][calitems]).map((stationItems) =>
+                                                Object.keys(data[0][items][calitems]).map((stationItems,stationindex) =>
                                                     typeof data[0][items][calitems][stationItems] === 'object' || data[0][items][calitems][stationItems] && Object.keys(data[0][items][calitems][stationItems]).length>1 ?
                                                     <Paper className={classes.childPaper} elevation={2}>
                                                     <ExpansionPanel expanded={childExpanded === `panel.${items}.${calitems}.${stationItems}`}
@@ -165,8 +165,8 @@ class ControlledExpansionPanels extends React.Component {
                                                             <Typography
                                                                 className={classes.heading}>{this.expansionPanelName(stationItems)}
                                                                 </Typography>
-                                                            <Typography className={classes.secondaryHeading}>
-                                                                {stationItems}
+                                                            <Typography style={{color: 'white'}} className={classes.secondaryHeading}>
+                                                                نامرئی
                                                             </Typography>
                                                         </ExpansionPanelSummary>
                                                         <ExpansionPanelDetails>
@@ -187,9 +187,13 @@ class ControlledExpansionPanels extends React.Component {
                                                                     )
                                                                   :
                                                                     Array.isArray( data[0][items][calitems][stationItems])&& stationItems==='heaters' ?
-                                                                        data[0][items][calitems][stationItems].map(heater =>
+                                                                        data[0][items][calitems][stationItems].map((heater,index) =>
                                                                             <div>
                                                                                 <Paper className={classes.childPaper} elevation={2}>
+                                                                                    <Typography className={classes.typography} component="h3">
+                                                                                        {'گرم‌کن '+parseInt(index+1)}
+
+                                                                                    </Typography>
                                                                                     <Typography className={classes.typography} component="p">
                                                                                         {this.expansionPanelName("efficiency") + ": "}
                                                                                         <NumberField className={classes.numberField} record={heater} source={"efficiency"}/>
@@ -201,15 +205,13 @@ class ControlledExpansionPanels extends React.Component {
                                                                                 {
                                                                                     heater["burners"].map((burner, index )=>
                                                                                         <div>
+                                                                                            <Paper className={classes.childPaper} elevation={3}>
                                                                                             <Typography className={classes.typography} component="h3">
                                                                                                 {'مشعل '+parseInt(index+1)}
 
                                                                                             </Typography>
                                                                                             {
-
-
                                                                                                 Object.keys(burner).map(burnerItem =>
-
                                                                                                     <Typography
                                                                                                         className={classes.typography}
                                                                                                         component="p">
@@ -221,6 +223,7 @@ class ControlledExpansionPanels extends React.Component {
                                                                                                     </Typography>
                                                                                                 )
                                                                                             }
+                                                                                            </Paper>
                                                                                         </div>
 
 
@@ -232,7 +235,55 @@ class ControlledExpansionPanels extends React.Component {
                                                                         )
 
                                                                         :
-                                                                        <div>not array</div>
+                                                                        Object.keys(data[0][items][calitems][stationItems]).map(inputOutputkey =>
+
+
+                                                                                inputOutputkey === 'input' || inputOutputkey === 'output' ?
+                                                                                    <Paper className={classes.childPaper}
+                                                                                           elevation={3}>
+                                                                                        <Typography
+                                                                                            className={classes.typography}
+                                                                                            component="h3">
+                                                                                            {this.expansionPanelName(inputOutputkey)}
+
+                                                                                        </Typography>
+
+                                                                                        {
+                                                                                            Object.keys(data[0][items][calitems][stationItems][inputOutputkey]).map(internalKey =>
+                                                                                                typeof data[0][items][calitems][stationItems][inputOutputkey][internalKey] !== "object" ?
+                                                                                                    <Paper
+                                                                                                        className={classes.childPaper}
+                                                                                                        elevation={2}>
+                                                                                                        <Typography
+                                                                                                            className={classes.typography}
+                                                                                                            component="p">
+                                                                                                            {this.expansionPanelName(internalKey) + ": "}
+                                                                                                            <NumberField
+                                                                                                                className={classes.numberField}
+                                                                                                                record={data[0][items][calitems][stationItems][inputOutputkey]}
+                                                                                                                source={internalKey}/>
+                                                                                                        </Typography>
+                                                                                                    </Paper>
+                                                                                                    :
+                                                                                                    <Paper
+                                                                                                        style={{textAlign: 'center'}}
+                                                                                                        className={classes.childPaper}
+                                                                                                        elevation={2}>
+                                                                                                        <GasPropertyShow
+                                                                                                            data={data[0][items][calitems][stationItems][inputOutputkey][internalKey]}/>
+                                                                                                    </Paper>
+                                                                                            )
+                                                                                        }
+                                                                                    </Paper>
+                                                                                    :
+                                                                                    <Paper className={classes.childPaper} elevation={2}>
+                                                                                        <Typography className={classes.typography} component="p">
+                                                                                            {this.expansionPanelName(inputOutputkey) + ": "}
+                                                                                            <NumberField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}/>
+                                                                                        </Typography>
+                                                                                    </Paper>
+                                                                            )
+
                                                             }
 
                                                         </ExpansionPanelDetails>

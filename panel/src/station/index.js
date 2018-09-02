@@ -1,3 +1,5 @@
+import ConditionDetails from "./condition/ConditionDetails";
+
 export { default as CityGateStationCreate } from './cityGateStation/CityGateStationCreate';
 export { default as CityGateStationDetails } from './cityGateStation/CityGateStationDetails';
 export { default as CityGateStationEdit } from './cityGateStation/CityGateStationEdit';
@@ -11,6 +13,8 @@ export { default as CityGateStationIcon } from 'material-ui/svg-icons/action/des
 export { default as GasList } from './gas/GasList';
 export { default as GasCreate } from './gas/GasCreate';
 export { default as GasEdit } from './gas/GasEdit';
+export { default as GasDetails} from './gas/GasDetails';
+
 
 export { default as CalculationList } from './calculation/CalculationList';
 export { default as CalculationCreate } from './calculation/CalculationCreate';
@@ -20,6 +24,7 @@ export { default as CalculationDetails } from './calculation/CalculationDetails'
 
 export { default as ConditionList } from './condition/ConditionList';
 export { default as ConditionCreate } from './condition/ConditionCreate';
+export { default as ConditionDetails } from './condition/ConditionDetails';
 
 export { default as HeaterList } from './heater/HeaterList';
 export { default as HeaterCreate } from './heater/HeaterCreate';
@@ -31,11 +36,14 @@ export { default as BurnerCreate } from './burner/BurnerCreate';
 export { default as PipeSizeList } from './pipeSize/PipeSizeList';
 export { default as PipeSizeCreate } from './pipeSize/PipeSizeCreate';
 export { default as PipeSizeEdit } from './pipeSize/PipeSizeEdit';
+export { default as PipeSizeDetails } from './pipeSize/PipeSizeDetails';
 
 
 export { default as PipeSpecificationList } from './pipeSpecification/PipeSpecificationList';
 export { default as PipeSpecificationCreate } from './pipeSpecification/PipeSpecificationCreate';
 export { default as PipeSpecificationEdit } from './pipeSpecification/PipeSpecificationEdit';
+export { default as PipeSpecificationDetails } from './pipeSpecification/PipeSpecificationDetails';
+
 
 export { default as RunsHasConditionList } from './runsHasCondition/RunsHasConditionList';
 export { default as RunsHasConditionCreate } from './runsHasCondition/RunsHasConditionCreate';
