@@ -32,6 +32,10 @@ export const fetchJson = (url, options = {}) => {
                 // not json, no big deal
             }
             if (status < 200 || status >= 300) {
+                if(json.error === 'invalid_token'){
+                    localStorage.removeItem('token');
+                    return Promise.reject();
+                }
                 return Promise.reject(new HttpError((json && json.message) || statusText, status));
             }
             return { status, headers, body, json };

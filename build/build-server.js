@@ -5,19 +5,13 @@ shell.echo('#     Building react       #')
 shell.echo('##########################')
 
 shell.cd('panel')
-const PUBLIC = '../spring/src/main/resources/public/'
-const STATIC = '../spring/src/main/resources/static/'
-const templates = '../spring/src/main/resources/templates/'
+const PUBLIC = '../spring/src/main/resources/templates/'
 shell.rm('-rf', PUBLIC);
-shell.rm('-rf', STATIC);
-shell.rm('-rf', templates);
 if (shell.exec('npm run build').code !== 0) {
   shell.echo('Error: react build failed')
   shell.exit(1)
 }
 shell.cp('-R', 'build/', PUBLIC)
-shell.cp('-R', 'build/', STATIC)
-shell.cp('-R', 'build/', templates)
 shell.cd('..')
 
 shell.echo('##########################')

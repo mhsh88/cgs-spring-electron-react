@@ -36,7 +36,7 @@ function IconLabelButtons(props) {
         <div onClick={onClick}>
             <Button size="large" variant="contained" className={classes.button} >
                 محاسبه نتایج
-                <Icon className={classes.leftIcon}>send</Icon>
+                <Icon className={classes.leftIcon}></Icon>
             </Button>
         </div>
     );

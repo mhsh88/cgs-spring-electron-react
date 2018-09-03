@@ -272,6 +272,9 @@ public class GasEntity extends BaseEntity {
     @Column(name = "mole_wight_persent")
     @NotNull
     public Boolean isMoleWightPersent() {
+        if (moleWightPersent == null) {
+            return false;
+        }
         return moleWightPersent;
     }
 

@@ -28,26 +28,6 @@ export const CityGateStationCreate = props => <Create {...props} >
         <ReferenceInput label="Natural Gas" source="gas.id" reference="gass" validate={required} allowEmpty>
             <SelectInput source="name"/>
         </ReferenceInput>
-        <div key="resultDiv4" className="rowC" style={{height: 'auto !important', margin: 'auto', width: 500}}>
-            <div id="main">
-                <div className="rowC" id="d1"><img src={Pipe}/><img src={FourWay}/></div>
-                <div className="rowC" id="d2"><img src={FourWay}/></div>
-            </div>
-            <div className="rowC">
-                <div className="rowC">
-                    <section>
-                        <img src={Pipe}/>
-                    </section>
-                </div>
-                <div className="rowC">
-                    <section>
-                        <img src={FourWay} className="rowC"/>
-                    </section>
-                </div>
-            </div>
-
-        </div>
-
     </SimpleForm>
 </Create>;
 

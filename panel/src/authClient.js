@@ -14,7 +14,6 @@ export default (type, params) => {
                 'authorization': 'Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==',
             })
         });
-        console.log(JSON.stringify(body));
         return fetch(request)
             .then((response) => {
                 if (response.status < 200 || response.status >= 300) {

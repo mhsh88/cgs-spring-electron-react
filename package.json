@@ -1,5 +1,5 @@
 {
-  "name": "electron-vue-spring",
+  "name": "electron-react-spring",
   "version": "1.0.0",
   "description": "A minimal starter project for using Electron, Vue and Spring.",
   "author": "Wu, Ruoyun",
@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "build": {
-    "appId": "electron-vue-spring",
+    "appId": "cgs-electron-react-spring",
     "extraFiles": [
       {
         "from": "spring/target",

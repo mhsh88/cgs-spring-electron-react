@@ -59,7 +59,7 @@ function createWindow() {
   }));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -105,7 +105,7 @@ app.on('ready', function () {
     loadHomePage('http://localhost:3000');
   } else {
     // Start server at an available port (prefer 8080)
-    getPort({ port: 9000 }).then(port => {
+    getPort({ port: 9090 }).then(port => {
       startServer(port);
       loadHomePage(`http://localhost:${port}`)
     })
