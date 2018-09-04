@@ -144,7 +144,7 @@ class App extends Component {
     render() {
         return (
             <Admin
-                title="CGS Panel"
+                title="بهینه‌سازان صنعت تاسیسات"
                 restClient={restClient}
                 authClient={authClient}
                 // dashboard={Dashboard}
@@ -153,17 +153,18 @@ class App extends Component {
                 messages={translations}
                 resourceGroupIcons={ResourceGroupIcons}
             >
-                <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
+
                 <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} show={CalculationDetails}/>
+                <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
                 <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} show={GasDetails}/>
                 <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} condition={ConditionDetails}/>
                 <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} edit={HeaterEdit}/>
                 <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} />
                 <Resource name="afterheaters" group="stations" />
-                <Resource name="pipespecificationss" group="stations" list={PipeSpecificationList} create={PipeSpecificationCreate} edit={PipeSpecificationEdit} show={PipeSpecificationDetails}/>
-                <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate} edit={PipeSizeEdit} show={PipeSizeDetails}/>
                 <Resource name="runshasconditions" group="stations" list={RunsHasConditionList} create={RunsHasConditionCreate}/>
                 <Resource name="runss" group="stations" list={RunsList} create={RunsCreate} edit={RunsEdit}/>
+                <Resource name="pipespecificationss" group="stations" list={PipeSpecificationList} create={PipeSpecificationCreate} edit={PipeSpecificationEdit} show={PipeSpecificationDetails}/>
+                <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate} edit={PipeSizeEdit} show={PipeSizeDetails}/>
             </Admin>
         );
     }

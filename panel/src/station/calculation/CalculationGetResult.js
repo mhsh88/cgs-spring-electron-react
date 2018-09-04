@@ -32,15 +32,13 @@ class CalculationGetResult extends Component {
             })
             .then(data => this.setState({ hits: data }))
             .catch((e) => {
-                console.error(e);
                 this.setState({isLoading: false });
-                showNotification('Error: comment not approved', 'warning')
+                showNotification('Error: ' + e, 'warning')
             });
     }
 
     render() {
         const postData = this.state.hits;
-        console.log(postData);
 
         if(this.state.isLoading){
             return(

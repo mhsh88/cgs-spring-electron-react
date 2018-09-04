@@ -51,7 +51,7 @@ export default {
                     id: 'کلکتور'
                 },
                 runs: {
-                  id: 'ران‌ها'
+                  id: 'ران‌'
                 },
             }
         },
@@ -83,11 +83,11 @@ export default {
             },
         },
         conditions:{
-          name: 'شرایط',
+          name: 'شرایط ایستگاه',
           fields:{
               id: '',
               envTempreture: 'دمای محیط',
-              windSpeed: 'سرعت باد',
+              windSpeed: 'سرعت باد (متر بر ثانیه)',
               stationDebi:'دبی عبوری',
               stationInputTemprature:'دمای گاز ورودی',
               stationInputPressure:'فشار گاز ورودی',
@@ -139,7 +139,7 @@ export default {
           }
         },
         runshasconditions:{
-            name: 'شرایط ران',
+            name: 'دبی ران',
             fields:{
                 id:'شرایط',
                 text:'عنوان',
@@ -155,7 +155,7 @@ export default {
                     id:'سایز لوله'
                 },
                 length:'طول',
-                condition:'شرایط',
+                condition:'دبی‌ها',
                 runsHasCondition: 'شرایط ران'
             }
         },

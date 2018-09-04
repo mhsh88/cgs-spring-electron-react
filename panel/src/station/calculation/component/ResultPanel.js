@@ -9,6 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import {NumberField, TextField} from "../../../core/mui/field";
 import { SimpleShowLayout } from "../../../core";
 import GasPropertyShow from './GasPropertyShow';
+import {TemperatureField} from "../../../components/cgsbase/TemperatureField";
+import {PressureField} from "../../../components/cgsbase/PressureField";
+import {DebiField} from "../../../components/cgsbase/DebiField";
 
 const styles = theme => ({
     root: {
@@ -175,9 +178,12 @@ class ControlledExpansionPanels extends React.Component {
                                                                     Object.keys(data[0][items][calitems][stationItems]).map(inputOutputkey =>
                                                                         typeof data[0][items][calitems][stationItems][inputOutputkey] !== "object"?
                                                                         <Paper className={classes.childPaper} elevation={2}>
+                                                                            <Typography className={classes.typography} component="p">
+                                                                                {this.expansionPanelName(inputOutputkey) + ": "}
+                                                                            </Typography>
                                                                         <Typography className={classes.typography} component="p">
-                                                                            {this.expansionPanelName(inputOutputkey) + ": "}
-                                                                            <NumberField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}/>
+                                                                            {inputOutputkey === 'T'?  <TemperatureField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}/> :
+                                                                                <PressureField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}/>}
                                                                         </Typography>
                                                                     </Paper>
                                                                     :
@@ -279,7 +285,10 @@ class ControlledExpansionPanels extends React.Component {
                                                                                     <Paper className={classes.childPaper} elevation={2}>
                                                                                         <Typography className={classes.typography} component="p">
                                                                                             {this.expansionPanelName(inputOutputkey) + ": "}
-                                                                                            <NumberField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}/>
+                                                                                        </Typography>
+                                                                                        <Typography className={classes.typography} component="p">
+                                                                                            <DebiField className={classes.numberField} record={data[0][items][calitems][stationItems]} source={inputOutputkey}
+                                                                                                       elStyle={{direction: 'ltr',display: 'inline-block'}}/>
                                                                                         </Typography>
                                                                                     </Paper>
                                                                             )
@@ -294,7 +303,13 @@ class ControlledExpansionPanels extends React.Component {
                                                         <Paper className={classes.childPaper} elevation={2}>
                                                             <Typography className={classes.typography} component="p">
                                                                 {this.expansionPanelName(stationItems) + ": "}
-                                                                <NumberField className={classes.numberField} record={data[0][items][calitems]} source={stationItems}/>
+                                                            </Typography>
+                                                            <div></div>
+                                                            <div></div>
+                                                            <Typography/>
+                                                            <Typography className={classes.typography} component="p">
+                                                                <DebiField className={classes.numberField} elStyle={{direction: 'ltr',display: 'inline-block'}}
+                                                                           record={data[0][items][calitems]} source={stationItems}/>
                                                             </Typography>
 
                                                         </Paper>

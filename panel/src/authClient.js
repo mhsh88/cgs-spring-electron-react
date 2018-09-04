@@ -40,7 +40,7 @@ export default (type, params) => {
         return Promise.resolve();
     }
     if (type === AUTH_CHECK) {
-        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
+        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject({ redirectTo: '/login' });
     }
     return Promise.reject('Unknown method');
 };

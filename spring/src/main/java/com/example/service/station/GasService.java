@@ -123,8 +123,8 @@ public class GasService {
         List<HeatersEntity> heatersEntityList = cityGateStationEntity.heaters;
         HeatersModel stationHeatersModel = new HeatersModel();
         ArrayList<HeaterModel> heaterModels = new ArrayList<HeaterModel>();
-        ArrayList<Burner> burners = new ArrayList<Burner>();
         for (HeatersEntity heatersEntity : cityGateStationEntity.heaters) {
+            ArrayList<Burner> burners = new ArrayList<Burner>();
             for (BurnersEntity burnersEntity : heatersEntity.burners) {
                 burners.add(new Burner(burnersEntity.oxygenPercent, burnersEntity.flueGasTemprature));
             }
