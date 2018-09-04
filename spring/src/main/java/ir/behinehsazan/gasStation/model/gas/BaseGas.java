@@ -1,5 +1,6 @@
 package ir.behinehsazan.gasStation.model.gas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.behinehsazan.gasStation.model.mathCalculation.FindRoot;
 import ir.behinehsazan.gasStation.model.mathCalculation.MathCalculation;
@@ -11,23 +12,37 @@ import java.util.ArrayList;
 
 public class BaseGas implements FindRoot {
 
-    protected Double D;
+    protected static final Double R = 8.314510;
+    protected static final Double T_theta = 298.15;
+    protected static final Double tau_theta = 1 / T_theta;
+    protected static final Double p_theta = 0.101325 * 1000;
+    protected static final Double rou_theta = p_theta / (R * T_theta);
+    final double[][] Ch = {{-1.60624067400000000, 0.94300879800000000, -0.07952887700000000, -0.22221523100000000,
+            0.10232186600000000, 5.71407681800000000, 0.03245301800000000,
+            0.38657166700000000, 5.49180622100000000, 40.21527998000000000, -0.00143821000000000,
+            -0.01023342100000000,
+            0.20477971800000000, 5.72853864300000000, 44.13499613000000000},
+            {0.40165793600000000, -0.21208744900000000, -0.01232112200000000, 0.04548728500000000,
+                    -0.00924222800000000, -0.27407968000000000,
+                    -0.00491592200000000, -0.02388913000000000, -0.48101573500000000, -3.86828445000000000,
+                    0.00021709700000000, 0.00234085000000000,
+                    0.03063534700000000, -0.07842183200000000, -3.26417032000000000}};
+    protected Double d;
     protected Double rou;
-    protected Double U;
-    protected Double H;
-    protected Double S;
-    protected Double C_v;
-    protected Double C_p;
+    protected Double u;
+    protected Double h;
+    protected Double s;
+    protected Double c_v;
+    protected Double c_p;
     protected Double mu;
     protected Double kappa;
     protected Double w;
-    protected Double Z;
+    protected Double z;
     protected Double P;
     protected Double T;
     protected Double[] component;
     protected Double[] Xi;
-
-    protected Double M;
+    protected Double m;
     protected Double F;
     protected Double Q;
     protected Double G;
@@ -37,51 +52,7 @@ public class BaseGas implements FindRoot {
     protected Double B;
     protected ArrayList<Double> C_n = new ArrayList<Double>();
     protected Double p1;
-    protected static final Double R = 8.314510;
-    private double T_h;
-
-    @JsonProperty("T_hydrate")
-    public double getT_h() {
-        return T_h;
-    }
-
-
-    @JsonProperty("Z")
-    public Double getZ() {
-        return Z;
-    }
-
-    public Double getP() {
-        return P;
-    }
-
-    public void setP(Double p) {
-        P = p;
-    }
-
-    public Double getT() {
-        return T;
-    }
-
-    public void setT(Double t) {
-        T = t;
-    }
-
-    public static Double getT_theta() {
-        return T_theta;
-    }
-
-    public static Double getP_theta() {
-        return p_theta;
-    }
-
-    protected static final Double T_theta = 298.15;
-    protected static final Double tau_theta = 1 / T_theta;
-    protected static final Double p_theta = 0.101325 * 1000;
-    protected static final Double rou_theta = p_theta / (R * T_theta);
     protected Double delta_theta;
-
-
     double[][] E_star_ij = {
             {1.0, 1.02274, 0.97164, 0.97012, 0.945939, 0.973384, 0.946914, 0.94552, 0.95934, 1.0, 1.0, 1.0, 1.0, 1.0, 1.08632, 1.021, 1.00571, 0.746954, 0.902271, 1.0, 1.0},
             {1.02274, 1.0, 0.960644, 0.925053, 0.960237, 0.897362, 0.906849, 0.859764, 0.726255, 0.855134, 0.831229, 0.80831, 0.786323, 0.765171, 1.28179, 1.0, 1.5, 0.849408, 0.955052, 1.0, 1.0},
@@ -209,7 +180,6 @@ public class BaseGas implements FindRoot {
                     1.0, 1.0},
             {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
                     1.0, 1.0}};
-
     double[] a_n = {1.53832600e-01, 1.34195300e+00, -2.99858300e+00, -4.83122800e-02,
             3.75796500e-01, -1.58957500e+00, -5.35884700e-02, 8.86594630e-01
             , -7.10237040e-01, -1.47172200e+00, 1.32185035e+00, -7.86659250e-01
@@ -229,7 +199,6 @@ public class BaseGas implements FindRoot {
             , 2., 2., 2., 2., 2., 2., 2., 2., 2., 3., 3., 3., 3., 3., 3., 3., 3., 3.
             , 3., 4., 4., 4., 4., 4., 4., 4., 5., 5., 5., 5., 5., 6., 6., 7., 7., 8.
             , 8., 8., 9., 9.};
-
     double[] c_n = {0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 1., 1., 1., 1., 1.
             , 0., 0., 1., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1., 1., 1., 1., 1.
             , 1., 0., 0., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1., 0., 1., 0., 1., 1.
@@ -238,7 +207,6 @@ public class BaseGas implements FindRoot {
             , 0., 0., 2., 2., 2., 4., 4., 4., 4., 0., 1., 1., 2., 2., 3., 3., 4., 4.
             , 4., 0., 0., 2., 2., 2., 4., 4., 0., 2., 2., 4., 4., 0., 2., 0., 2., 1.
             , 2., 2., 2., 2.};
-
     double[] u_n = {0., 0.5, 1., 3.5, -0.5, 4.5, 0.5, 7.5, 9.5, 6., 12., 12.5
             , -6., 2., 3., 2., 2., 11., -0.5, 0.5, 0., 4., 6., 21.
             , 23., 22., -1., -0.5, 7., -1., 6., 4., 1., 9., -3., 21.
@@ -285,21 +253,17 @@ public class BaseGas implements FindRoot {
             , 34.082
             , 4.0026
             , 39.948};
-
     double[] E_i = {99.73778, 241.9606, 151.3183, 244.1667, 298.1183, 337.6389,
             324.0689, 370.6823, 365.5999, 402.636293, 427.72263, 450.325022,
             470.840891, 489.558373, 26.95794, 122.7667, 105.5348, 514.0156,
             296.355, 2.610111, 119.6299};
-
     double[] K_i = {0.4479153, 0.4557489, 0.4619255, 0.5279209, 0.583749, 0.6341423
             , 0.6406937, 0.6798307, 0.6738577, 0.7175118, 0.7525189, 0.784955
             , 0.8152731, 0.8437826, 0.3514916, 0.4186954, 0.4533894, 0.3825868
             , 0.4618263, 0.3589888, 0.4216551};
-
     Double[] G_i = {0.027815, 0.189065, 0., 0.0793, 0.141239, 0.281835, 0.256692
             , 0.366911, 0.332267, 0.289731, 0.337542, 0.383381, 0.427354, 0.469659
             , 0.034369, 0.021, 0.038953, 0.3325, 0.0885, 0., 0.};
-
     Double[] Q_i = {0., 0.69, 0., 0., 0., 0., 0., 0.
             , 0., 0., 0., 0., 0., 0., 0., 0.
             , 0., 1.06775, 0.633276, 0., 0.,};
@@ -310,16 +274,13 @@ public class BaseGas implements FindRoot {
             , 0.};
     double[] W_i = {0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.
             , 0., 0., 0.};
-
     double[] Ao1_i = {23.2653, 26.35604, 35.53603, 42.42766, 50.40669, 42.22997, 39.9994
             , 48.37597, 48.86978, 52.69477, 57.77391, 62.95591, 67.79407, 71.63669
             , 18.7728, 22.49931, 23.15547, 27.27642, 27.28069, 15.74399, 15.74399};
-
     double[] Ao2_i = {-2801.72907, -4902.17152, -15999.69151, -23639.65301, -31236.63551,
             -38957.80933, -38525.50276, -45215.83, -51198.30946, -52746.83318,
             -57104.81056, -60546.76385, -66600.12837, -74131.45483, -5836.9437,
             -2318.32269, -2635.24412, -7766.73308, -6069.03587, -745.375, -745.375};
-
     double[] Bo_i = {3.50031, 3.50002, 4.00088, 4.00263, 4.02939, 4.33944, 4.06714, 4., 4.
             , 4., 4., 4., 4., 4., 2.47906, 3.50146, 3.50055,
             4.00392, 4., 2.5, 2.5};
@@ -332,7 +293,6 @@ public class BaseGas implements FindRoot {
     double[] Do_i = {662.738, 919.306, 820.659, 559.314, 479.856, 468.27, 438.27
             , 178.67, 292.503, 182.326, 169.789, 158.922, 156.854, 164.947,
             228.734, 2235.71, 1550.45, 268.795, 1833.63, 0., 0.};
-
     double[] Eo_i = {-1.46600000e-01, -1.06044000e+00, 4.60000000e-03, 1.23722000e+00,
             3.19700000e+00, 6.89406000e+00, 5.25156000e+00, 2.18360000e+01
             , 2.01101000e+01, 2.68142000e+01, 3.04707000e+01, 3.38029000e+01,
@@ -346,7 +306,6 @@ public class BaseGas implements FindRoot {
     double[] Ho_i = {1740.06, 483.553, 1062.82, 1031.38, 955.312, 1914.1, 1905.02
             , 1774.25, 1919.37, 1826.59, 1760.46, 1693.07, 1693.79, 1750.24
             , 1651.71, 0., 0., 2507.37, 0., 0., 0.};
-
     double[] Io_i = {0.0
             , 0.01393
             , -4.46921
@@ -368,22 +327,53 @@ public class BaseGas implements FindRoot {
             , 0.0
             , 0.0
             , 0.0};
-
     double[] Jo_i = {0., 341.109, 1090.53, 1071.29, 1027.29, 903.185, 893.765,
             0., 0., 0., 0., 0., 0., 0.,
             1671.69, 0., 0., 0., 0., 0., 0.};
+    private double t_h;
 
-    final double[][] Ch = {{-1.60624067400000000, 0.94300879800000000, - 0.07952887700000000, - 0.22221523100000000,
-            0.10232186600000000, 5.71407681800000000, 0.03245301800000000,
-            0.38657166700000000, 5.49180622100000000, 40.21527998000000000, - 0.00143821000000000,
-            - 0.01023342100000000,
-            0.20477971800000000, 5.72853864300000000, 44.13499613000000000},
-        {0.40165793600000000, -0.21208744900000000, - 0.01232112200000000, 0.04548728500000000,
-            - 0.00924222800000000, - 0.27407968000000000,
-            - 0.00491592200000000, - 0.02388913000000000, - 0.48101573500000000, - 3.86828445000000000,
-            0.00021709700000000, 0.00234085000000000,
-            0.03063534700000000, - 0.07842183200000000, - 3.26417032000000000}};
+    public static Double getT_theta() {
+        return T_theta;
+    }
 
+    public static Double getP_theta() {
+        return p_theta;
+    }
+
+    //    @JsonProperty("t_h")
+    @JsonProperty
+    public double getT_h() {
+        return t_h;
+    }
+
+    //    @JsonProperty("z")
+    @JsonProperty
+    public Double getZ() {
+        return z;
+    }
+
+    @JsonIgnore
+    public Double getP() {
+        return P;
+    }
+
+    public void setP(Double p) {
+        P = p;
+    }
+
+    @JsonIgnore
+    public Double getT() {
+        return T;
+    }
+
+    public void setT(Double t) {
+        T = t;
+    }
+
+    @JsonIgnore
+    public Double[] getComponent() {
+        return this.Xi;
+    }
 
     public void setComponent(Double[] component) {
         double sum = MathCalculation.listSum(component);
@@ -396,11 +386,6 @@ public class BaseGas implements FindRoot {
         this.Xi = component;
     }
 
-    public Double[] getComponent() {
-        return this.Xi;
-    }
-
-
     public void calculate(double P, double T) {
         calculate(P, T, getComponent());
 
@@ -412,7 +397,7 @@ public class BaseGas implements FindRoot {
         setComponent(component);
         tau = 1 / getT();
 
-        M = MathCalculation.dotProduct(M_i, getComponent());
+        m = MathCalculation.dotProduct(M_i, getComponent());
         F = MathCalculation.dotProduct(F_i, getComponent());
         Q = MathCalculation.dotProduct(Q_i, getComponent());
         double temp = 0;
@@ -517,7 +502,7 @@ public class BaseGas implements FindRoot {
 //        double result = instanceFun()
 
 
-        Z = (P * tau * Math.pow(K, 3)) / (soldelta * R * 1);
+        z = (P * tau * Math.pow(K, 3)) / (soldelta * R * 1);
 
         delta_theta = rou_theta * Math.pow(K, 3);
 
@@ -563,7 +548,7 @@ public class BaseGas implements FindRoot {
             }
         }
 
-//       double[] c = cop_i_R.stream().mapToDouble(D -> D).toArray();
+//       double[] c = cop_i_R.stream().mapToDouble(d -> d).toArray();
 //       Double[] arr = ListAdapter.adapt(cop_i_R).asLazy().collectDouble(each -> each).toArray();
 //        (Double[]) cop_i_R.stream().mapToDouble(Double::doubleValue).toArray());
         Double cop_R = MathCalculation.dotProduct(Xi, cop_i_R.stream().mapToDouble(Double::doubleValue).toArray());
@@ -642,35 +627,35 @@ public class BaseGas implements FindRoot {
         Double phi_2 = 1 + (soldelta / Math.pow(K, 3)) * MathCalculation.listSum(phi_2_1) - soldelta * MathCalculation.listSum(phi_2_2) + MathCalculation.listSum(phi_2_3);
 
 
-        D = M * soldelta / Math.pow(K, 3);
+        d = m * soldelta / Math.pow(K, 3);
         rou = soldelta / Math.pow(K, 3);
-        U = R * T / M * tau_phi_tau;
-        H = R * T / M * (tau_phi_tau + delta_phi_delta);
-        S = (tau_phi_tau - phi) * R / M;
-        C_v = R / M * (-tau2_phi_tautau);
-        C_p = R / M * (-tau2_phi_tautau + Math.pow(phi_2, 2) / phi_1);
-        mu = (phi_2 / phi_1 - 1) / C_p / M / rou * 1000;
-        kappa = phi_1 / Z * C_p / C_v;
-        w = Math.sqrt(phi_1 * C_p / C_v * R * T / M * 1000);
+        u = R * T / m * tau_phi_tau;
+        h = R * T / m * (tau_phi_tau + delta_phi_delta);
+        s = (tau_phi_tau - phi) * R / m;
+        c_v = R / m * (-tau2_phi_tautau);
+        c_p = R / m * (-tau2_phi_tautau + Math.pow(phi_2, 2) / phi_1);
+        mu = (phi_2 / phi_1 - 1) / c_p / m / rou * 1000;
+        kappa = phi_1 / z * c_p / c_v;
+        w = Math.sqrt(phi_1 * c_p / c_v * R * T / m * 1000);
 
 
         double Ma = 28.95;  //# molecular mass of air
-        double Gamma_g = M / Ma;
+        double Gamma_g = m / Ma;
         double psi = getP() * 0.145038;
-        double [] mass_matrix = {1, Math.log(psi), Math.log(Gamma_g), Math.pow((Math.log(psi)) , 2.0) , Math.log(psi) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g) , 2.0),
-                Math.pow((Math.log(psi)) , 3.0), Math.pow(Math.log(psi) , 2.0) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g) , 2.0) * Math.log(psi), Math.pow((Math.log(Gamma_g)) , 3),
-                Math.pow((Math.log(psi)) , 4.0), Math.pow(Math.log(psi) , 3.0) * Math.log(Gamma_g), Math.pow(Math.log(psi) , 2.0) * Math.pow(Math.log(Gamma_g) , 2.0),
-                Math.pow(Math.log(Gamma_g) , 3.0) * Math.log(psi), Math.pow(Math.log(Gamma_g),  4)};
+        double[] mass_matrix = {1, Math.log(psi), Math.log(Gamma_g), Math.pow((Math.log(psi)), 2.0), Math.log(psi) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g), 2.0),
+                Math.pow((Math.log(psi)), 3.0), Math.pow(Math.log(psi), 2.0) * Math.log(Gamma_g), Math.pow(Math.log(Gamma_g), 2.0) * Math.log(psi), Math.pow((Math.log(Gamma_g)), 3),
+                Math.pow((Math.log(psi)), 4.0), Math.pow(Math.log(psi), 3.0) * Math.log(Gamma_g), Math.pow(Math.log(psi), 2.0) * Math.pow(Math.log(Gamma_g), 2.0),
+                Math.pow(Math.log(Gamma_g), 3.0) * Math.log(psi), Math.pow(Math.log(Gamma_g), 4)};
         double[] cc;
         if (Gamma_g <= 0.7) {
-             cc = Ch[0];
+            cc = Ch[0];
+        } else {
+            cc = Ch[1];
         }
-        else{
-        cc = Ch[1];}
 
-        double T_h = 1 / MathCalculation.dotProduct( cc, mass_matrix);
+        double T_h = 1 / MathCalculation.dotProduct(cc, mass_matrix);
         T_h = (T_h - 32) / 1.8;
-        this.T_h = T_h;
+        this.t_h = T_h;
 
 
     }
@@ -690,9 +675,6 @@ public class BaseGas implements FindRoot {
 
         return (delta * R) / (tau * Math.pow(K, 3)) * (1 + B * delta / Math.pow(K, 3) - delta * p1 + __C_n) - P;
     }
-
-
-
 
 
 //    @Override

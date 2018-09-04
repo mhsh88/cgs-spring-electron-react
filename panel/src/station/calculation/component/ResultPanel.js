@@ -263,11 +263,23 @@ class ControlledExpansionPanels extends React.Component {
                                                                                                         <Typography
                                                                                                             className={classes.typography}
                                                                                                             component="p">
-                                                                                                            {this.expansionPanelName(internalKey) + ": "}
-                                                                                                            <NumberField
-                                                                                                                className={classes.numberField}
-                                                                                                                record={data[0][items][calitems][stationItems][inputOutputkey]}
-                                                                                                                source={internalKey}/>
+                                                                                                            <Typography className={classes.typography} component="p">
+                                                                                                                {this.expansionPanelName(internalKey) + ": "}
+                                                                                                            </Typography>
+                                                                                                            {internalKey === 'T'?
+                                                                                                                <TemperatureField
+                                                                                                                    className={classes.numberField}
+                                                                                                                    record={data[0][items][calitems][stationItems][inputOutputkey]}
+                                                                                                                    source={internalKey}
+                                                                                                                    elStyle={{direction: 'ltr',display: 'inline-block'}}/>
+                                                                                                            :
+
+                                                                                                                <PressureField
+                                                                                                                    className={classes.numberField}
+                                                                                                                    record={data[0][items][calitems][stationItems][inputOutputkey]}
+                                                                                                                    source={internalKey}
+                                                                                                                    elStyle={{direction: 'ltr',display: 'inline-block'}}/>
+                                                                                                            }
                                                                                                         </Typography>
                                                                                                     </Paper>
                                                                                                     :

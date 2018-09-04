@@ -34,9 +34,9 @@ package core.hosSein.core.ebean;
 //
 //
 //@RequestMapping("/u")
-//public abstract class RestController<M extends BaseEntity, I extends Serializable, V extends BaseView> extends BaseController {
+//public abstract class RestController<m extends BaseEntity, I extends Serializable, V extends BaseView> extends BaseController {
 //
-//    public abstract BaseDao<I, M> getDao();
+//    public abstract BaseDao<I, m> getDao();
 //
 //    @Autowired
 //    BaseService baseDAO;
@@ -44,10 +44,10 @@ package core.hosSein.core.ebean;
 //    //@SubjectPresent
 //    public Result load(I id) {
 //
-//        PageResult<M> pageResult = new PageResult<>();
+//        PageResult<m> pageResult = new PageResult<>();
 //
 //        try {
-//            M model = getDao().load(id, getFetchedFields());
+//            m model = getDao().load(id, getFetchedFields());
 //            afterLoad(model);
 //            pageResult.addData(model);
 //            pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_LOAD_MODEL);
@@ -59,7 +59,7 @@ package core.hosSein.core.ebean;
 //        }
 //    }
 //
-//    protected void afterLoad(M model) { }
+//    protected void afterLoad(m model) { }
 //
 //    /* This method can be overriden in the subclasses */
 //    protected List<String> getFetchedFields() {
@@ -96,12 +96,12 @@ package core.hosSein.core.ebean;
 //    @BodyParser.Of(BodyParser.Json.class)
 //    protected Result insert() {
 //
-//        PageResult<M> pageResult = new PageResult<>();
+//        PageResult<m> pageResult = new PageResult<>();
 //
 //        try {
-//            M model = readJson(request().body().asJson());
+//            m model = readJson(request().body().asJson());
 //            model = beforeInsert(model);
-//            M newModel = getDao().insert(model);
+//            m newModel = getDao().insert(model);
 //            newModel = afterInsert(newModel);
 //            pageResult.addData(newModel);
 //            pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_SAVE_MODEL);
@@ -116,13 +116,13 @@ package core.hosSein.core.ebean;
 //    @BodyParser.Of(BodyParser.Json.class)
 //    protected Result update() {
 //
-//        PageResult<M> pageResult = new PageResult<>();
+//        PageResult<m> pageResult = new PageResult<>();
 //
 //        try {
-//            M model = readJson(request().body().asJson());
-//            M oldModel = getDao().load((I) model.id);
+//            m model = readJson(request().body().asJson());
+//            m oldModel = getDao().load((I) model.id);
 //            model = beforeUpdate(oldModel, model);
-//            M newModel = getDao().update(model);
+//            m newModel = getDao().update(model);
 //            newModel = afterUpdate(newModel);
 //            pageResult.addData(newModel);
 //            pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_SAVE_MODEL);
@@ -135,27 +135,27 @@ package core.hosSein.core.ebean;
 //    }
 //
 //    /* This method can be overriden in the subclasses */
-//    protected M beforeInsert(M newEntity) throws Exception {
+//    protected m beforeInsert(m newEntity) throws Exception {
 //        return newEntity;
 //    }
 //
 //    /* This method can be overriden in the subclasses */
-//    protected M afterInsert(M newEntity) {
+//    protected m afterInsert(m newEntity) {
 //        return newEntity;
 //    }
 //
 //    /* This method can be overriden in the subclasses */
-//    protected M beforeUpdate(M oldEntity, M newEntity) throws Exception {
+//    protected m beforeUpdate(m oldEntity, m newEntity) throws Exception {
 //        return newEntity;
 //    }
 //
 //    /* This method can be overriden in the subclasses */
-//    protected M afterUpdate(M newEntity) {
+//    protected m afterUpdate(m newEntity) {
 //        return newEntity;
 //    }
 //
 //    protected Result delete(I id) {
-//        PageResult<M> pageResult = new PageResult<>();
+//        PageResult<m> pageResult = new PageResult<>();
 //        try {
 //            getDao().delete(id);
 //            pageResult.setMessage(CoreMessagesCodes.SUCCESSFUL_DELETE_MODEL);
@@ -172,13 +172,13 @@ package core.hosSein.core.ebean;
 //        JsonNode pageNode = Json.parse(request().queryString().size() > 0 ?
 //                request().queryString().keySet().toArray()[0].toString() : "{}");
 //        PageDto page = Json.fromJson(pageNode, PageDto.class);
-//        PageResult<M> modelsPageResult = new PageResult<>();
+//        PageResult<m> modelsPageResult = new PageResult<>();
 //
 //        try {
 //            List<String> fields = getFetchedFields();
 //            page.setFetchFields(fields);
 //            modelsPageResult = find(page);
-//            for (M model : modelsPageResult.getData()) {
+//            for (m model : modelsPageResult.getData()) {
 //                afterLoad(model);
 //            }
 //            return ok(writeJson(modelsPageResult));
@@ -189,7 +189,7 @@ package core.hosSein.core.ebean;
 //        }
 //    }
 //
-//    protected PageResult<M> find(PageDto page) throws Exception {
+//    protected PageResult<m> find(PageDto page) throws Exception {
 //        return getDao().find(page);
 //    }
 //
@@ -204,9 +204,9 @@ package core.hosSein.core.ebean;
 //            /*if (page.getSorter() != null)
 //                page.getSorter().setAscending(true);*/
 //
-//            PageResult<M> pageResult = find(page);
+//            PageResult<m> pageResult = find(page);
 //            if (pageResult != null) {
-//                for (M model : pageResult.getData()) {
+//                for (m model : pageResult.getData()) {
 //                    try {
 //                        Object optionTitle = ReflectionUtil.invokeGetter(model, page.getOptionField());
 //                        options.put(model.id, optionTitle.toString());
@@ -217,18 +217,18 @@ package core.hosSein.core.ebean;
 //            }
 //        }
 //        catch (Exception e) {
-//            PageResult<M> pageResult = new PageResult<>();
+//            PageResult<m> pageResult = new PageResult<>();
 //            pageResult.unsuccessfulOperation(e.getMessage());
 //            return badRequest(Json.toJson(pageResult));
 //        }
 //        return ok(Json.toJson(options));
 //    }
 //
-//    protected Class<M> getModelClass() {
+//    protected Class<m> getModelClass() {
 //        Class<?> clazz = getClass();
 //        while (clazz.getGenericSuperclass() != null) {
 //            if (clazz.getGenericSuperclass() instanceof ParameterizedType) {
-//                return (Class<M>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
+//                return (Class<m>) ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
 //            } else {
 //                clazz = clazz.getSuperclass();
 //            }
@@ -248,11 +248,11 @@ package core.hosSein.core.ebean;
 //        return null;
 //    }
 //
-//    protected String writeJson(PageResult<M> pageResult) throws JsonProcessingException {
+//    protected String writeJson(PageResult<m> pageResult) throws JsonProcessingException {
 //        return Json.mapper().writerWithView(getViewClass()).writeValueAsString(pageResult);
 //    }
 //
-//    protected M readJson(JsonNode jsonNode) throws java.io.IOException {
+//    protected m readJson(JsonNode jsonNode) throws java.io.IOException {
 //        return Json.mapper().readerWithView(getViewClass()).forType(getModelClass()).readValue(jsonNode);
 //    }
 //

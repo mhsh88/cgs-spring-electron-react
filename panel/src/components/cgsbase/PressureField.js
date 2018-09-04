@@ -67,7 +67,7 @@ export class PressureField extends React.Component {
             !this.state.value ? null: !hasNumberFormat? <span style={elStyle}>{this.state.value}</span>:
 
                     <div style={{display: 'inline-block', textAlign: 'center', fontSize: 13.5}}>
-                        <span style={elStyle}>{this.state.value.toLocaleString(locales, options)}  </span>
+                        <span style={elStyle}>{Math.round(this.state.value).toLocaleString(locales, options)}  </span>
                         <UnitSelect onChange={this.onUnitChange.bind(this)}/>
                     </div>
 

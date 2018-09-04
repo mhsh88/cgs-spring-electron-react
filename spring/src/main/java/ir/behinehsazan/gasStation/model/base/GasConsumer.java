@@ -108,7 +108,7 @@ public abstract class GasConsumer extends EntityBase {
         // change kJ/s to kJ/hr
         heatConsumption = heatConsumption * 3600;
         // change kJ/hr to kg/hr
-        heatConsumption = heatConsumption / g.getHHVd();
+        heatConsumption = heatConsumption / g.getHhvd();
         //kg/hr to Standard m^3/hr
         heatConsumption = heatConsumption / Dstd;
 
