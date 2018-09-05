@@ -18,9 +18,9 @@ public class ResultService {
         GasEntity gasEntity = calculationEntity.gas;
         GasService gasService = new GasService();
         gasService.setGas(gasEntity,cityGateStation,conditionEntity);
-        gasService.setBeforeHeater(cityGateStation.beforeHeater);
+        gasService.setBeforeHeater(cityGateStation.getBeforeHeater());
         gasService.setHeater(cityGateStation);
-        gasService.setAfterHeater(cityGateStation.afterHeater);
+        gasService.setAfterHeater(cityGateStation.getAfterHeater());
         gasService.setRunAndCollector(cityGateStation);
 
         CalculateController calculateController = new CalculateController();

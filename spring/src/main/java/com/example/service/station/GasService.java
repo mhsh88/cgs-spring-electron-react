@@ -83,11 +83,11 @@ public class GasService {
         stationPropertice.setComponent(component);
 
 
-        stationPropertice.setProvince(cityGateStationEntity.province);
-        stationPropertice.setCity(cityGateStationEntity.city);
-        stationPropertice.setArea(cityGateStationEntity.region);
-        stationPropertice.setNominalCapacity(String.valueOf(cityGateStationEntity.nominalCapacity));
-        stationPropertice.setAddress(cityGateStationEntity.address);
+        stationPropertice.setProvince(cityGateStationEntity.getProvince());
+        stationPropertice.setCity(cityGateStationEntity.getCity());
+        stationPropertice.setArea(cityGateStationEntity.getRegion());
+        stationPropertice.setNominalCapacity(String.valueOf(cityGateStationEntity.getNominalCapacity()));
+        stationPropertice.setAddress(cityGateStationEntity.getAddress());
 
         stationPropertice.setInputTemp(conditionEntity.getStationInputTemprature());
         stationPropertice.setInputPressure(conditionEntity.getStationInputPressure());
@@ -108,6 +108,9 @@ public class GasService {
     }
 
     public void setBeforeHeater(PipeSpecificationsEntity pipeSpecificationsEntity) {
+        if(pipeSpecificationsEntity==null){
+            return;
+        }
         PipeSize pipeSize = new PipeSize(pipeSpecificationsEntity.pipeSize.getWallThickness(), pipeSpecificationsEntity.pipeSize.getOuterDiameter());
         PipeLine pipeLine = new PipeLine(pipeSize, pipeSpecificationsEntity.getLength());
         pipeLine.setInsulationFactor(pipeSpecificationsEntity.getInsulationFactor());
@@ -120,11 +123,17 @@ public class GasService {
     }
 
     public void setHeater(CityGateStationEntity cityGateStationEntity) {
+        if(cityGateStationEntity.heaters == null){
+            return;
+        }
         List<HeatersEntity> heatersEntityList = cityGateStationEntity.heaters;
         HeatersModel stationHeatersModel = new HeatersModel();
         ArrayList<HeaterModel> heaterModels = new ArrayList<HeaterModel>();
         for (HeatersEntity heatersEntity : cityGateStationEntity.heaters) {
             ArrayList<Burner> burners = new ArrayList<Burner>();
+            if(heatersEntity.burners == null){
+                continue;
+            }
             for (BurnersEntity burnersEntity : heatersEntity.burners) {
                 burners.add(new Burner(burnersEntity.oxygenPercent, burnersEntity.flueGasTemprature));
             }
@@ -135,6 +144,9 @@ public class GasService {
         Station.getInstance().getList().put("HeatersModel", stationHeatersModel);
     }
     public void setAfterHeater(PipeSpecificationsEntity pipeSpecificationsEntity){
+        if(pipeSpecificationsEntity == null){
+            return;
+        }
         PipeSize pipeSize = new PipeSize(pipeSpecificationsEntity.pipeSize.getWallThickness(), pipeSpecificationsEntity.pipeSize.getOuterDiameter());
         PipeLine pipeLine = new PipeLine(pipeSize, pipeSpecificationsEntity.getLength());
         pipeLine.setInsulationFactor(pipeSpecificationsEntity.getInsulationFactor());
@@ -145,6 +157,9 @@ public class GasService {
     public void setRunAndCollector(CityGateStationEntity cityGateStationEntity){
 
         ArrayList<Run> runs = new ArrayList<Run>();
+        if(cityGateStationEntity.runs == null){
+            return;
+        }
 
         for(RunsHasConditionEntity runsHasConditionEntity : cityGateStationEntity.runs.runsHasCondition){
 
@@ -152,10 +167,15 @@ public class GasService {
                 PipeSize pipeSize = new PipeSize(cityGateStationEntity.runs.pipeSize.getWallThickness(),cityGateStationEntity.runs.pipeSize.getOuterDiameter());
                 runs.add(new Run(pipeSize,cityGateStationEntity.runs.getLength(), runsHasConditionEntity.getDebi()));
             }
+            Collector collector = null;
+            if(cityGateStationEntity.collector != null ){
+                if(cityGateStationEntity.collector.pipeSize != null) {
+                    PipeSize pipeSize = new PipeSize(cityGateStationEntity.collector.pipeSize.getWallThickness(), cityGateStationEntity.collector.pipeSize.getOuterDiameter());
+                    collector = new Collector(pipeSize,
+                            cityGateStationEntity.collector.getLength());
+                }
+            }
 
-        PipeSize pipeSize  = new PipeSize(cityGateStationEntity.collector.pipeSize.getWallThickness(), cityGateStationEntity.collector.pipeSize.getOuterDiameter());
-        Collector collector = new Collector(pipeSize,
-                cityGateStationEntity.collector.getLength());
 
         Runs allRun = new Runs(runs, collector);
         Station.getInstance().getList().put("Runs", allRun);

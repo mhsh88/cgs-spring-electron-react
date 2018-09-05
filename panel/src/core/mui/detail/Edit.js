@@ -56,7 +56,7 @@ export class Edit extends Component {
     };
 
     save = (record, redirect) => {
-         const newRecord = this.props.beforeSave(record);
+         const newRecord = typeof this.props.beforeSave === 'function'? this.props.beforeSave(record) : null;
         if (newRecord) {
             this.props.crudUpdate(this.props.resource, this.props.id, newRecord, this.props.data, this.getBasePath(), redirect);
         } else {
@@ -132,6 +132,7 @@ Edit.propTypes = {
     title: PropTypes.any,
     translate: PropTypes.func,
     width: PropTypes.number,
+    beforeSave: PropTypes.func
 };
 
 function mapStateToProps(state, props) {

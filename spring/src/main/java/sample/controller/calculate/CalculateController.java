@@ -109,7 +109,7 @@ public class CalculateController{
 
 
             ObjectNode userInput = mapper.createObjectNode();
-            if (stationLogic.getBeforeHeater() != null) {
+            if (stationLogic.getBeforeHeater() != null && station.getList().get("beforeHeaterPipeLine")!=null) {
 
 
 //
@@ -197,7 +197,7 @@ public class CalculateController{
     }
 
     private void setAfterHeaterJson(PipeLine afterHeaterPipeLine, StationLogic stationLogic, Gas gas, ObjectNode userInput) throws IOException {
-        if(stationLogic.getAfterHeater() != null) {
+        if(stationLogic.getAfterHeater() != null && afterHeaterPipeLine !=null && gas !=null) {
             ObjectNode afterHeater = mapper.createObjectNode();
 
             ObjectNode afterHeaterInput = mapper.createObjectNode();
@@ -222,7 +222,7 @@ public class CalculateController{
 
     private void setCollectorJson(PipeLine afterHeaterPipeLine, StationLogic stationLogic, Gas gas, ObjectNode userInput) throws IOException {
         if (stationLogic != null) {
-            if (stationLogic.getCollector() != null) {
+            if (stationLogic.getCollector() != null && afterHeaterPipeLine !=null && gas !=null) {
 
                 BasePipe collector = stationLogic.getCollector();
                 ObjectNode jsonCollector = mapper.createObjectNode();
@@ -251,7 +251,7 @@ public class CalculateController{
 
     private void setRunJson(PipeLine afterHeaterPipeLine, StationLogic stationLogic, Gas gas, ObjectNode userInput) throws IOException {
         if (stationLogic != null) {
-            if (stationLogic.getRuns() != null) {
+            if (stationLogic.getRuns() != null && afterHeaterPipeLine!=null && gas !=null) {
 
                 ir.behinehsazan.gasStation.model.run.Runs logicRuns = stationLogic.getRuns();
                 List<BaseRun> run = logicRuns.getRuns();
@@ -392,7 +392,7 @@ public class CalculateController{
 
             ObjectNode beforeHeater = mapper.createObjectNode();
 
-            if(stationLogic.getBeforeHeater()!=null) {
+            if(stationLogic.getBeforeHeater()!=null && beforeHeaterPipeLine != null) {
                 ObjectNode beforeHeaterInput = mapper.createObjectNode();
                 beforeHeaterInput.put("T", beforeHeaterPipeLine.getTin() - 273.15);
                 beforeHeaterInput.put("P", beforeHeaterPipeLine.getPin() - 101.235);

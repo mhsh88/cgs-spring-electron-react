@@ -229,7 +229,7 @@ public class StationLogic extends GasConsumer {
     }
 
     public void setCollector(sample.model.run.Runs runs) {
-        if(runs != null && getTenv() != null) {
+        if(runs != null && getTenv() != null && runs.getCollector() !=null) {
             double temp = -273.15;
             double pi = 0;
             double debi = 0.0;

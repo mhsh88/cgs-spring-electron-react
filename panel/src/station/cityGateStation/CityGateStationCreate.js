@@ -31,20 +31,20 @@ export const CityGateStationCreate = (props) => (
             <TextInput source="address" validate={maxLength(1000)} options={{ fullWidth: true }} />
             <NumberInput source="nominalCapacity" validate={maxLength(1000)} options={{ fullWidth: true }} />
             <ReferenceInput source="afterHeater.id" reference="pipespecificationss" allowEmpty options={{ fullWidth: true }}>
-                <SelectInput optionText="length" validate={required} options={{ fullWidth: true }}/>
+                <SelectInput optionText="length"  options={{ fullWidth: true }}/>
             </ReferenceInput>
             <ReferenceInput source="beforeHeater.id" reference="pipespecificationss" allowEmpty>
-                <SelectInput optionText="length" validate={required} options={{ fullWidth: true }}/>
+                <SelectInput optionText="length"  options={{ fullWidth: true }}/>
             </ReferenceInput>
             <ReferenceInput  source="collector.id" reference="pipespecificationss" allowEmpty>
-                <SelectInput optionText="length" validate={required} options={{ fullWidth: true }}/>
+                <SelectInput optionText="length"  options={{ fullWidth: true }}/>
             </ReferenceInput>
 
-            <ReferenceArrayInput source="heaters" reference="heaters" validate={required} >
+            <ReferenceArrayInput source="heaters" reference="heaters" >
                 <SelectArrayInput optionText="text" options={{ fullWidth: true }}/>
             </ReferenceArrayInput>
             <ReferenceInput source="runs.id" reference="runss" allowEmpty>
-                <SelectInput optionText="length" validate={required} options={{ fullWidth: true }}/>
+                <SelectInput optionText="length" options={{ fullWidth: true }}/>
             </ReferenceInput>
         </SimpleForm>
     </Create>
