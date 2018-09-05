@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-spring",
+  "name": "BSSTCo",
   "version": "1.0.0",
-  "description": "A minimal starter project for using Electron, Vue and Spring.",
-  "author": "Wu, Ruoyun",
+  "description": "City Gate Station Consumption Calculation on Spring framework and React with Electron",
+  "author": "M.H, Sharifi",
   "main": "electron/index.js",
   "scripts": {
     "start": "electron ./electron",
@@ -35,6 +35,7 @@
     "axios": "^0.18.0",
     "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.14",
+    "electron-navigation": "^1.5.8",
     "get-port": "^3.2.0",
     "tree-kill": "^1.2.0"
   }

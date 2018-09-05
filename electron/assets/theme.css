@@ -1,0 +1,10 @@
+/* back button, grouped in: .nav-icons */
+#nav-ctrls-back {
+     fill:#000; width:24px; height:24px;
+}
+
+
+/* back button with no history, grouped in: .nav-icons.disabled */
+#nav-ctrls-back.disabled {
+     pointer-events:none; opacity:0.5;
+}

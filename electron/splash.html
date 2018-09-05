@@ -2,17 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Electron-Vue-Spring</title>
+    <link rel="stylesheet" href="assets/theme.css">
+    <title>بهینه‌سازان صنعت تاسیسات</title>
   </head>
   <body>
+  <div id="nav-body-ctrls"></div>
+  <div id="nav-body-tabs"></div>
+  <div id="nav-body-views"></div>
     <h1>Loading, please wait...</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(versions.node)</script>,
-    Chromium <script>document.write(versions.chrome)</script>,
-    and Electron <script>document.write(versions.electron)</script>.
+    <!--We are using Node.js <script>document.write(versions.node)</script>,-->
+    <!--Chromium <script>document.write(versions.chrome)</script>,-->
+    <!--and Electron <script>document.write(versions.electron)</script>.-->
 
     <script>
       // You can also require other files to run in this process
+      const enav = new (require('electron-navigation'))();
       require('./renderer.js')
     </script>
   </body>

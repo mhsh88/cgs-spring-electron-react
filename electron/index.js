@@ -5,7 +5,7 @@ const logger = require('electron-log');
 const getPort = require('get-port');
 const isDev = require('electron-is-dev');
 
-const { app, BrowserWindow, dialog } = electron;
+const { app, BrowserWindow, dialog, Menu } = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -48,7 +48,9 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false
-    }
+    },
+      icon: path.join(__dirname, 'assets/logo2.png')
+
   })
 
   // and load the splash screen of the app
