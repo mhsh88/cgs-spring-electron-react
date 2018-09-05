@@ -24,6 +24,7 @@ export { default as CalculationDetails } from './calculation/CalculationDetails'
 
 export { default as ConditionList } from './condition/ConditionList';
 export { default as ConditionCreate } from './condition/ConditionCreate';
+export { default as ConditionEdit } from './condition/ConditionEdit';
 export { default as ConditionDetails } from './condition/ConditionDetails';
 
 export { default as HeaterList } from './heater/HeaterList';

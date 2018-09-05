@@ -11,7 +11,7 @@ export const HeaterEdit = (props) => (
 
             <DisabledInput source="id"/>
             <TextInput source="text"/>
-            <NumberInput source="efficiency"/>
+            <NumberInput source="efficiency" format={v => v*100} parse={v => v/100}/>
 
             <ReferenceArrayInput source="burners" reference="burners">
                 <SelectArrayInput optionText="text" />

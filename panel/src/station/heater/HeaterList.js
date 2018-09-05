@@ -3,6 +3,7 @@ import {
     ColumnActions,
     List,
     Datagrid,
+    NumberField,
     TextField, EditButton, ReferenceField,BooleanField, DeleteButton,
     ReferenceManyField,SingleFieldList,
     ChipField
@@ -14,7 +15,7 @@ export const HeaterList = props => (
         <Datagrid>
             <TextField source="id"/>
             <TextField source="text"/>
-            <TextField source="efficiency"/>
+            <TextField source="efficiency" />
             <ReferenceManyField source="burners" reference="burners" target="heaters.id" >
                 <SingleFieldList>
                     <ChipField label="Burner" source="oxygenPercent" />

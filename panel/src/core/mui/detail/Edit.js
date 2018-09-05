@@ -56,7 +56,12 @@ export class Edit extends Component {
     };
 
     save = (record, redirect) => {
-        this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath(), redirect);
+         const newRecord = this.props.beforeSave(record);
+        if (newRecord) {
+            this.props.crudUpdate(this.props.resource, this.props.id, newRecord, this.props.data, this.getBasePath(), redirect);
+        } else {
+            this.props.crudUpdate(this.props.resource, this.props.id, record, this.props.data, this.getBasePath(), redirect);
+        }
     };
 
     render() {

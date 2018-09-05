@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import PressureInput from "./input/PressureInput";
 
 const styles = theme => ({
     root: {
@@ -30,8 +31,10 @@ class SimpleSelect extends React.Component {
     };
 
     handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-        this.props.onChange(event.target.value);
+        event.target && event.target?
+        this.setState({ [event.target.name]: event.target.value }): null ;
+        this.props.onChange?
+        this.props.onChange(event.target.value):null;
     };
 
     render() {
@@ -64,6 +67,11 @@ class SimpleSelect extends React.Component {
 SimpleSelect.propTypes = {
     classes: PropTypes.object.isRequired,
     onChange: PropTypes.func,
+};
+
+SimpleSelect.defaultProps = {
+    classes:{},
+    onChange: () => {},
 };
 
 export default withStyles(styles)(SimpleSelect);

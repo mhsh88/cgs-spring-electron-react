@@ -126,7 +126,7 @@ import {
     GasCreate,
     GasEdit, GasDetails,
     CalculationList, CalculationCreate, CalculationEdit, CalculationDetails,
-    ConditionList, ConditionCreate,ConditionDetails,
+    ConditionList, ConditionCreate,ConditionDetails,ConditionEdit,
     HeaterList, HeaterCreate, HeaterEdit,
     BurnerList, BurnerCreate,
     PipeSizeList, PipeSizeCreate, PipeSizeEdit, PipeSizeDetails,
@@ -157,7 +157,7 @@ class App extends Component {
                 <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} show={CalculationDetails}/>
                 <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
                 <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} show={GasDetails}/>
-                <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} condition={ConditionDetails}/>
+                <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} show={ConditionDetails} edit={ConditionEdit}/>
                 <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} edit={HeaterEdit}/>
                 <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} />
                 <Resource name="afterheaters" group="stations" />

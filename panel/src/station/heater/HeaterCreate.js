@@ -33,7 +33,7 @@ export const HeaterCreate = (props) => (
         <SimpleForm>
                 <DisabledInput source="id"/>
                 <TextInput source="text" validate={required} />
-                <NumberInput source="efficiency" validate={[required, maxValue(100),minValue(0)]} />
+                <NumberInput source="efficiency" format={v => v*100} parse={v => v/100} validate={[required, maxValue(100),minValue(0)]} />
 
 
                 <ReferenceArrayInput source="burners" reference="burners" validate={required} >
