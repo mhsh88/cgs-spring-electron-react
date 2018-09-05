@@ -18,14 +18,14 @@ const validateCalculationCreation = (values) => {
 export const CityGateStationCreate = props => <Create {...props} >
     <SimpleForm>
         <DisabledInput source="id"/>
-        <ReferenceInput label="Station" source="cityGateStation.id" reference="citygatestations" validate={required}
+        <ReferenceInput  source="cityGateStation.id" reference="citygatestations" validate={required}
                         allowEmpty>
             <SelectInput optionText="city"/>
         </ReferenceInput>
-        <ReferenceInput label="Condition" source="condition.id" reference="conditions" validate={required} allowEmpty>
+        <ReferenceInput  source="condition.id" reference="conditions" validate={required} allowEmpty>
             <SelectInput optionText="id"/>
         </ReferenceInput>
-        <ReferenceInput label="Natural Gas" source="gas.id" reference="gass" validate={required} allowEmpty>
+        <ReferenceInput source="gas.id" reference="gass" validate={required} allowEmpty>
             <SelectInput source="name"/>
         </ReferenceInput>
     </SimpleForm>

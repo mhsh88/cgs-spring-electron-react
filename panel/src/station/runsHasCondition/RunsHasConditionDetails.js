@@ -3,20 +3,20 @@ import {
     ColumnActions,
     List,
     Datagrid,
-    TextField, EditButton, ReferenceField, BooleanField, DeleteButton, NumberField
+    TextField, EditButton, ReferenceField, BooleanField, DeleteButton, NumberField, SimpleShowLayout, Show
 } from '../../core';
 import DebiField from '../../components/cgsbase/DebiField';
 
 
-export const RunsHasConditionList = props => (
-    <List {...props}>
-        <Datagrid>
+export const RunsHasConditionDetails = props => (
+    <Show {...props}>
+        <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="text" />
             <DebiField source="debi" />
             <ColumnActions />
-        </Datagrid>
-    </List>
+        </SimpleShowLayout>
+    </Show>
 );
 
-export default RunsHasConditionList;
+export default RunsHasConditionDetails;

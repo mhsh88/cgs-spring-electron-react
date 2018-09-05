@@ -1,3 +1,6 @@
+import {maxValue, minValue, NumberInput, required, SimpleForm} from "../core";
+import React from "react";
+
 export default {
     pos: {
         search: 'جستجو',
@@ -78,6 +81,29 @@ export default {
             name: 'اطلاعات گاز |||| اطلاعات گازها',
             fields:{
                 id: 'گاز طبیعی',
+                name: 'عنوان',
+                 nitrogen  : 'نیتروژن',
+                 carbonDioxide  : 'کربن دی‌اکسید',
+                 methan  : 'متان',
+                 ethane  : 'اتان',
+                 propane  : 'پروپان',
+                 nButane  : 'نرمال بوتان',
+                 isoButane  : 'ایزو بوتان',
+                 nPentane  : 'نرمال پنتان',
+                 isoPentane  : 'ایزو پنتان',
+                 hexane  : 'هگزان',
+                 heptane  : 'هپتان',
+                 octane  : 'اکتان',
+                 nonane  : 'نونان',
+                 decane  : 'دکان',
+                 hydrogen  : 'هیدروژن',
+                 oxygen  : 'اکسیژن',
+                 carbonMonoxide  : 'منو‌اکسید کربن',
+                 water  : 'آب',
+                 hydrogenSulfide  : 'هیدروژن سولفید',
+                 helium  : 'هلیوم',
+                 argon  : 'آرگون',
+                moleWightPersent: 'درصد جرمی'
 
 
             },

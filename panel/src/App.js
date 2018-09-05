@@ -11,108 +11,25 @@ import { Dashboard } from './dashboard';
 import translations from './i18n';
 import ResourceGroupIcons from './ResourceGroupIcons';
 
-import {
-    AssessmentSalCreate,
-    AssessmentSalDelete,
-    AssessmentSalDetails,
-    AssessmentSalEdit,
-    AssessmentSalList,
-    AssessmentSalRetrieve,
-    AssessmentSalIcon,
-    DatabaseQuestionCreate,
-    DatabaseQuestionDelete,
-    DatabaseQuestionDetails,
-    DatabaseQuestionEdit,
-    DatabaseQuestionList,
-    DatabaseQuestionRetrieve,
-    DatabaseQuestionIcon,
-    MetricCreate,
-    MetricDelete,
-    MetricDetails,
-    MetricEdit,
-    MetricList,
-    MetricRetrieve,
-    MetricIcon,
-    OrganizationAssessmentCreate,
-    OrganizationAssessmentDelete,
-    OrganizationAssessmentList,
-    OrganizationAssessmentIcon,
-    OrganizationAssessmentHasQuestionCreate,
-    OrganizationAssessmentHasQuestionDelete,
-    OrganizationAssessmentHasQuestionDetails,
-    OrganizationAssessmentHasQuestionEdit,
-    OrganizationAssessmentHasQuestionList,
-    OrganizationAssessmentHasQuestionRetrieve,
-    OrganizationAssessmentHasQuestionIcon,
-    PreQuestionCreate,
-    PreQuestionDelete,
-    PreQuestionDetails,
-    PreQuestionEdit,
-    PreQuestionList,
-    PreQuestionRetrieve,
-    PreQuestionIcon,
-    QuestionCreate,
-    QuestionDelete,
-    QuestionDetails,
-    QuestionEdit,
-    QuestionList,
-    QuestionRetrieve,
-    QuestionIcon,
-    QuestionHasSalCreate,
-    QuestionHasSalDelete,
-    QuestionHasSalDetails,
-    QuestionHasSalEdit,
-    QuestionHasSalList,
-    QuestionHasSalRetrieve,
-    QuestionHasSalIcon,
-    QuestionScopeCreate,
-    QuestionScopeDelete,
-    QuestionScopeDetails,
-    QuestionScopeEdit,
-    QuestionScopeList,
-    QuestionScopeRetrieve,
-    QuestionScopeIcon,
-    SalCreate,
-    SalDelete,
-    SalDetails,
-    SalEdit,
-    SalList,
-    SalRetrieve,
-    SalIcon,
-    StandardCreate,
-    StandardDelete,
-    StandardDetails,
-    StandardEdit,
-    StandardList,
-    StandardRetrieve,
-    StandardIcon,
-    SubMetricCreate,
-    SubMetricDelete,
-    SubMetricDetails,
-    SubMetricEdit,
-    SubMetricList,
-    SubMetricRetrieve,
-    SubMetricIcon,
-} from './assessments';
-import {
-    OrganizationsList,
-    OrganizationDetails,
-    OrganizationCreate,
-    OrganizationEdit,
-    OrganizationDelete,
-    OrganizationRetrieve,
-    OrganizationIcon,
-    PermissionsList,
-    PermissionDetails,
-    PermissionIcon,
-    RolesList,
-    RoleDetails,
-    RoleCreate,
-    RoleEdit,
-    RoleDelete,
-    RoleRetrieve,
-    RoleIcon,
-} from './users';
+// import {
+//     OrganizationsList,
+//     OrganizationDetails,
+//     OrganizationCreate,
+//     OrganizationEdit,
+//     OrganizationDelete,
+//     OrganizationRetrieve,
+//     OrganizationIcon,
+//     PermissionsList,
+//     PermissionDetails,
+//     PermissionIcon,
+//     RolesList,
+//     RoleDetails,
+//     RoleCreate,
+//     RoleEdit,
+//     RoleDelete,
+//     RoleRetrieve,
+//     RoleIcon,
+// } from './users';
 
 import {
     CityGateStationList,
@@ -124,15 +41,48 @@ import {
     CityGateStationIcon,
     GasList,
     GasCreate,
-    GasEdit, GasDetails,
-    CalculationList, CalculationCreate, CalculationEdit, CalculationDetails,
-    ConditionList, ConditionCreate,ConditionDetails,ConditionEdit,
-    HeaterList, HeaterCreate, HeaterEdit,
-    BurnerList, BurnerCreate,
-    PipeSizeList, PipeSizeCreate, PipeSizeEdit, PipeSizeDetails,
-    PipeSpecificationCreate, PipeSpecificationEdit, PipeSpecificationList, PipeSpecificationDetails,
-    RunsHasConditionList, RunsHasConditionCreate,
-    RunsCreate,RunsEdit,RunsList
+    GasEdit,
+    GasDetails,
+    CalculationList,
+    CalculationCreate,
+    CalculationEdit,
+    CalculationDetails,
+    ConditionList,
+    ConditionCreate,
+    ConditionDetails,
+    ConditionEdit,
+    HeaterList,
+    HeaterCreate,
+    HeaterEdit,
+    BurnerList,
+    BurnerCreate,
+    BurnerEdit,
+    PipeSizeList,
+    PipeSizeCreate,
+    PipeSizeEdit,
+    PipeSizeDetails,
+    PipeSpecificationCreate,
+    PipeSpecificationEdit,
+    PipeSpecificationList,
+    PipeSpecificationDetails,
+    RunsHasConditionList,
+    RunsHasConditionCreate,
+    RunsHasConditionEdit,
+    RunsCreate,
+    RunsEdit,
+    RunsList,
+    CalculationDelete,
+    GasDelete,
+    ConditionDelete,
+    HeaterDelete,
+    BurnerDelete,
+    RunsHasConditionDelete,
+    RunsDelete,
+    PipeSpecificationDelete,
+    PipeSizeDelete,
+    RunsDetails,
+    RunsHasConditionDetails,
+    BurnerDetails, HeaterDetails
 } from './station';
 
 
@@ -154,17 +104,17 @@ class App extends Component {
                 resourceGroupIcons={ResourceGroupIcons}
             >
 
-                <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} show={CalculationDetails}/>
+                <Resource name="calculations" group="stations" list={CalculationList} create={CalculationCreate} edit={CalculationEdit} show={CalculationDetails} remove={CalculationDelete}/>
                 <Resource name="citygatestations" group="stations" list={CityGateStationList} create={CityGateStationCreate} edit={CityGateStationEdit} show={CityGateStationDetails} remove={CityGateStationDelete} retrieve={CityGateStationRetrieve} icon={CityGateStationIcon} />
-                <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} show={GasDetails}/>
-                <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} show={ConditionDetails} edit={ConditionEdit}/>
-                <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} edit={HeaterEdit}/>
-                <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} />
+                <Resource name="gass" group="stations" list={GasList} create={GasCreate} edit={GasEdit} show={GasDetails} remove={GasDelete}/>
+                <Resource name="conditions" group="stations" list={ConditionList} create={ConditionCreate} show={ConditionDetails} edit={ConditionEdit} remove={ConditionDelete}/>
+                <Resource name="heaters" group="stations" list={HeaterList} create={HeaterCreate} edit={HeaterEdit} show={HeaterDetails} remove={HeaterDelete}/>
+                <Resource name="burners" group="stations" list={BurnerList} create={BurnerCreate} edit={BurnerEdit} show={BurnerDetails} remove={BurnerDelete}/>
                 <Resource name="afterheaters" group="stations" />
-                <Resource name="runshasconditions" group="stations" list={RunsHasConditionList} create={RunsHasConditionCreate}/>
-                <Resource name="runss" group="stations" list={RunsList} create={RunsCreate} edit={RunsEdit}/>
-                <Resource name="pipespecificationss" group="stations" list={PipeSpecificationList} create={PipeSpecificationCreate} edit={PipeSpecificationEdit} show={PipeSpecificationDetails}/>
-                <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate} edit={PipeSizeEdit} show={PipeSizeDetails}/>
+                <Resource name="runshasconditions" group="stations" list={RunsHasConditionList} create={RunsHasConditionCreate} edit={RunsHasConditionEdit} show={RunsHasConditionDetails} remove={RunsHasConditionDelete}/>
+                <Resource name="runss" group="stations" list={RunsList} create={RunsCreate} edit={RunsEdit} remove={RunsDelete} show={RunsDetails}/>
+                <Resource name="pipespecificationss" group="stations" list={PipeSpecificationList} create={PipeSpecificationCreate} edit={PipeSpecificationEdit} show={PipeSpecificationDetails} remove={PipeSpecificationDelete}/>
+                <Resource name="pipesizes" group="stations" list={PipeSizeList} create={PipeSizeCreate} edit={PipeSizeEdit} show={PipeSizeDetails} remove={PipeSizeDelete}/>
             </Admin>
         );
     }

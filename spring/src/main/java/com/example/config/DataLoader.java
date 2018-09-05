@@ -1,9 +1,11 @@
 package com.example.config;
 
+import com.example.models.station.PipeSizeEntity;
 import com.example.models.users.OrganizationEntity;
 import com.example.models.users.PermissionEntity;
 import com.example.models.users.RoleEntity;
 import com.example.models.users.UserEntity;
+import com.example.repositories.station.PipeSizeRepository;
 import com.example.repositories.users.OrganizationRepository;
 import com.example.repositories.users.PermissionRepository;
 import com.example.repositories.users.RoleRepository;
@@ -30,6 +32,8 @@ public class DataLoader implements ApplicationRunner {
     private RoleRepository roleRepository;
     @Autowired
     private OrganizationRepository organizationRepository;
+    @Autowired
+    private PipeSizeRepository pipeSizeRepository;
 
 //    @Autowired
 //    public DataLoader(UserRepository userRepository) {
@@ -153,6 +157,44 @@ public class DataLoader implements ApplicationRunner {
         }
         testUserEntity.organization = testOrganizationEntity;
         userRepository.save(testUserEntity);
+
+
+        List<PipeSizeEntity> pipeSizes = new ArrayList< PipeSizeEntity>() {
+            {
+
+                add(new PipeSizeEntity("۲ اینچ",3.9, 60.3));
+
+                add(new PipeSizeEntity("۳ اینچ",5.5, 88.9));
+
+                add(new PipeSizeEntity("۴ اینچ",6.02, 114.3));
+                add(new PipeSizeEntity("۶ اینچ",7.11, 168.30));
+                add(new PipeSizeEntity("۸ اینچ",8.18, 219.10));
+                add(new PipeSizeEntity("۱۰ اینچ",9.27, 273.10));
+                add(new PipeSizeEntity("۱۲ اینچ",9.53, 323.90));
+                add(new PipeSizeEntity("۱۶ اینچ",9.53, 406.40));
+                add(new PipeSizeEntity("۲۰ اینچ",9.53, 508));
+                add(new PipeSizeEntity("۲۴ اینچ",9.53, 610));
+                add(new PipeSizeEntity("۳۰ اینچ",9.53, 762));
+
+
+            }
+        };
+
+        for(PipeSizeEntity pipeSizeEntity : pipeSizes){
+            try{
+            PipeSizeEntity pipeSize = pipeSizeRepository.findByNameLike(pipeSizeEntity.getName());
+            if(pipeSize== null){
+                pipeSize = pipeSizeRepository.save(pipeSizeEntity);
+            }
+            if(!pipeSize.getName().equals(pipeSizeEntity.getName()) && !pipeSizeEntity.getWallThickness().equals(pipeSize.getWallThickness()) &&
+                    !pipeSizeEntity.getOuterDiameter().equals(pipeSize.getOuterDiameter())){
+                pipeSizeRepository.save(pipeSizeEntity);
+            }}
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
 
 
     }

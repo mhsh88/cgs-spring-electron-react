@@ -25,8 +25,8 @@ const styles = theme => ({
 class SimpleSelect extends React.Component {
 
     state = {
-        age: 'm^3/hr',
-        name: 'm^3/hr',
+        age: 'متر مکعب بر ساعت',
+        name: 'متر مکعب بر ساعت',
     };
 
     handleChange = event => {
@@ -41,7 +41,7 @@ class SimpleSelect extends React.Component {
             <form className={classes.root} autoComplete="off">
                 <FormControl className={classes.formControl}>
                     <Select
-                        style={{alignContent: 'left', textAlign: 'left'}}
+                        style={{alignContent: 'right', textAlign: 'right', fontFamily:'IRANSans'}}
                         value={this.state.age}
                         onChange={this.handleChange}
                         onOpen={this.handleChange}
@@ -51,10 +51,10 @@ class SimpleSelect extends React.Component {
                         displayEmpty={false}
                         renderValue={value => `${this.state.age}`}
                     >
-                            <MenuItem value={'m^3/hr'}>m^3/hr</MenuItem>
-                            <MenuItem value={'m^3/day'}>m^3/day</MenuItem>
-                        <MenuItem value={'m^3/month'}>m^3/month</MenuItem>
-                        <MenuItem value={'m^3/year'}>m^3/year</MenuItem>
+                            <MenuItem value={'متر مکعب بر ساعت'} style={{alignContent: 'right', textAlign: 'right', fontFamily:'IRANSans'}}>متر مکعب بر ساعت</MenuItem>
+                            <MenuItem value={'متر مکعب بر روز'} style={{alignContent: 'right', textAlign: 'right', fontFamily:'IRANSans'}}>متر مکعب بر روز</MenuItem>
+                        <MenuItem value={'متر مکعب بر ماه'} style={{alignContent: 'right', textAlign: 'right', fontFamily:'IRANSans'}}>متر مکعب بر ماه</MenuItem>
+                        <MenuItem value={'متر مکعب بر سال'} style={{alignContent: 'right', textAlign: 'right', fontFamily:'IRANSans'}}>متر مکعب بر سال</MenuItem>
                     </Select>
                 </FormControl>
             </form>

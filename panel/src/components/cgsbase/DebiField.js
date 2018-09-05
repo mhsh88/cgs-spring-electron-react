@@ -43,19 +43,19 @@ export class DebiField extends React.Component {
     };
      onUnitChange(unit) {
         switch (unit) {
-            case 'm^3/hr':
+            case 'متر مکعب بر ساعت':
                 this.setState({value:get(this.props.record, this.props.source) * 1});
                 console.log(unit);
                 break;
-            case 'm^3/day':
+            case 'متر مکعب بر روز':
                 this.setState({value:get(this.props.record, this.props.source) * 24});
                 console.log(unit);
                 break;
-            case 'm^3/month':
+            case 'متر مکعب بر ماه':
                 this.setState({value:get(this.props.record, this.props.source) * 24 * 30});
                 console.log(unit);
                 break;
-            case 'm^3/year':
+            case 'متر مکعب بر سال':
                 this.setState({value:get(this.props.record, this.props.source) * 24 * 30 * 365});
                 console.log(unit);
                 break;

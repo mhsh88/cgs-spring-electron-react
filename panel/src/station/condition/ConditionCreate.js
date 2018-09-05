@@ -32,7 +32,7 @@ export class ConditionCreate extends React.Component {
         envTempUnit: 'C°',
         inputTempUnit: 'C°',
         outputTempUnit: 'C°',
-        debiUnit:'m^3/hr'
+        debiUnit:'متر مکعب بر ساعت'
     };
     envTempUnitChange = unit =>{
         this.setState({envTempUnit: unit});
@@ -124,7 +124,7 @@ export class ConditionCreate extends React.Component {
             id,
             envTempreture: this.state.envTempUnit === 'C°'? envTempreture: this.state.envTempUnit === 'F°'? (envTempreture-32) / 1.8: this.state.envTempUnit === 'K°'? envTempreture - 273.15 : this.state.envTempUnit === 'R°'? (envTempreture - 491.67) * 5/9  : envTempreture,
             windSpeed,
-            stationDebi: this.state.debiUnit === 'm^3/hr'? stationDebi: this.state.debiUnit === 'm^3/day'? stationDebi / 24: this.state.debiUnit === 'm^3/month'? stationDebi / 24 / 30: this.state.debiUnit === 'm^3/year'? stationDebi / 24 / 30 / 365 : stationDebi,
+            stationDebi: this.state.debiUnit === 'متر مکعب بر ساعت'? stationDebi: this.state.debiUnit === 'متر مکعب بر روز'? stationDebi / 24: this.state.debiUnit === 'متر مکعب بر ماه'? stationDebi / 24 / 30: this.state.debiUnit === 'متر مکعب بر سال'? stationDebi / 24 / 30 / 365 : stationDebi,
             stationInputTemprature: this.state.inputTempUnit === 'C°'? stationInputTemprature: this.state.inputTempUnit === 'F°'? (stationInputTemprature-32) / 1.8: this.state.inputTempUnit === 'K°'? stationInputTemprature - 273.15 : this.state.inputTempUnit === 'R°'? (stationInputTemprature - 491.67) * 5/9  : stationInputTemprature,
             stationInputPressure: this.state.inputPressureUnit === 'kPa' ? stationInputPressure * 1: this.state.inputPressureUnit === 'MPa'? stationInputPressure * 1000: this.state.inputPressureUnit === 'PSI'?stationInputPressure * 6.89476 : stationInputPressure,
             stationOutputTemprature: this.state.outputTempUnit === 'C°'? stationOutputTemprature: this.state.outputTempUnit === 'F°'? (stationOutputTemprature-32) / 1.8: this.state.outputTempUnit === 'K°'? stationOutputTemprature - 273.15 : this.state.outputTempUnit === 'R°'? (stationOutputTemprature - 491.67) * 5/9  : stationOutputTemprature,
@@ -139,12 +139,12 @@ export class ConditionCreate extends React.Component {
             <Create {...this.props} beforeSave={this.arrangeValues}>
                 <SimpleForm>
                     <DisabledInput source="id"/>
-                    <TemperatureInput source="envTempreture" onUnitChange={this.envTempUnitChange} validate={[ maxValue(70),minValue(-40)]}/>
+                    <TemperatureInput source="envTempreture" onUnitChange={this.envTempUnitChange} validate={[minValue(-40)]}/>
                     <NumberInput source="windSpeed" validate={[maxValue(50),minValue(0)]} />
                     <DebiInput source="stationDebi" validate={[minValue(0)]} onUnitChange={this.debiUnitChange}/>
-                    <TemperatureInput source="stationInputTemprature" validate={[required, maxValue(70),minValue(-40)]} onUnitChange={this.inTempUnit} />
+                    <TemperatureInput source="stationInputTemprature" validate={[required, minValue(-40)]} onUnitChange={this.inTempUnit} />
                     <PressureInput source="stationInputPressure"  validate={required} onUnitChange={this.inpressureUnitChange}/>
-                    <TemperatureInput source="stationOutputTemprature" validate={[required, maxValue(70),minValue(-40)]} onUnitChange={this.outTempUnit}/>
+                    <TemperatureInput source="stationOutputTemprature" validate={[required, minValue(-40)]} onUnitChange={this.outTempUnit}/>
                     <PressureInput source="stationOutputPressure"  validate={required} onUnitChange={this.outpressureUnitChange}/>
                 </SimpleForm>
             </Create>

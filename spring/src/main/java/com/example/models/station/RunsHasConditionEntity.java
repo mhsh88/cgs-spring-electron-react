@@ -30,7 +30,7 @@ public class RunsHasConditionEntity extends BaseEntity {
     @Basic
     @Column(name="text")
     public String getText(){
-        return String.valueOf(debi);
+        return String.valueOf(Math.round(this.debi));
     }
     public void setText(String text){
 

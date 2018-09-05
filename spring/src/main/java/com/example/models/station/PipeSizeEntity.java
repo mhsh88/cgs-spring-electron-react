@@ -16,6 +16,17 @@ public class PipeSizeEntity extends BaseEntity {
     private Double outerDiameter;
     private Double wallThickness;
 
+    public PipeSizeEntity(){
+        super();
+    }
+
+    public PipeSizeEntity(String name, double wallThickness, double outerDiameter) {
+        super();
+        this.name = name;
+        this.wallThickness = wallThickness;
+        this.outerDiameter = outerDiameter;
+    }
+
 
     @JsonView({PipeSizeView.class})
     @OneToMany(mappedBy="pipeSize")
@@ -24,6 +35,7 @@ public class PipeSizeEntity extends BaseEntity {
     @JsonView
     @OneToMany(mappedBy = "pipeSize")
     public List<RunsEntity> runs;
+
 
     @Basic
     @Column(name = "name")

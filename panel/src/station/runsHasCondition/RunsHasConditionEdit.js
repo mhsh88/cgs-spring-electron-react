@@ -23,7 +23,7 @@ import {
 } from '../../core';
 import DebiInput from "../../components/cgsbase/input/DebiInput";
 
-export class RunsHasConditionCreate extends React.Component {
+export class RunsHasConditionEdit extends React.Component {
     state = {
         debiUnit:'متر مکعب بر ساعت'
     };
@@ -42,17 +42,17 @@ export class RunsHasConditionCreate extends React.Component {
 
     render() {
         return (
-            <Create {...this.props} beforeSave={this.arrangeValues}>
+            <Edit {...this.props} beforeSave={this.arrangeValues}>
                 <SimpleForm>
                     <DisabledInput source="id"/>
                     <DisabledInput source="text"/>
                     <DebiInput source="debi" validate={[required, minValue(0)]} onUnitChange={this.debiUnitChange}/>
                 </SimpleForm>
-            </Create>
+            </Edit>
 
         );
 }
 }
 
 
-export default RunsHasConditionCreate;
+export default RunsHasConditionEdit;
