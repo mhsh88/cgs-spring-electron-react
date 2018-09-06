@@ -127,8 +127,8 @@ public abstract class BaseController<T extends BaseEntity, ID extends Serializab
         logger.debug("create() with body {} of type {}", json, json.getClass());
         PageResult<T> pageResult = new PageResult<>();
 
-        T json2 = getDao().save(json);
-
+//        T json2 = getDao().save(json);
+            T json2 = repo.save(json);
         ResponseEntity<String> response = getStringResponseEntity(pageResult, (T) json);
         return response;
     }

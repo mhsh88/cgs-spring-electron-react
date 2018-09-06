@@ -14,9 +14,11 @@ const cardActionStyle = {
     float: 'right',
 };
 
-const ShowActions = ({ basePath, resource, data, hasDelete, hasRetrieve, hasEdit, refresh, width }) => (
+const ShowActions = ({ basePath, resource, data, hasDelete, hasRetrieve, hasEdit, refresh, width, update }) => (
+
     width !== 1 ?
         (<CardActions style={cardActionStyle}>
+            {data = data ? data :  console.log(update.meta)}
             {hasEdit && <EditButton basePath={basePath} record={data} />}
             <ListButton basePath={basePath} />
             {hasDelete && !data.deleted && <DeleteButton basePath={basePath} record={data} />}
@@ -47,6 +49,7 @@ ShowActions.propTypes = {
     hasEdit: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     width: PropTypes.number.isRequired,
+    update: PropTypes.func,
 };
 
 export default withWidth()(ShowActions);

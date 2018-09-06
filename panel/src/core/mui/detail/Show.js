@@ -30,6 +30,10 @@ export class Show extends Component {
         this.props.crudGetOne(resource, id, this.getBasePath());
     }
 
+    myUpdateData(resource = this.props.resource, id = this.props.id) {
+        return this.props.crudGetOne(resource, id, this.getBasePath());
+    }
+
     refresh = (event) => {
         event.stopPropagation();
         this.fullRefresh = true;
@@ -37,7 +41,7 @@ export class Show extends Component {
     };
 
     render() {
-        const { actions = <DefaultActions />, title, children, id, data, isLoading, resource, hasDelete, hasRetrieve, hasEdit, translate } = this.props;
+        const { actions = <DefaultActions update={this.myUpdateData} />, title, children, id, data, isLoading, resource, hasDelete, hasRetrieve, hasEdit, translate } = this.props;
         const basePath = this.getBasePath();
 
         const resourceName = translate(`resources.${resource}.name`, {

@@ -95,7 +95,7 @@ export class SelectInputComponent extends Component {
                 optionText(choice) :
                 get(choice, optionText)
             );
-        if (typeof choiceName === 'object') {
+        if (choiceName && typeof choiceName === 'object') {
             const hasResourceAnyLocale = Object.keys(choiceName).reduce((result, key) => {
                 if (key !== INITIAL_LANGUAGE) result.push(key); return result;
             }, []).length > 0;

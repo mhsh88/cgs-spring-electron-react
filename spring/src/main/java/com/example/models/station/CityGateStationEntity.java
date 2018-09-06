@@ -68,7 +68,7 @@ public class CityGateStationEntity extends BaseEntity {
     public List<HeatersEntity> heaters;
 
     @JsonView({CityGateStationView.class, CalculationView.class})
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "runs")
     @LazyCollection(LazyCollectionOption.FALSE)
     public RunsEntity runs;
