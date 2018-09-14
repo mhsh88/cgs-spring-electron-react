@@ -18,7 +18,6 @@ const ShowActions = ({ basePath, resource, data, hasDelete, hasRetrieve, hasEdit
 
     width !== 1 ?
         (<CardActions style={cardActionStyle}>
-            {data = data ? data :  console.log(update.meta)}
             {hasEdit && <EditButton basePath={basePath} record={data} />}
             <ListButton basePath={basePath} />
             {hasDelete && !data.deleted && <DeleteButton basePath={basePath} record={data} />}

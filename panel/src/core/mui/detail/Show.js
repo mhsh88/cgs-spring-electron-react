@@ -41,8 +41,9 @@ export class Show extends Component {
     };
 
     render() {
-        const { actions = <DefaultActions update={this.myUpdateData} />, title, children, id, data, isLoading, resource, hasDelete, hasRetrieve, hasEdit, translate } = this.props;
+        const { actions = <DefaultActions />, title, children, id, data, isLoading, resource, hasDelete, hasRetrieve, hasEdit, translate } = this.props;
         const basePath = this.getBasePath();
+        data ? null : this.updateData();
 
         const resourceName = translate(`resources.${resource}.name`, {
             smart_count: 1,
